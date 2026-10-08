@@ -3,7 +3,7 @@
 import { ArrowDown, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { BlurWords, FadeUp, MaskLines } from "@/components/motion/primitives";
 import { Magnetic } from "@/components/motion/magnetic";
-import { links } from "@/content/site";
+import { external, links } from "@/content/site";
 
 export function Hero() {
   return (
@@ -20,6 +20,7 @@ export function Hero() {
         <Magnetic>
           <a
             href={links.bookCall}
+            {...external(links.bookCall)}
             className="group flex items-center gap-2 rounded-full bg-ink-2 px-5 py-3.5 text-base font-medium text-white"
           >
             <ArrowUpRight size={16} className="transition-transform duration-300 ease-out group-hover:rotate-45" />

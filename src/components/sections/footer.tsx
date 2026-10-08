@@ -4,7 +4,7 @@ import linkedin from "@iconify-icons/akar-icons/linkedin-box-fill";
 import twitterX from "@iconify-icons/bi/twitter-x";
 import behance from "@iconify-icons/basil/behance-solid";
 import { SkillPile } from "@/components/sections/skill-pile";
-import { links } from "@/content/site";
+import { external, links } from "@/content/site";
 
 const nav = [
   { label: "Work", href: "#work" },
@@ -27,7 +27,7 @@ export function Footer() {
       <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium leading-[1.3] text-neutral-300">
           {nav.map((l) => (
-            <a key={l.label} href={l.href} className="transition-colors hover:text-white">
+            <a key={l.label} href={l.href} {...external(l.href)} className="transition-colors hover:text-white">
               {l.label}
             </a>
           ))}
@@ -37,6 +37,7 @@ export function Footer() {
             <a
               key={s.label}
               href={s.href}
+              {...external(s.href)}
               aria-label={s.label}
               className="rounded-xl border border-tint-12 bg-tint-06 p-2.5 text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:text-white"
             >

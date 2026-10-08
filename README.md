@@ -13,6 +13,7 @@ npm run dev   # http://localhost:3000
 - `src/components/sections/`: one file per home-page section, in Figma order.
 - `src/components/motion/`: reusable motion pieces (mask line reveals, blur-in words, scroll-filled text, draggable stickers, magnetic buttons, smooth scroll).
 - `src/app/globals.css`: design tokens taken from the Figma variables.
+- `src/fonts/`: PP Neue Montreal Book and Medium (licensed from Pangram Pangram), loaded with `next/font/local`.
 
 ## Motion
 
@@ -32,5 +33,4 @@ Everything respects `prefers-reduced-motion`.
 
 ## Assets still needed
 
-- **Fonts**: put `PPNeueMontreal-Book.woff2` and `PPNeueMontreal-Medium.woff2` in `public/fonts/`. Geist is used until they're there.
 - **Images**: the files listed in `src/content/site.ts` (`/images/work-*.png`, avatars), plus `timi.png` and `cherub.png`, go in `public/images/`. Covers show a grey placeholder until they're added.

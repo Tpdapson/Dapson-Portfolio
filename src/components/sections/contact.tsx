@@ -3,7 +3,7 @@
 import { ArrowUpRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { FadeUp, MaskLines } from "@/components/motion/primitives";
 import { Magnetic } from "@/components/motion/magnetic";
-import { links } from "@/content/site";
+import { external, links } from "@/content/site";
 
 export function Contact() {
   return (
@@ -23,6 +23,7 @@ export function Contact() {
             <Magnetic>
               <a
                 href={links.bookCall}
+                {...external(links.bookCall)}
                 className="group flex items-center gap-1.5 rounded-full bg-neutral-0 px-5 py-3.5 text-base font-medium text-neutral-950"
               >
                 Book a call

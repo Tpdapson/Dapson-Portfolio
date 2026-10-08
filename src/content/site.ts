@@ -1,10 +1,10 @@
 // Everything editable on the home page lives here.
-// TODO(Timi): fill in the real links marked "#".
+// TODO(Timi): fill in the social links still marked "#".
 
 export const links = {
-  bookCall: "#", // e.g. Calendly / Cal.com URL
-  email: "mailto:hello@example.com",
-  resume: "#",
+  bookCall: "https://calendly.com/tp_dapson/30min",
+  email: "mailto:petertimmy8@gmail.com",
+  resume: "https://drive.google.com/file/d/1fW6aFax2e0h83tb7hsAvqiB1I1Ah-_gd/view?usp=drivesdk",
   playground: "#",
   socials: {
     whatsapp: "#",
@@ -86,3 +86,8 @@ export const testimonials: Testimonial[] = [
     initials: "DH",
   },
 ];
+
+/** Props for links that leave the site. */
+export function external(href: string) {
+  return href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}

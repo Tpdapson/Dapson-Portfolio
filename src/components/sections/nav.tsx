@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { FileText, Folder, Smiley } from "@phosphor-icons/react/dist/ssr";
 import { easeOut } from "@/components/motion/primitives";
-import { links } from "@/content/site";
+import { external, links } from "@/content/site";
 
 const items = [
   { label: "Work", href: "#work", Icon: Folder },
@@ -34,6 +34,7 @@ export function Nav() {
           <a
             key={label}
             href={href}
+            {...external(href)}
             className="group flex items-center gap-1.5 rounded-full p-1 text-sm text-ink-3 transition-colors hover:text-ink"
           >
             <Icon size={14} className="transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />

@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import "@fontsource/reenie-beanie/400.css";
+
+/*
+ * PP Neue Montreal (Pangram Pangram) is a licensed font, so the files are not
+ * committed yet. Drop the woff2 files into /public/fonts with these names and
+ * they load automatically; until then Geist stands in.
+ */
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Book.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tokens from the Figma file (Landing / Final). */
+@theme {
+  --font-sans: "PP Neue Montreal", var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Reenie Beanie", cursive;
+
+  --color-ink: #0a0a0a;
+  --color-ink-2: #111111;
+  --color-ink-3: #222222;
+  --color-muted: #949393;
+  --color-faint: #c4c4c4;
+  --color-caption: #8a8a8a;
+  --color-rule: #d9d9d9;
+  --color-surface: #ededed;
+  --color-chip: #f1f1f1;
+  --color-lime: #e4f27a;
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-300: #c2c2be;
+  --color-neutral-400: #9a9a95;
+  --color-neutral-800: #272725;
+  --color-neutral-950: #0e0e0d;
+  --color-tint-06: #1c1c1c;
+  --color-tint-12: #2b2b2a;
+
+  --shadow-pill: inset 1px 4px 4px 2px rgb(255 255 255 / 0.2), inset -1px -4px 5px 0 rgb(0 0 0 / 0.16);
+  --shadow-bubble: inset 1px 4px 4px 2px rgb(255 255 255 / 0.2), inset -1px -4px 5px 0 rgb(0 0 0 / 0.12);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  background: #ffffff;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #ffffff;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}

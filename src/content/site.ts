@@ -6,6 +6,7 @@ export const links = {
   email: "mailto:petertimmy8@gmail.com",
   resume: "https://drive.google.com/file/d/1fW6aFax2e0h83tb7hsAvqiB1I1Ah-_gd/view?usp=drivesdk",
   playground: "#",
+  digitalclan: "#", // TODO(Timi): DigitalClan live website URL
   socials: {
     whatsapp: "#",
     x: "#",
@@ -19,20 +20,21 @@ export type Work = {
   name: string;
   tagline: string;
   cover: string;
+  /** Case-study page, or the live site for projects without one. */
+  href: string;
   /** Background behind the cover while it loads. */
   tone?: string;
 };
 
 export const works: Work[] = [
-  { slug: "hellome-travel", name: "HelloMe Travel", tagline: "Flights, hotels and tours in one app", cover: "/images/work-hellome-travel.jpg" },
-  { slug: "spendive", name: "Spendive", tagline: "Spend and procurement management for growing teams", cover: "/images/work-spendive.jpg" },
-  { slug: "freshline", name: "FreshLine", tagline: "Agri supply chain, from farm gate to buyer", cover: "/images/work-freshline.jpg" },
-  { slug: "digitalclan", name: "DigitalClan", tagline: "All in one digital agency for startups", cover: "/images/work-digitalclan.jpg" },
-  { slug: "soulsync", name: "SoulSync", tagline: "AI-assisted mental wellness app", cover: "/images/work-soulsync.jpg" },
-  { slug: "hellome-money", name: "HelloMe Money", tagline: "Modern fintech app for swift money transfers", cover: "/images/work-hellome-money.jpg" },
-  { slug: "fundora", name: "Fundora", tagline: "Trade finance for African importers", cover: "/images/work-fundora.jpg" },
-  { slug: "cargotrace", name: "CargoTrace", tagline: "Freight tracking for Nigerian importers", cover: "/images/work-cargotrace.jpg", tone: "#e8edf3" },
-  { slug: "andiesplace", name: "AndiesPlace", tagline: "Digital AI academy all in one place", cover: "/images/work-andiesplace.jpg" },
+  { slug: "hellome-travel", name: "HelloMe Travel", tagline: "Flights, hotels and tours in one app", href: "/work/hellome-travel", cover: "/images/work-hellome-travel.jpg" },
+  { slug: "spendive", name: "Spendive", tagline: "Spend and procurement management for growing teams", href: "/work/spendive", cover: "/images/work-spendive.jpg" },
+  { slug: "freshline", name: "FreshLine", tagline: "Agri supply chain, from farm gate to buyer", href: "/work/freshline", cover: "/images/work-freshline.jpg" },
+  { slug: "digitalclan", name: "DigitalClan", tagline: "All in one digital agency for startups", href: links.digitalclan, cover: "/images/work-digitalclan.jpg" },
+  { slug: "soulsync", name: "SoulSync", tagline: "AI-assisted mental wellness app", href: "/work/soulsync", cover: "/images/work-soulsync.jpg" },
+  { slug: "hellome-money", name: "HelloMe Money", tagline: "Modern fintech app for swift money transfers", href: "/work/hellome-money", cover: "/images/work-hellome-money.jpg" },
+  { slug: "fundora", name: "Fundora", tagline: "Trade finance for African importers", href: "/work/fundora", cover: "/images/work-fundora.jpg" },
+  { slug: "cargotrace", name: "CargoTrace", tagline: "Freight tracking for Nigerian importers", href: "/work/cargotrace", cover: "/images/work-cargotrace.jpg", tone: "#e8edf3" },
 ];
 
 export type Testimonial = {

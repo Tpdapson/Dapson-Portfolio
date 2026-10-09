@@ -13,7 +13,8 @@ import {
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { easeOut, Sticker } from "@/components/motion/primitives";
 import { SectionTitle } from "@/components/sections/section-title";
-import { works, type Work } from "@/content/site";
+import Link from "next/link";
+import { external, works, type Work } from "@/content/site";
 
 type CursorApi = { show: (label: string) => void; hide: () => void };
 const CursorContext = createContext<CursorApi>({ show: () => {}, hide: () => {} });
@@ -89,6 +90,7 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
   const imgY = useTransform(scrollYProgress, [0, 1], ["-3.5%", "3.5%"]);
 
   const number = String(index + 1).padStart(2, "0");
+  const isExternal = work.href.startsWith("http") || work.href === "#";
 
   return (
     <article className="flex flex-col gap-5 px-4 pb-[72px] sm:px-10">
@@ -119,11 +121,17 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
         </motion.span>
       </motion.div>
 
+      <Link
+        href={work.href}
+        {...external(work.href)}
+        aria-label={isExternal ? `Visit the ${work.name} website` : `Read the ${work.name} case study`}
+        className="block"
+      >
       <motion.div
         ref={coverRef}
         style={reduce ? undefined : { clipPath }}
         className="group relative aspect-[4/3] w-full overflow-hidden sm:aspect-[1360/800]"
-        onPointerEnter={(e) => e.pointerType === "mouse" && cursor.show("Case study soon")}
+        onPointerEnter={(e) => e.pointerType === "mouse" && cursor.show(isExternal ? "Visit website" : "View case study")}
         onPointerLeave={cursor.hide}
       >
         <div className="absolute inset-0" style={{ background: work.tone ?? "var(--color-surface)" }} />
@@ -140,6 +148,7 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
           </motion.div>
         )}
       </motion.div>
+      </Link>
     </article>
   );
 }

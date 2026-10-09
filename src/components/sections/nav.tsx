@@ -1,15 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { FileText, Folder, Smiley } from "@phosphor-icons/react/dist/ssr";
 import { easeOut } from "@/components/motion/primitives";
 import { external, links } from "@/content/site";
 
 const items = [
-  { label: "Work", href: "#work", Icon: Folder },
-  { label: "About", href: "#about", Icon: Smiley },
+  { label: "Work", href: "/#work", Icon: Folder },
+  { label: "About", href: "/#about", Icon: Smiley },
   { label: "Resume", href: links.resume, Icon: FileText },
-  { label: "Contact", href: "#contact", Icon: FileText },
+  { label: "Contact", href: "/#contact", Icon: FileText },
 ];
 
 export function Nav() {
@@ -21,13 +22,13 @@ export function Nav() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: easeOut }}
     >
-      <a href="#top" className="flex items-center gap-2">
+      <Link href="/" className="flex items-center gap-2">
         <span className="relative size-[34px] overflow-hidden rounded-full bg-surface">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/timi.png" alt="" className="size-full object-cover" />
         </span>
         <span className="text-sm font-medium text-ink">Dapson</span>
-      </a>
+      </Link>
 
       <nav className="flex items-center gap-1 sm:gap-4">
         {items.map(({ label, href, Icon }) => (

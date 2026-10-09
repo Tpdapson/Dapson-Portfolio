@@ -7,11 +7,11 @@ import { SkillPile } from "@/components/sections/skill-pile";
 import { external, links } from "@/content/site";
 
 const nav = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/#about" },
   { label: "Résumé", href: links.resume },
   { label: "Playground", href: links.playground },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const socials = [

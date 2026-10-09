@@ -26,7 +26,7 @@ export const hellomeTravel: CaseStudy = {
       heading: "The challenge",
       body: "Planning a trip from Nigeria often means juggling several apps and agents, long forms, and prices that change across currencies. Flight results are dense and hard to compare, and the moment between paying and receiving a confirmation is full of anxiety. HelloMe Travels needed to make the journey from planning to departure feel seamless, in one place.",
     },
-    img("100:41686", 1376, 774, "HelloMe Travels key screens"),
+    img("100:41686", 1376, 774, "Home, flight results and flight details"),
     {
       type: "split",
       heading: "The solution",
@@ -60,8 +60,8 @@ export const hellomeTravel: CaseStudy = {
         "Destination cards show rating and price, so inspiration turns into a booking.",
       ],
     },
-    img("135:46129", 1376, 840, "Home and destinations"),
-    img("135:46140", 1376, 753, "Flight search and bottom sheets"),
+    img("135:46129", 1376, 840, "Home and flight search"),
+    img("135:46140", 1376, 753, "Cabin class and traveller sheets, and the search loading state"),
     {
       type: "split",
       heading: "Comparing and choosing flights",
@@ -72,8 +72,8 @@ export const hellomeTravel: CaseStudy = {
         "Flight details show every leg and layover on a simple timeline.",
       ],
     },
-    img("135:46153", 1376, 709, "Flight results"),
-    img("135:46170", 1376, 840, "Sort, filter and flight details"),
+    img("135:46153", 1376, 709, "Flight results, sort and filter sheets"),
+    img("135:46170", 1376, 840, "Flight details, contact info and passenger form"),
     {
       type: "split",
       heading: "Hotels and tours, same pattern",
@@ -83,8 +83,8 @@ export const hellomeTravel: CaseStudy = {
         "Room selection and reviews are separated into tabs to keep details scannable.",
       ],
     },
-    img("135:46181", 1376, 840, "Hotel results"),
-    img("135:46192", 1376, 753, "Rooms, reviews and tours"),
+    img("135:46181", 1376, 840, "Hotel sort and hotel details"),
+    img("135:46192", 1376, 753, "Hotel reviews, tours and booking confirmation"),
     {
       type: "split",
       heading: "Checkout, bookings and price alerts",
@@ -95,9 +95,9 @@ export const hellomeTravel: CaseStudy = {
         "Flight price alerts let people set a route and get notified when fares drop.",
       ],
     },
-    img("135:46205", 1376, 840, "Passenger details and payment"),
-    img("135:46216", 1376, 753, "Confirmation and bookings"),
-    img("135:46229", 1376, 840, "Empty states and price alerts"),
+    img("135:46205", 1376, 840, "Payment method and paying with HelloMe Money"),
+    img("135:46216", 1376, 753, "Checkout, booking confirmation and bank deposit details"),
+    img("135:46229", 1376, 840, "Bookings and wishlists"),
     {
       type: "split",
       heading: "Price alerts & profile",
@@ -110,8 +110,8 @@ export const hellomeTravel: CaseStudy = {
         "Help lives in the profile, with FAQs, contact options and account settings in one place.",
       ],
     },
-    img("135:46258", 1376, 840, "Price alert setup"),
-    img("135:46269", 1376, 753, "Profile and help"),
+    img("135:46258", 1376, 840, "Flight price alerts and adding a new alert"),
+    img("135:46269", 1376, 753, "Profile, travel information and FAQs"),
     {
       type: "split",
       heading: "The HelloMe Travels website",
@@ -121,8 +121,8 @@ export const hellomeTravel: CaseStudy = {
       ],
       // TODO(Timi): add the website URL → link: { label: "View live website ↗", href: "…" }
     },
-    img("140:47743", 1376, 1011, "HelloMe Travels website homepage"),
-    img("140:47745", 1376, 470, "HelloMe Travels website pages"),
+    img("140:47743", 1376, 1011, "HelloMe Travels website flights homepage"),
+    img("140:47745", 1376, 470, "Tours and hotels homepages"),
     {
       type: "split",
       heading: "The outcome",

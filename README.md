@@ -31,6 +31,6 @@ Nothing waits behind a loader. The hero types in on load, and everything else pl
 
 Everything respects `prefers-reduced-motion`.
 
-## Assets still needed
+## Assets
 
-- **Images**: the files listed in `src/content/site.ts` (`/images/work-*.png`, avatars), plus `timi.png` and `cherub.png`, go in `public/images/`. Covers show a grey placeholder until they're added.
+Images in `public/images/` were exported from the Figma file at 1x. The covers are 1360×800 JPEGs. Your photo (150px), the presenting photo used as the "cherub" sticker and the testimonial avatars are small. Replace any of them with higher-resolution files under the same names whenever you like.

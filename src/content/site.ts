@@ -24,15 +24,15 @@ export type Work = {
 };
 
 export const works: Work[] = [
-  { slug: "hellome-travel", name: "HelloMe Travel", tagline: "Flights, hotels and tours in one app", cover: "/images/work-hellome-travel.png" },
-  { slug: "spendive", name: "Spendive", tagline: "Spend and procurement management for growing teams", cover: "/images/work-spendive.png" },
-  { slug: "freshline", name: "FreshLine", tagline: "Agri supply chain, from farm gate to buyer", cover: "/images/work-freshline.png" },
-  { slug: "digitalclan", name: "DigitalClan", tagline: "All in one digital agency for startups", cover: "/images/work-digitalclan.png" },
-  { slug: "soulsync", name: "SoulSync", tagline: "AI-assisted mental wellness app", cover: "/images/work-soulsync.png" },
-  { slug: "hellome-money", name: "HelloMe Money", tagline: "Modern fintech app for swift money transfers", cover: "/images/work-hellome-money.png" },
-  { slug: "fundora", name: "Fundora", tagline: "Trade finance for African importers", cover: "/images/work-fundora.png" },
-  { slug: "cargotrace", name: "CargoTrace", tagline: "Freight tracking for Nigerian importers", cover: "/images/work-cargotrace.png", tone: "#e8edf3" },
-  { slug: "andiesplace", name: "AndiesPlace", tagline: "Digital AI academy all in one place", cover: "/images/work-andiesplace.png" },
+  { slug: "hellome-travel", name: "HelloMe Travel", tagline: "Flights, hotels and tours in one app", cover: "/images/work-hellome-travel.jpg" },
+  { slug: "spendive", name: "Spendive", tagline: "Spend and procurement management for growing teams", cover: "/images/work-spendive.jpg" },
+  { slug: "freshline", name: "FreshLine", tagline: "Agri supply chain, from farm gate to buyer", cover: "/images/work-freshline.jpg" },
+  { slug: "digitalclan", name: "DigitalClan", tagline: "All in one digital agency for startups", cover: "/images/work-digitalclan.jpg" },
+  { slug: "soulsync", name: "SoulSync", tagline: "AI-assisted mental wellness app", cover: "/images/work-soulsync.jpg" },
+  { slug: "hellome-money", name: "HelloMe Money", tagline: "Modern fintech app for swift money transfers", cover: "/images/work-hellome-money.jpg" },
+  { slug: "fundora", name: "Fundora", tagline: "Trade finance for African importers", cover: "/images/work-fundora.jpg" },
+  { slug: "cargotrace", name: "CargoTrace", tagline: "Freight tracking for Nigerian importers", cover: "/images/work-cargotrace.jpg", tone: "#e8edf3" },
+  { slug: "andiesplace", name: "AndiesPlace", tagline: "Digital AI academy all in one place", cover: "/images/work-andiesplace.jpg" },
 ];
 
 export type Testimonial = {

@@ -86,7 +86,7 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
   const { scrollYProgress } = useScroll({ target: coverRef, offset: ["start end", "end start"] });
   const inset = useTransform(scrollYProgress, [0, 0.35], [8, 0]);
   const clipPath = useTransform(inset, (v) => `inset(${v}% ${v}% ${v}% ${v}% round ${v * 2}px)`);
-  const imgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-3.5%", "3.5%"]);
 
   const number = String(index + 1).padStart(2, "0");
 
@@ -128,7 +128,7 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
       >
         <div className="absolute inset-0" style={{ background: work.tone ?? "var(--color-surface)" }} />
         {!missing && (
-          <motion.div className="absolute inset-[-8%_0]" style={reduce ? undefined : { y: imgY }}>
+          <motion.div className="absolute inset-[-4%_0]" style={reduce ? undefined : { y: imgY }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={work.cover}

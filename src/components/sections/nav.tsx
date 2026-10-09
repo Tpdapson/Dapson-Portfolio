@@ -24,7 +24,7 @@ export function Nav() {
       <a href="#top" className="flex items-center gap-2">
         <span className="relative size-[34px] overflow-hidden rounded-full bg-surface">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/timi.png" alt="" className="absolute left-0 top-[-5.41%] h-[118.92%] w-full max-w-none" />
+          <img src="/images/timi.png" alt="" className="size-full object-cover" />
         </span>
         <span className="text-sm font-medium text-ink">Dapson</span>
       </a>

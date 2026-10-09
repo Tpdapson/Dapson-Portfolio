@@ -63,8 +63,8 @@ export const cargotrace: CaseStudy = {
         "“How should we interrupt you?” lets people choose which alerts deserve a push notification.",
       ],
     },
-    img("131:57198", 1376, 840, "Cargo type and first shipment setup"),
-    img("131:57209", 1376, 753, "Alert preferences"),
+    img("131:57198", 1376, 840, "Sign-in and cargo type"),
+    img("131:57209", 1376, 753, "First shipment and alert preferences"),
     {
       type: "split",
       heading: "Home & shipments",
@@ -75,8 +75,8 @@ export const cargotrace: CaseStudy = {
         "The shipments list filters by status: all, in transit, customs, delayed.",
       ],
     },
-    img("131:57218", 1376, 840, "Home and search"),
-    img("131:57229", 1376, 753, "Shipments list"),
+    img("131:57218", 1376, 840, "Home and shipments list"),
+    img("131:57229", 1376, 753, "Search, filters and track a shipment"),
     {
       type: "split",
       heading: "Tracking & timeline",
@@ -87,8 +87,8 @@ export const cargotrace: CaseStudy = {
         "A delay report explains the cause and whether any action is needed, often none.",
       ],
     },
-    img("131:57242", 1376, 753, "Live tracking and timeline"),
-    img("131:57255", 1376, 840, "Milestone sheet and delay report"),
+    img("131:57242", 1376, 753, "Live tracking, timeline and delay report"),
+    img("131:57255", 1376, 840, "Milestone sheet and revised ETA"),
     {
       type: "split",
       heading: "Container detail & paperwork",
@@ -99,8 +99,8 @@ export const cargotrace: CaseStudy = {
         "Customs status uses the same timeline language, so nothing needs re-learning.",
       ],
     },
-    img("131:57266", 1376, 840, "Container detail and manifest"),
-    img("131:57277", 1376, 753, "Documents and customs status"),
+    img("131:57266", 1376, 840, "Container detail and documents"),
+    img("131:57277", 1376, 753, "Document actions and customs status"),
     {
       type: "split",
       heading: "Costs, alerts & sharing",
@@ -114,7 +114,7 @@ export const cargotrace: CaseStudy = {
       ],
     },
     img("131:57286", 1376, 840, "Costs and charge detail"),
-    img("131:57297", 1376, 753, "Alerts and share tracking"),
+    img("131:57297", 1376, 753, "Notifications, ETA update and share tracking"),
     {
       type: "split",
       heading: "App Store screenshots",

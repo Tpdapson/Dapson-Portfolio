@@ -147,8 +147,8 @@ export const spendive: CaseStudy = {
         "Transactions list every movement with status, and pending items open into full detail.",
       ],
     },
-    img("116:43263", 1376, 460, "Bill payment screens"),
-    img("116:43258", 1376, 460, "Transaction screens"),
+    img("116:43263", 1376, 460, "Transactions and transaction detail"),
+    img("116:43258", 1376, 460, "Bill payments and new bill"),
     {
       type: "split",
       heading: "Insights",

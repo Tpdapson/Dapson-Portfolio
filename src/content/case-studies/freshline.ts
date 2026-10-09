@@ -64,8 +64,8 @@ export const freshline: CaseStudy = {
         "A first-run overview and empty states explain what to do next instead of showing blank screens.",
       ],
     },
-    img("131:57057", 1376, 753, "Phone verification and business setup"),
-    img("131:57070", 1376, 840, "Payout account and first-run overview"),
+    img("131:57057", 1376, 753, "Phone verification, business setup and payout account"),
+    img("131:57070", 1376, 840, "First-run overview and empty states"),
     {
       type: "split",
       heading: "Overview & inventory",
@@ -77,7 +77,7 @@ export const freshline: CaseStudy = {
       ],
     },
     img("131:57081", 1376, 840, "Overview and inventory"),
-    img("131:57092", 1376, 753, "Lot detail and producer profile"),
+    img("131:57092", 1376, 753, "Producer profile and account"),
     {
       type: "split",
       heading: "Shipments & tracking",
@@ -88,8 +88,8 @@ export const freshline: CaseStudy = {
         "Tracking shows checkpoints (picked up, quality sealed, in transit) with the driver one tap away.",
       ],
     },
-    img("131:57101", 1376, 840, "Booking review and confirmation"),
-    img("131:57112", 1376, 753, "Live shipment tracking"),
+    img("131:57101", 1376, 840, "New shipment and review"),
+    img("131:57112", 1376, 753, "Booked confirmation, live tracking and shipments"),
     {
       type: "split",
       heading: "Inspection & payments",
@@ -100,7 +100,7 @@ export const freshline: CaseStudy = {
         "Payment detail breaks down every charge, so the final number is never a surprise.",
       ],
     },
-    img("131:57125", 1376, 840, "Quality inspection"),
+    img("131:57125", 1376, 840, "Warehouse storage and quality inspection"),
     img("131:57136", 1376, 753, "Payment status and detail"),
     {
       type: "split",

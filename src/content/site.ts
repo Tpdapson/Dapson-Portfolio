@@ -92,6 +92,16 @@ export const testimonials: Testimonial[] = [
     text: "#1e4a10",
     avatar: "/images/avatar-kenechukwu.png",
   },
+  {
+    quote:
+      "I really enjoyed working with Timilehin. He was easy to work with, a great team player, and had a good eye for turning business requirements into designs that were both visually appealing and easy to navigate. I'd happily recommend him.",
+    name: "Korede Adelaja",
+    role: "Product Manager, IMBIL Telecoms Solutions",
+    side: "left",
+    bubble: "#a0d8f8",
+    text: "#153952",
+    avatar: "/images/avatar-korede.png",
+  },
 ];
 
 /** Props for links that leave the site. */

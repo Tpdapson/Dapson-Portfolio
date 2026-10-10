@@ -39,7 +39,7 @@ export function Works() {
           <Sticker rotate={-8} delay={0.3} className="absolute left-[calc(50%+120px)] top-[24px] sm:left-[65%] sm:top-[30px]">
             <div className="size-[56px] overflow-hidden rounded-full bg-surface sm:size-[73px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/cherub.png" alt="" className="pointer-events-none size-full object-cover" draggable={false} />
+              <img src="/images/works-sticker.png" alt="" className="pointer-events-none size-full object-cover" draggable={false} />
             </div>
           </Sticker>
         </SectionTitle>

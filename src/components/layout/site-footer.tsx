@@ -12,7 +12,7 @@ const nav = [
   { label: "About", href: "/#about" },
   { label: "Résumé", href: links.resume },
   { label: "Playground", href: links.playground },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const socials = [

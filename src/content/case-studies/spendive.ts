@@ -14,7 +14,7 @@ export const spendive: CaseStudy = {
   hero: heroFor(slug, "118:76378", "Spendive dashboard on a laptop"),
   overview: {
     body: "Spendive is a spend and procurement management platform for startups, SMEs and mid-sized companies. It brings procurement, reimbursements, approvals and vendor management into one place, giving finance teams structure, control and visibility over every naira spent. As the sole product designer, I led the web app and the marketing website, improving the visual design, UX and navigation to match the company’s new direction.",
-    cta: { label: "View website ↗", href: links.spendive },
+    cta: { label: "View website", href: links.spendive },
     meta: [
       ["Role", "Sole Product Designer"],
       ["Type", "Web app · B2B SaaS"],

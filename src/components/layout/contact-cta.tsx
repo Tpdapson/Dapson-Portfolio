@@ -2,8 +2,8 @@
 
 import { ArrowUpRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { FadeUp, MaskLines } from "@/components/motion/primitives";
-import { Magnetic } from "@/components/motion/magnetic";
-import { external, links } from "@/content/site";
+import { PillButton } from "@/components/ui/pill-button";
+import { links } from "@/content/site";
 
 /** "Have an idea worth building?" block that sits above the footer. */
 export function ContactCta() {
@@ -21,25 +21,23 @@ export function ContactCta() {
             </p>
           </FadeUp>
           <FadeUp delay={0.15} className="flex flex-wrap gap-4">
-            <Magnetic>
-              <a
-                href={links.bookCall}
-                {...external(links.bookCall)}
-                className="group flex items-center gap-1.5 rounded-full bg-neutral-0 px-5 py-3.5 text-base font-medium text-neutral-950"
-              >
-                Book a call
-                <ArrowUpRight size={18} className="transition-transform duration-300 ease-out group-hover:rotate-45" />
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <a
-                href={links.email}
-                className="group flex items-center gap-2 rounded-full bg-neutral-800 px-5 py-3.5 text-base font-medium text-neutral-0"
-              >
-                Send an email
-                <EnvelopeSimple size={18} className="transition-transform duration-300 ease-out group-hover:-rotate-12" />
-              </a>
-            </Magnetic>
+            <PillButton
+              href={links.bookCall}
+              label="Book a call"
+              icon={ArrowUpRight}
+              nudge="up-right"
+              tone="bg-neutral-0 text-neutral-950"
+              pad="pl-5 pr-[22px]"
+              gap="gap-1.5"
+            />
+            <PillButton
+              href={links.email}
+              label="Send an email"
+              icon={EnvelopeSimple}
+              nudge="tilt"
+              tone="bg-neutral-800 text-neutral-0"
+              pad="pl-[22px] pr-5"
+            />
           </FadeUp>
         </div>
       </div>

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { easeOut, FadeUp, MaskLines } from "@/components/motion/primitives";
+import { PillButton } from "@/components/ui/pill-button";
 import { cardCover, getCaseStudy, type CaseStudy } from "@/content/case-studies";
-import { external } from "@/content/site";
 
 export function CaseHero({ study }: { study: CaseStudy }) {
   const reduce = useReducedMotion();
@@ -54,13 +54,18 @@ export function CaseOverview({ study }: { study: CaseStudy }) {
         <h2 className="text-[28px] font-medium leading-[1.2] tracking-[-0.02em] text-[#0e0e0e]">{overview.heading ?? "Overview"}</h2>
         <p className="text-base font-medium leading-[1.45] text-[#737373]">{overview.body}</p>
         {overview.cta && (
-          <a
-            href={overview.cta.href}
-            {...external(overview.cta.href)}
-            className="w-fit rounded-full bg-[#0e0e0e] px-4 py-2.5 text-[13px] font-medium text-white transition-transform hover:-translate-y-0.5"
-          >
-            {overview.cta.label}
-          </a>
+          <div>
+            <PillButton
+              href={overview.cta.href}
+              label={overview.cta.label}
+              icon={ArrowUpRight}
+              nudge="up-right"
+              tone="bg-[#0e0e0e] text-white"
+              pad="px-4"
+              gap="gap-1.5"
+              size="sm"
+            />
+          </div>
         )}
       </FadeUp>
       <FadeUp delay={0.12} className="grid flex-1 grid-cols-2 gap-x-6 gap-y-7">

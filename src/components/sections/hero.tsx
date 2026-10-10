@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowDown, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDown, CalendarBlank } from "@phosphor-icons/react/dist/ssr";
 import { BlurWords, FadeUp, MaskLines } from "@/components/motion/primitives";
-import { Magnetic } from "@/components/motion/magnetic";
-import { external, links } from "@/content/site";
+import { PillButton } from "@/components/ui/pill-button";
+import { links } from "@/content/site";
 
 export function Hero() {
   return (
@@ -17,22 +17,15 @@ export function Hero() {
       </p>
 
       <FadeUp onMount delay={0.85} y={16} className="flex flex-wrap justify-center gap-2.5 py-6">
-        <Magnetic>
-          <a
-            href={links.bookCall}
-            {...external(links.bookCall)}
-            className="group flex items-center gap-2 rounded-full bg-ink-2 px-5 py-3.5 text-base font-medium text-white"
-          >
-            <ArrowUpRight size={16} className="transition-transform duration-300 ease-out group-hover:rotate-45" />
-            Book a call
-          </a>
-        </Magnetic>
-        <Magnetic>
-          <a href="#work" className="group flex items-center gap-2 rounded-full bg-chip px-5 py-3.5 text-base font-medium text-ink-2">
-            See my works
-            <ArrowDown size={16} className="transition-transform duration-300 ease-out group-hover:translate-y-0.5" />
-          </a>
-        </Magnetic>
+        <PillButton
+          href={links.bookCall}
+          label="Book a call"
+          icon={CalendarBlank}
+          nudge="tilt"
+          tone="bg-ink-2 text-white"
+          pad="pl-5 pr-[22px]"
+        />
+        <PillButton href="#work" label="See my works" icon={ArrowDown} nudge="down" tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />
       </FadeUp>
     </section>
   );

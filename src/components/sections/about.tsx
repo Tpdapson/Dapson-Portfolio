@@ -3,6 +3,7 @@
 import { ArrowRight, PaperPlaneTilt } from "@phosphor-icons/react/dist/ssr";
 import { FadeUp, Sticker } from "@/components/motion/primitives";
 import { RevealText } from "@/components/motion/reveal-text";
+import { PillButton } from "@/components/ui/pill-button";
 
 export function About() {
   return (
@@ -37,10 +38,7 @@ export function About() {
       />
 
       <FadeUp>
-        <a href="#contact" className="group flex items-center gap-2 rounded-full bg-chip px-[18px] py-2.5 text-[13px] font-medium text-ink-2">
-          Get in Touch
-          <ArrowRight size={14} className="transition-transform duration-300 ease-out group-hover:translate-x-1" />
-        </a>
+        <PillButton href="#contact" label="Get in Touch" icon={ArrowRight} nudge="right" tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />
       </FadeUp>
     </section>
   );

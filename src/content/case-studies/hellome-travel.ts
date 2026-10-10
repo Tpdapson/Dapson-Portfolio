@@ -14,7 +14,7 @@ export const hellomeTravel: CaseStudy = {
   hero: heroFor(slug, "100:41658", "HelloMe Travels app screens over snowy mountains"),
   overview: {
     body: "HelloMe Travels brings flights, hotels and tours into a single booking app. People can search return, one-way and multi-city flights, filter and compare results, book hotels and tours, pay by card or bank deposit, and keep everything in bookings and wishlists, with flight price alerts for the trips they are still planning.",
-    cta: { label: "View website ↗", href: links.hellomeTravels },
+    cta: { label: "View website", href: links.hellomeTravels },
     meta: [
       ["Role", "Product Designer"],
       ["Company", "HelloMe"],

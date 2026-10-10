@@ -10,7 +10,7 @@ const items = [
   { label: "Work", href: "/#work", Icon: Folder },
   { label: "About", href: "/#about", Icon: Smiley },
   { label: "Resume", href: links.resume, Icon: FileText },
-  { label: "Contact", href: "/#contact", Icon: Phone },
+  { label: "Contact", href: "#contact", Icon: Phone },
 ];
 
 /** Site-wide top navigation. Rendered once in the root layout. */
@@ -24,11 +24,11 @@ export function SiteNav() {
       transition={{ duration: 0.8, ease: easeOut }}
     >
       <Link href="/" className="flex items-center gap-2">
-        <span className="relative size-[34px] overflow-hidden rounded-full bg-surface">
+        <span className="relative size-10 overflow-hidden rounded-[10px] bg-surface">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/timi.png" alt="" className="size-full object-cover" />
         </span>
-        <span className="text-sm font-medium text-ink">Dapson</span>
+        <span className="text-base text-ink">Dapson</span>
       </Link>
 
       <nav className="flex items-center gap-1 sm:gap-4">
@@ -44,9 +44,9 @@ export function SiteNav() {
           </a>
         ))}
         <span className="flex items-center gap-1.5 p-1 text-sm text-ink-3">
-          <span className="relative flex size-4 items-center justify-center" aria-hidden>
-            <span className="absolute size-2 animate-ping rounded-full bg-[#3fbf5f] opacity-60" />
-            <span className="size-2 rounded-full bg-[#3fbf5f]" />
+          <span className="relative flex size-4 items-center justify-center rounded-full bg-[#9ddaa9]" aria-hidden>
+            <span className="absolute size-2 animate-ping rounded-full bg-[#329746] opacity-50 motion-reduce:animate-none" />
+            <span className="size-2 rounded-full bg-[#329746]" />
           </span>
           <span className="hidden md:inline">Open to work</span>
         </span>

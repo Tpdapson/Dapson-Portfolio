@@ -44,7 +44,6 @@ export function SiteNav() {
           </a>
         ))}
         <span className="flex items-center gap-1.5 p-1 text-sm text-ink-3">
-          {/* TODO: swap for the "Frame 15" status icon from Figma once assets can be exported. */}
           <span className="relative flex size-4 items-center justify-center" aria-hidden>
             <span className="absolute size-2 animate-ping rounded-full bg-[#3fbf5f] opacity-60" />
             <span className="size-2 rounded-full bg-[#3fbf5f]" />

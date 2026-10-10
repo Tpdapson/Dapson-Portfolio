@@ -1,17 +1,18 @@
 // Everything editable on the home page lives here.
-// TODO(Timi): fill in the social links still marked "#".
 
 export const links = {
   bookCall: "https://calendly.com/tp_dapson/30min",
   email: "mailto:petertimmy8@gmail.com",
   resume: "https://drive.google.com/file/d/1fW6aFax2e0h83tb7hsAvqiB1I1Ah-_gd/view?usp=drivesdk",
   playground: "#",
-  digitalclan: "#", // TODO(Timi): DigitalClan live website URL
+  digitalclan: "https://digitalclan.co.uk/",
+  spendive: "https://spendive.com/",
+  hellomeTravels: "https://hellometravels.com/",
   socials: {
-    whatsapp: "#",
-    x: "#",
-    behance: "#",
-    linkedin: "#",
+    whatsapp: "https://wa.me/message/O5PQRNUPNQAOE1",
+    x: "https://www.x.com/tp_dapson",
+    behance: "https://www.behance.net/timmypeter",
+    linkedin: "https://www.linkedin.com/in/timilehin-oladapo-51b34a16b",
   },
 };
 

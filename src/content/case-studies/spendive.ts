@@ -1,3 +1,4 @@
+import { links } from "@/content/site";
 import { heroFor, imageFor, type CaseStudy } from "./types";
 
 const slug = "spendive";
@@ -13,7 +14,7 @@ export const spendive: CaseStudy = {
   hero: heroFor(slug, "118:76378", "Spendive dashboard on a laptop"),
   overview: {
     body: "Spendive is a spend and procurement management platform for startups, SMEs and mid-sized companies. It brings procurement, reimbursements, approvals and vendor management into one place, giving finance teams structure, control and visibility over every naira spent. As the sole product designer, I led the web app and the marketing website, improving the visual design, UX and navigation to match the company’s new direction.",
-    // TODO(Timi): add the live website URL to show the "View website ↗" button.
+    cta: { label: "View website ↗", href: links.spendive },
     meta: [
       ["Role", "Sole Product Designer"],
       ["Type", "Web app · B2B SaaS"],
@@ -225,7 +226,7 @@ export const spendive: CaseStudy = {
           ],
         },
       ],
-      // TODO(Timi): add the website URL → link: { label: "View live website ↗", href: "…" }
+      link: { label: "View live website ↗", href: links.spendive },
     },
     img("118:76427", 1376, 850, "Spendive website: reimbursements, customer stories and reporting pages"),
     img("147:128191", 1376, 850, "Spendive website: homepage hero, integrated vendor portal, testimonials and footer"),

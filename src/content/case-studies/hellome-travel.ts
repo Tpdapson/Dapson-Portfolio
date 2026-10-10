@@ -1,3 +1,4 @@
+import { links } from "@/content/site";
 import { heroFor, imageFor, type CaseStudy } from "./types";
 
 const slug = "hellome-travel";
@@ -13,6 +14,7 @@ export const hellomeTravel: CaseStudy = {
   hero: heroFor(slug, "100:41658", "HelloMe Travels app screens over snowy mountains"),
   overview: {
     body: "HelloMe Travels brings flights, hotels and tours into a single booking app. People can search return, one-way and multi-city flights, filter and compare results, book hotels and tours, pay by card or bank deposit, and keep everything in bookings and wishlists, with flight price alerts for the trips they are still planning.",
+    cta: { label: "View website ↗", href: links.hellomeTravels },
     meta: [
       ["Role", "Product Designer"],
       ["Company", "HelloMe"],
@@ -119,7 +121,7 @@ export const hellomeTravel: CaseStudy = {
         "Alongside the app, I designed the HelloMe Travels website, giving travellers the same flights, hotels and tours experience on the web. Each homepage leads with a focused search (one-way, return and multi-city flights, hotels or tours), followed by trending flight deals, exclusive offers and top hotels to inspire the next trip.",
         "The design direction was warm, trustworthy and image-led: bold travel photography, the HelloMe orange for key actions, and clean cards that keep prices easy to compare. Trust signals like IATA accreditation, transparent pricing and 24/7 support sit right on the page, with FAQs answering common questions before checkout.",
       ],
-      // TODO(Timi): add the website URL → link: { label: "View live website ↗", href: "…" }
+      link: { label: "View live website ↗", href: links.hellomeTravels },
     },
     img("150:136601", 1376, 850, "HelloMe Travels website: hotel details, flights homepage with travel deals, and multi-city flight results"),
     {

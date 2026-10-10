@@ -90,7 +90,7 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
   const imgY = useTransform(scrollYProgress, [0, 1], ["-3.5%", "3.5%"]);
 
   const number = String(index + 1).padStart(2, "0");
-  const isExternal = work.href.startsWith("http") || work.href === "#";
+  const isExternal = !!work.website;
 
   return (
     <article className="flex flex-col gap-5 px-4 pb-[72px] sm:px-10">
@@ -124,14 +124,14 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
       <Link
         href={work.href}
         {...external(work.href)}
-        aria-label={isExternal ? `Visit the ${work.name} website` : `Read the ${work.name} case study`}
+        aria-label={isExternal ? `View the ${work.name} website` : `Read the ${work.name} case study`}
         className="block"
       >
       <motion.div
         ref={coverRef}
         style={reduce ? undefined : { clipPath }}
         className="group relative aspect-[4/3] w-full overflow-hidden sm:aspect-[1360/800]"
-        onPointerEnter={(e) => e.pointerType === "mouse" && cursor.show(isExternal ? "Visit website" : "View case study")}
+        onPointerEnter={(e) => e.pointerType === "mouse" && cursor.show(isExternal ? "View website" : "View case study")}
         onPointerLeave={cursor.hide}
       >
         <div className="absolute inset-0" style={{ background: work.tone ?? "var(--color-surface)" }} />

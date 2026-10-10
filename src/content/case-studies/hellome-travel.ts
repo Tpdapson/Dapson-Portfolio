@@ -121,8 +121,7 @@ export const hellomeTravel: CaseStudy = {
       ],
       // TODO(Timi): add the website URL → link: { label: "View live website ↗", href: "…" }
     },
-    img("140:47743", 1376, 1011, "HelloMe Travels website flights homepage"),
-    img("140:47745", 1376, 470, "Tours and hotels homepages"),
+    img("150:136601", 1376, 850, "HelloMe Travels website: hotel details, flights homepage with travel deals, and multi-city flight results"),
     {
       type: "split",
       heading: "The outcome",

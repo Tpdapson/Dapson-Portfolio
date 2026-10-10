@@ -1,13 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 export const easeOut = [0.16, 1, 0.3, 1] as const;
 
@@ -108,51 +101,6 @@ export function FadeUp({
       {children}
     </motion.div>
   );
-}
-
-/** Each word fills from `from` to `to` as the paragraph scrolls through the viewport. */
-export function ScrollFillText({
-  text,
-  className,
-  from = "#c4c4c4",
-  to = "#0a0a0a",
-}: {
-  text: string;
-  className?: string;
-  from?: string;
-  to?: string;
-}) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
-  const words = text.split(" ");
-  if (reduce) return <p className={className} style={{ color: to }}>{text}</p>;
-  return (
-    <p ref={ref} className={className}>
-      {words.map((w, i) => (
-        <FillWord key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]} from={from} to={to}>
-          {w + (i < words.length - 1 ? " " : "")}
-        </FillWord>
-      ))}
-    </p>
-  );
-}
-
-function FillWord({
-  children,
-  progress,
-  range,
-  from,
-  to,
-}: {
-  children: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-  from: string;
-  to: string;
-}) {
-  const color = useTransform(progress, range, [from, to]);
-  return <motion.span style={{ color }}>{children}</motion.span>;
 }
 
 /**

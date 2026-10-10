@@ -227,7 +227,8 @@ export const spendive: CaseStudy = {
       ],
       // TODO(Timi): add the website URL → link: { label: "View live website ↗", href: "…" }
     },
-    img("118:76427", 1376, 850, "Spendive marketing website sections"),
+    img("118:76427", 1376, 850, "Spendive website: reimbursements, customer stories and reporting pages"),
+    img("147:128191", 1376, 850, "Spendive website: homepage hero, integrated vendor portal, testimonials and footer"),
     {
       type: "split",
       heading: "Impact",

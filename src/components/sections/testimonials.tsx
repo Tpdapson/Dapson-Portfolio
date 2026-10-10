@@ -96,7 +96,7 @@ function Avatar({ t }: { t: Testimonial }) {
   if (t.avatar) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={t.avatar} alt="" className="size-8 rounded-full bg-surface object-cover" />
+      <img src={t.avatar} alt="" className="size-9 rounded-full bg-surface object-cover" />
     );
   }
   return (

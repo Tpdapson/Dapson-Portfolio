@@ -50,42 +50,44 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    quote: "I recommend Timmy, a designer who played a significant role in shaping our product and our design culture.",
+    quote:
+      "Timi designed both the UX and UI for our website at Digitalclan, and I was thoroughly impressed. He turned our needs into intuitive, user-friendly designs with real attention to details. Communication was smooth, deadlines were met, and quality never dropped. Highly recommended!",
     name: "Jide Ladipo",
     role: "Founder, Digital Clan",
     side: "left",
     bubble: "#edbbf7",
-    text: "#684270",
-    initials: "JL",
+    text: "#503357",
+    avatar: "/images/avatar-jide.png",
   },
   {
     quote:
-      "I had a great experience working with Timmy. He has a strong understanding of UI principles and his contributions were key in helping us hit our launch goals and deliver a better experience for our users.",
-    name: "Kenechuckwu",
-    role: "Product Designer, Andies Place",
-    side: "right",
-    bubble: "#e2e57f",
-    text: "#494d0e",
-    avatar: "/images/avatar-kenechukwu.png",
-  },
-  {
-    quote: "Timmy’s product design insights are super amazing. I learnt a lot from him and will always appreciate working alongside him.",
+      "I wholeheartedly recommend Timilehin for any role or project that needs a thoughtful, reliable team member. He is patient, diligent, and always listens and understands before taking action. It's rare to find someone who pairs technical skill with such a humble, open-minded attitude.",
     name: "Oke Micheal",
     role: "CTO, Spendive",
-    side: "left",
-    bubble: "#af92f6",
-    text: "#2b1a5c",
+    side: "right",
+    bubble: "#e2e57f",
+    text: "#41450d",
     avatar: "/images/avatar-oke.png",
   },
   {
-    quote: "Timmy is one of the most detail-oriented designers I’ve met. His attention to craft and prioritisation of user experience are unmatched.",
+    quote:
+      "Timmy is good. He brings a really good attitude to the work, and the quality of what he delivers is consistently good too. Really great to work with.",
     name: "David Hanby",
-    role: "CTO, Minutes Master",
+    role: "Director, Minutes Master",
+    side: "left",
+    bubble: "#f6c892",
+    text: "#4c3015",
+    avatar: "/images/avatar-david.png",
+  },
+  {
+    quote:
+      "I really enjoyed working with Dapson. He was intentional with his work, communicated clearly, and made the whole process smooth from start to finish. He took feedback well and understood both the brief and the bigger picture. I'd happily work with him again.",
+    name: "Kenechuckwu Anyaeche",
+    role: "Product Designer, Wiseki Technologies",
     side: "right",
-    bubble: "#9edf86",
+    bubble: "#b1e59e",
     text: "#1e4a10",
-    // Figma reuses Timi's photo here as a placeholder; swap in David's photo when you have it.
-    initials: "DH",
+    avatar: "/images/avatar-kenechukwu.png",
   },
 ];
 

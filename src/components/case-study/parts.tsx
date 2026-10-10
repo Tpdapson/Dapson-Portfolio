@@ -49,8 +49,8 @@ export function CaseHero({ study }: { study: CaseStudy }) {
 export function CaseOverview({ study }: { study: CaseStudy }) {
   const { overview } = study;
   return (
-    <section className="flex flex-col gap-12 px-4 pb-20 pt-12 sm:px-10 md:flex-row md:gap-[120px] md:pb-[120px] md:pt-20">
-      <FadeUp className="flex flex-col gap-5 md:w-[640px] md:shrink-0">
+    <section className="flex flex-col gap-12 px-4 pb-20 pt-12 sm:px-10 lg:flex-row lg:gap-16 xl:gap-[120px] md:pb-[120px] md:pt-20">
+      <FadeUp className="flex flex-col gap-5 lg:w-[55%] lg:max-w-[640px] lg:shrink-0">
         <h2 className="text-[28px] font-medium leading-[1.2] tracking-[-0.02em] text-[#0e0e0e]">{overview.heading ?? "Overview"}</h2>
         <p className="text-base font-medium leading-[1.45] text-[#737373]">{overview.body}</p>
         {overview.cta && (

@@ -12,7 +12,7 @@ export function Hero() {
         <MaskLines lines={["PRODUCT", "DESIGNER"]} onMount delay={0.15} stagger={0.09} />
       </h1>
 
-      <p className="w-full max-w-[588px] py-4 text-[clamp(22px,2.5vw,36px)] leading-[1.1] text-muted">
+      <p className="w-full max-w-[588px] py-4 text-[clamp(22px,2.5vw,36px)] leading-[1.1] text-balance text-muted">
         <BlurWords text="I design and build digital products that look good & work even better." onMount delay={0.55} />
       </p>
 

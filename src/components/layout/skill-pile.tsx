@@ -207,7 +207,7 @@ export function SkillPile() {
       ref={box}
       aria-label="Skills"
       role="list"
-      className="absolute inset-x-0 bottom-0 h-[260px] cursor-grab select-none active:cursor-grabbing sm:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
+      className="absolute inset-x-0 bottom-0 h-[260px] cursor-grab select-none active:cursor-grabbing lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
     >
       {items.map((it, i) => (
         <div

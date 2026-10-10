@@ -73,19 +73,21 @@ export function SiteNav() {
           <span className="text-base text-ink">Dapson</span>
         </Link>
 
-        <nav className="flex items-center gap-1 sm:gap-4">
+        <nav className="-mr-2 flex items-center sm:mr-0 sm:gap-4">
           {items.map(({ label, href, Icon }) => (
             <a
               key={label}
               href={href}
               {...external(href)}
-              className="group flex items-center gap-1.5 rounded-full p-1 text-sm text-ink-3 transition-colors hover:text-ink"
+              aria-label={label}
+              // Icon-only on phones, so give each a full 40px tap target there.
+              className="group flex size-10 items-center justify-center gap-1.5 rounded-full text-sm sm:size-auto sm:p-1 text-ink-3 transition-colors hover:text-ink"
             >
-              <Icon size={14} className="transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
+              <Icon size={14} className="size-[18px] transition-transform sm:size-3.5 duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
               <span className="hidden sm:inline">{label}</span>
             </a>
           ))}
-          <span className="flex items-center gap-1.5 p-1 text-sm text-ink-3">
+          <span className="flex items-center gap-1.5 p-1 pl-2 text-sm text-ink-3 sm:pl-1" title="Open to work">
             <span className="relative flex size-4 items-center justify-center rounded-full bg-[#9ddaa9]" aria-hidden>
               <span className="absolute size-2 animate-ping rounded-full bg-[#329746] opacity-50 motion-reduce:animate-none" />
               <span className="size-2 rounded-full bg-[#329746]" />

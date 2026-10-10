@@ -10,7 +10,9 @@ npm run dev   # http://localhost:3000
 ## Where things live
 
 - `src/content/site.ts`: projects, testimonials and links (Book a call, email, résumé, socials). Edit copy here.
+- `src/components/layout/`: the site-wide nav (`SiteNav`) and footer (`SiteFooter`, which includes the contact call to action and the skill pile). Both are rendered once in `src/app/layout.tsx`, so every page gets them; pages only render their own `<main>`.
 - `src/components/sections/`: one file per home-page section, in Figma order.
+- `src/app/work/[slug]/` and `src/content/case-studies/`: the case-study template and one content file per project.
 - `src/components/motion/`: reusable motion pieces (mask line reveals, blur-in words, scroll-filled text, draggable stickers, magnetic buttons, smooth scroll).
 - `src/app/globals.css`: design tokens taken from the Figma variables.
 - `src/fonts/`: PP Neue Montreal Book and Medium (licensed from Pangram Pangram), loaded with `next/font/local`.

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { FileText, Folder, Smiley } from "@phosphor-icons/react/dist/ssr";
+import { FileText, Folder, Phone, Smiley } from "@phosphor-icons/react/dist/ssr";
 import { easeOut } from "@/components/motion/primitives";
 import { external, links } from "@/content/site";
 
@@ -10,10 +10,11 @@ const items = [
   { label: "Work", href: "/#work", Icon: Folder },
   { label: "About", href: "/#about", Icon: Smiley },
   { label: "Resume", href: links.resume, Icon: FileText },
-  { label: "Contact", href: "/#contact", Icon: FileText },
+  { label: "Contact", href: "/#contact", Icon: Phone },
 ];
 
-export function Nav() {
+/** Site-wide top navigation. Rendered once in the root layout. */
+export function SiteNav() {
   const reduce = useReducedMotion();
   return (
     <motion.header

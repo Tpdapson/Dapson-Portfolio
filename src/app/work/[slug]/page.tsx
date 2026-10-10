@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Nav } from "@/components/sections/nav";
-import { Contact } from "@/components/sections/contact";
-import { Footer } from "@/components/sections/footer";
 import { CaseHero, CaseOverview, MoreWorks } from "@/components/case-study/parts";
 import { Blocks } from "@/components/case-study/blocks";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
@@ -24,16 +21,11 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   if (!study) notFound();
 
   return (
-    <>
-      <Nav />
-      <main className="mx-auto max-w-[1440px]">
-        <CaseHero study={study} />
-        <CaseOverview study={study} />
-        <Blocks study={study} />
-        <MoreWorks study={study} />
-      </main>
-      <Contact />
-      <Footer />
-    </>
+    <main className="mx-auto max-w-[1440px]">
+      <CaseHero study={study} />
+      <CaseOverview study={study} />
+      <Blocks study={study} />
+      <MoreWorks study={study} />
+    </main>
   );
 }

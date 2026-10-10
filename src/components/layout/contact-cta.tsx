@@ -5,7 +5,8 @@ import { FadeUp, MaskLines } from "@/components/motion/primitives";
 import { Magnetic } from "@/components/motion/magnetic";
 import { external, links } from "@/content/site";
 
-export function Contact() {
+/** "Have an idea worth building?" block that sits above the footer. */
+export function ContactCta() {
   return (
     <section id="contact" className="border-t border-tint-12 bg-black px-4 pb-20 pt-24 sm:px-20">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-14">

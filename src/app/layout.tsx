@@ -18,6 +18,12 @@ const title = "Dapson — Product Designer";
 const description =
   "Timilehin Oladapo designs and builds digital products that look good and work even better.";
 
+// Text shown on link previews (WhatsApp, LinkedIn, X, …).
+const share = {
+  title: "Oladapo Timilehin — Product Designer",
+  description: "Product (UI/UX) Designer, designing digital products that look good and work even better.",
+};
+
 // Share images come from app/opengraph-image.jpg and app/twitter-image.jpg.
 // Set NEXT_PUBLIC_SITE_URL to the live domain so their URLs are absolute
 // (on Vercel the production URL is used automatically).
@@ -25,8 +31,8 @@ export const metadata: Metadata = {
   ...(process.env.NEXT_PUBLIC_SITE_URL && { metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL) }),
   title,
   description,
-  openGraph: { title, description, type: "website", siteName: "Dapson", locale: "en_GB" },
-  twitter: { card: "summary_large_image", title, description, creator: "@tp_dapson" },
+  openGraph: { ...share, type: "website", siteName: "Dapson", locale: "en_GB" },
+  twitter: { card: "summary_large_image", ...share, creator: "@tp_dapson" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

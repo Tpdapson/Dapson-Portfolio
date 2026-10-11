@@ -53,7 +53,10 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p className="text-center text-sm font-medium leading-[1.3] text-neutral-300">© 2026 Timilehin Oladapo</p>
+        {/* Left on phones, in line with the links and socials above; centred from tablet up. */}
+        <p className="text-left text-sm font-medium leading-[1.3] text-neutral-300 sm:text-center">
+          © 2026 - Designed &amp; Developed by Timilehin Oladapo
+        </p>
 
         <p
           aria-hidden

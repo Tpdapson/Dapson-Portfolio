@@ -39,7 +39,7 @@ export function Works() {
         <SectionTitle note="Explore my work!" lines={["SELECTED", "WORKS"]}>
           <Sticker rotate={-8} delay={0.3} className="absolute left-[min(calc(50%+120px),calc(100%-64px))] top-[24px] sm:left-[65%] sm:top-[30px]">
             <div className="size-[56px] overflow-hidden rounded-full bg-surface sm:size-[73px]">
-              <Image src="/images/works-sticker.png" alt="" width={73} height={73} className="pointer-events-none size-full object-cover" draggable={false} />
+              <Image src="/images/works-sticker.png" alt="" width={73} height={73} quality={90} className="pointer-events-none size-full object-cover" draggable={false} />
             </div>
           </Sticker>
         </SectionTitle>

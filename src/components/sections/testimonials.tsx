@@ -96,7 +96,7 @@ function Message({ t }: { t: Testimonial }) {
 function Avatar({ t }: { t: Testimonial }) {
   if (t.avatar) {
     return (
-      <Image src={t.avatar} alt="" width={36} height={36} className="size-9 rounded-full bg-surface object-cover" />
+      <Image src={t.avatar} alt="" width={36} height={36} quality={90} className="size-9 rounded-full bg-surface object-cover" />
     );
   }
   return (

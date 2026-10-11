@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useInView, useReducedMotion } from "motion/react";
 import {
   ArrowUpRight,
@@ -70,8 +70,9 @@ function place(node: HTMLElement, x: number, y: number, angle: number) {
 }
 
 /**
- * When the footer scrolls in, the pills drop in and pile up. With a mouse you
- * can grab and throw them. Reduced motion gets the static Figma arrangement.
+ * When the footer scrolls in, the pills drop in and pile up. Tapping a pill,
+ * or brushing the mouse across one, bounces it; with a mouse you can also grab
+ * and throw them. Reduced motion gets the static Figma arrangement.
  */
 export function SkillPile() {
   const box = useRef<HTMLDivElement>(null);
@@ -79,6 +80,9 @@ export function SkillPile() {
   const reduce = useReducedMotion();
   const started = useInView(box, { amount: 0.2, once: true });
   const [build, setBuild] = useState(0);
+  // Set once the physics world exists: bounces pill `i`, nudged along (dx, dy).
+  const kick = useRef<(i: number, dx?: number, dy?: number) => void>(() => {});
+  const lastKick = useRef<number[]>([]);
 
   // Rebuild the world when the width changes meaningfully.
   useEffect(() => {
@@ -148,6 +152,17 @@ export function SkillPile() {
       });
       M.Composite.add(engine.world, bodies);
 
+      kick.current = (i, dx = 0, dy = 0) => {
+        const b = bodies[i];
+        if (!b) return;
+        const side = dx || (Math.random() - 0.5) * 6;
+        M.Body.setVelocity(b, {
+          x: Math.max(-14, Math.min(14, b.velocity.x + side)),
+          y: Math.min(b.velocity.y, -9 - Math.random() * 5 + Math.min(0, dy)),
+        });
+        M.Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.3);
+      };
+
       // Grab-and-throw for mouse users only; touch keeps native scrolling.
       let removeMouse = () => {};
       if (window.matchMedia("(pointer: fine)").matches) {
@@ -189,6 +204,7 @@ export function SkillPile() {
       raf = requestAnimationFrame(tick);
 
       teardown = () => {
+        kick.current = () => {};
         cancelAnimationFrame(raf);
         io.disconnect();
         removeMouse();
@@ -207,7 +223,8 @@ export function SkillPile() {
       ref={box}
       aria-label="Skills"
       role="list"
-      className="absolute inset-x-0 bottom-0 h-[260px] cursor-grab select-none active:cursor-grabbing lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
+      // On touch screens the box lets scrolls through; only the pills take taps.
+      className="absolute inset-x-0 bottom-0 h-[150px] cursor-grab select-none active:cursor-grabbing sm:h-[260px] lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
     >
       {items.map((it, i) => (
         <div
@@ -217,18 +234,31 @@ export function SkillPile() {
           }}
           role={it.label ? "listitem" : undefined}
           aria-hidden={it.label ? undefined : true}
-          className={`absolute left-0 top-0 flex items-center justify-center opacity-0 shadow-[var(--shadow-pill)] will-change-transform ${
-            it.kind === "ball"
-              ? "rounded-full"
-              : "gap-2.5 whitespace-nowrap rounded-full px-4 py-2.5 text-[13px] uppercase tracking-[0.02em] text-[#1b1b1b] sm:px-[22px] sm:py-3.5 sm:text-[17px]"
-          }`}
-          style={{
-            background: it.color,
-            ...(it.kind === "ball" ? { width: it.size, height: it.size } : null),
+          // Tap to bounce (a click never fires on a scroll, so swiping still scrolls).
+          onClick={() => kick.current(i)}
+          // Mouse: brushing across a pill knocks it the way the cursor moves.
+          onPointerMove={(e) => {
+            if (e.pointerType !== "mouse" || e.buttons) return;
+            const now = performance.now();
+            if (now - (lastKick.current[i] ?? 0) < 350) return;
+            lastKick.current[i] = now;
+            kick.current(i, e.movementX * 0.6, e.movementY * 0.3);
           }}
+          className={`pointer-events-auto absolute left-0 top-0 flex items-center justify-center opacity-0 shadow-[var(--shadow-pill)] will-change-transform [-webkit-tap-highlight-color:transparent] ${
+            it.kind === "ball"
+              ? "size-[var(--s)] rounded-full sm:size-[var(--S)]"
+              : "gap-1 whitespace-nowrap rounded-full px-2.5 py-1.5 text-[10px] uppercase tracking-[0.02em] text-[#1b1b1b] sm:gap-2.5 sm:px-[22px] sm:py-3.5 sm:text-[17px]"
+          }`}
+          style={
+            {
+              background: it.color,
+              // Balls: half size on phones.
+              ...(it.kind === "ball" ? { "--s": `${it.size! / 2}px`, "--S": `${it.size}px` } : null),
+            } as CSSProperties
+          }
         >
           {it.label}
-          <it.Icon size={it.kind === "ball" ? 18 : 16} color="#1b1b1b" />
+          <it.Icon size={16} color="#1b1b1b" className={it.kind === "ball" ? "size-2.5 sm:size-[18px]" : "size-2.5 sm:size-4"} />
         </div>
       ))}
     </div>

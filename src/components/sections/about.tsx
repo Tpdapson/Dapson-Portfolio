@@ -20,10 +20,10 @@ export function About() {
           </div>
         </Sticker>
 
-        <Sticker rotate={14} delay={0.25} className="absolute right-[0%] top-[90px] sm:right-[7%] sm:top-[50px]">
-          <div className="flex items-center gap-2 rounded-[4px] border border-[#2b2b2b] bg-lime px-3.5 py-2">
-            <PaperPlaneTilt size={14} />
-            <p className="font-hand text-xl text-[#1a1a1a]">OPEN TO WORK</p>
+        <Sticker rotate={14} delay={0.25} className="absolute right-[4%] top-[96px] sm:right-[7%] sm:top-[50px]">
+          <div className="flex items-center gap-1.5 rounded-[4px] border border-[#2b2b2b] bg-lime px-2 py-1 sm:gap-2 sm:px-3.5 sm:py-2">
+            <PaperPlaneTilt size={14} className="size-2.5 sm:size-3.5" />
+            <p className="font-hand text-[13px] leading-none text-[#1a1a1a] sm:text-xl sm:leading-normal">OPEN TO WORK</p>
           </div>
         </Sticker>
       </div>

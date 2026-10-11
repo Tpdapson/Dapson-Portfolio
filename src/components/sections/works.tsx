@@ -83,11 +83,11 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
   const coverRef = useRef<HTMLDivElement>(null);
   const [missing, setMissing] = useState(false);
 
-  // Cover opens up from an inset card and the image drifts slower than the page.
+  // Cover opens up from an inset card as it scrolls in. The image itself is
+  // never zoomed or shifted, so the whole design always shows.
   const { scrollYProgress } = useScroll({ target: coverRef, offset: ["start end", "end start"] });
   const inset = useTransform(scrollYProgress, [0, 0.35], [8, 0]);
   const clipPath = useTransform(inset, (v) => `inset(${v}% ${v}% ${v}% ${v}% round ${v * 2}px)`);
-  const imgY = useTransform(scrollYProgress, [0, 1], ["-3.5%", "3.5%"]);
 
   const number = String(index + 1).padStart(2, "0");
   const isExternal = !!work.website;
@@ -130,22 +130,21 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
       <motion.div
         ref={coverRef}
         style={reduce ? undefined : { clipPath }}
-        className="group relative aspect-[4/3] w-full overflow-hidden sm:aspect-[1360/800]"
+        // Same 1360×800 shape as the Figma cover, on every screen size.
+        className="relative aspect-[1360/800] w-full overflow-hidden"
         onPointerEnter={(e) => e.pointerType === "mouse" && cursor.show(isExternal ? "View website" : "View case study")}
         onPointerLeave={cursor.hide}
       >
         <div className="absolute inset-0" style={{ background: work.tone ?? "var(--color-surface)" }} />
         {!missing && (
-          <motion.div className="absolute inset-[-4%_0]" style={reduce ? undefined : { y: imgY }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={work.cover}
-              alt={`${work.name} — ${work.tagline}`}
-              loading="lazy"
-              onError={() => setMissing(true)}
-              className="size-full object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03]"
-            />
-          </motion.div>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={work.cover}
+            alt={`${work.name} — ${work.tagline}`}
+            loading="lazy"
+            onError={() => setMissing(true)}
+            className="absolute inset-0 size-full object-cover"
+          />
         )}
       </motion.div>
       </Link>

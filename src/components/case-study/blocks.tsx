@@ -46,10 +46,13 @@ function BlockView({ block, study }: { block: Block; study: CaseStudy }) {
       );
     case "pair":
       return (
-        // Side by side from tablet up with Figma's 24px gap (as a share of the
-        // 1376px frame); stacked on phones so each panel is shown large.
+        // Side by side with Figma's 24px gap (as a share of the 1376px frame).
+        // Desktop products (wide screenshots) stack on phones so each is shown
+        // large; mobile-app panels stay side by side and open larger on tap.
         <figure className="flex flex-col gap-4 px-4 py-1.5 sm:px-8 sm:py-5">
-          <div className="grid gap-3 md:grid-cols-2 md:gap-[1.744%]">
+          <div
+            className={`grid ${study.squareImages ? "gap-3 md:grid-cols-2 md:gap-[1.744%]" : "grid-cols-2 gap-[1.744%]"}`}
+          >
             {block.images.map((img) => (
               <RevealImage
                 key={img.src}
@@ -58,7 +61,9 @@ function BlockView({ block, study }: { block: Block; study: CaseStudy }) {
                 h={img.h}
                 alt={img.alt}
                 square={study.squareImages}
-                sizes="(min-width: 1440px) 676px, (min-width: 768px) 50vw, 100vw"
+                sizes={
+                  study.squareImages ? "(min-width: 1440px) 676px, (min-width: 768px) 50vw, 100vw" : "(min-width: 1440px) 676px, 50vw"
+                }
               />
             ))}
           </div>

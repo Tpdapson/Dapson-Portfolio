@@ -3,7 +3,7 @@ export type Img = { src: string; w: number; h: number; alt: string };
 export type Block =
   /** Full-width image (mockup panels, split panels, feature shots). */
   | ({ type: "image"; caption?: string } & Img)
-  /** Two panels side by side on wider screens, stacked on phones. Each opens on its own in the viewer. */
+  /** Two panels side by side (stacked on phones for desktop-product case studies). Each opens on its own in the viewer. */
   | { type: "pair"; images: [Img, Img]; caption?: string }
   /** Narrow centred text column, used for "The challenge". */
   | { type: "centered"; heading: string; body: string }
@@ -41,7 +41,7 @@ export type CaseStudy = {
     meta: [string, string][];
   };
   blocks: Block[];
-  /** Desktop products (web apps, dashboards): images get square corners. */
+  /** Desktop products (web apps, dashboards): square image corners, and two-panel images stack on phones. */
   squareImages?: boolean;
   /** Slugs of the two projects suggested at the end; their cards come from `works` in content/site.ts. */
   more: [string, string];

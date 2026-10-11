@@ -2,17 +2,6 @@ import Link from "next/link";
 import type { Icon } from "@phosphor-icons/react";
 import { external } from "@/content/site";
 
-/**
- * How the icon moves on hover. The button itself stays still; only the icon
- * gives a small, direction-aware nudge.
- */
-const nudges = {
-  "up-right": "group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
-  right: "group-hover:translate-x-1",
-  down: "group-hover:translate-y-0.5",
-  tilt: "group-hover:-rotate-12",
-} as const;
-
 const sizes = {
   // 16px text, 18px icon, 47px tall (landing page CTAs).
   md: { text: "text-base", py: "py-3.5", icon: 18 },
@@ -24,12 +13,14 @@ const sizes = {
  * Rounded pill button from the Figma file. Padding is set per button (`pad`)
  * because the side with the icon gets slightly different padding for visual
  * balance.
+ *
+ * Hover (and keyboard focus): the label rolls up out of the pill while an
+ * identical copy rises in from below. The pill itself never moves.
  */
 export function PillButton({
   href,
   label,
-  icon: IconComp,
-  nudge,
+  icon,
   tone,
   pad,
   gap = "gap-2",
@@ -38,37 +29,59 @@ export function PillButton({
   href: string;
   label: string;
   icon: Icon;
-  nudge: keyof typeof nudges;
   /** Background and text colour classes. */
   tone: string;
-  /** Left/right padding classes, e.g. "pl-5 pr-[22px]". */
+  /** Left/right padding classes, e.g. "pl-[22px] pr-5". */
   pad: string;
   gap?: string;
   size?: keyof typeof sizes;
 }) {
   const s = sizes[size];
-  const className = `group inline-flex items-center rounded-full font-medium leading-[normal] whitespace-nowrap transition-[filter] duration-300 hover:brightness-[0.97] ${s.text} ${s.py} ${gap} ${pad} ${tone}`;
-  const icon = (
-    <IconComp
-      size={s.icon}
-      aria-hidden
-      className={`shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${nudges[nudge]}`}
-    />
+  const className = `group relative inline-flex overflow-hidden rounded-full font-medium leading-[normal] whitespace-nowrap ${s.text} ${s.py} ${pad} ${tone}`;
+  const IconComp = icon;
+  const content = (
+    <RollingLabel className={gap}>
+      {label}
+      <IconComp size={s.icon} aria-hidden className="shrink-0" />
+    </RollingLabel>
   );
 
   // In-page anchors and other routes use Link; mailto and external links use <a>.
   if (href.startsWith("/")) {
     return (
       <Link href={href} className={className}>
-        {label}
-        {icon}
+        {content}
       </Link>
     );
   }
   return (
     <a href={href} {...external(href)} className={className}>
-      {label}
-      {icon}
+      {content}
     </a>
+  );
+}
+
+// Quick ease-in-out roll. The 180% travel below clears the pill's padding, so
+// the label leaves the pill entirely rather than just its own line.
+const roll =
+  "transition-transform duration-[450ms] ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:transition-none";
+
+/**
+ * Content that rolls on hover/focus of the nearest `group`: it slides up out
+ * of view while a copy rises in from below. The parent needs `overflow-hidden`.
+ */
+export function RollingLabel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className="relative flex">
+      <span className={`flex items-center ${className} ${roll} group-hover:-translate-y-[180%] group-focus-visible:-translate-y-[180%]`}>
+        {children}
+      </span>
+      <span
+        aria-hidden
+        className={`absolute inset-0 flex items-center ${className} translate-y-[180%] ${roll} group-hover:translate-y-0 group-focus-visible:translate-y-0`}
+      >
+        {children}
+      </span>
+    </span>
   );
 }

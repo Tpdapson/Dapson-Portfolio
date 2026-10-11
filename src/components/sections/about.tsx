@@ -38,7 +38,7 @@ export function About() {
       />
 
       <FadeUp>
-        <PillButton href="#contact" label="Get in Touch" icon={ArrowRight} nudge="right" tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />
+        <PillButton href="#contact" label="Get in Touch" icon={ArrowRight} tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />
       </FadeUp>
     </section>
   );

@@ -25,7 +25,6 @@ export function ContactCta() {
               href={links.bookCall}
               label="Book a call"
               icon={ArrowUpRight}
-              nudge="up-right"
               tone="bg-neutral-0 text-neutral-950"
               pad="pl-5 pr-[22px]"
               gap="gap-1.5"
@@ -34,7 +33,6 @@ export function ContactCta() {
               href={links.email}
               label="Send an email"
               icon={EnvelopeSimple}
-              nudge="tilt"
               tone="bg-neutral-800 text-neutral-0"
               pad="pl-[22px] pr-5"
             />

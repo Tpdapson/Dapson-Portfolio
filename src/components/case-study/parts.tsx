@@ -66,7 +66,6 @@ export function CaseOverview({ study }: { study: CaseStudy }) {
               href={overview.cta.href}
               label={overview.cta.label}
               icon={ArrowUpRight}
-              nudge="up-right"
               tone="bg-ink text-on-ink"
               pad="px-4"
               gap="gap-1.5"

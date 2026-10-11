@@ -5,6 +5,7 @@ import twitterX from "@iconify-icons/bi/twitter-x";
 import behance from "@iconify-icons/basil/behance-solid";
 import { ContactCta } from "@/components/layout/contact-cta";
 import { SkillPile } from "@/components/layout/skill-pile";
+import { RollingLabel } from "@/components/ui/pill-button";
 import { external, links } from "@/content/site";
 
 const nav = [
@@ -43,9 +44,11 @@ export function SiteFooter() {
                 href={s.href}
                 {...external(s.href)}
                 aria-label={s.label}
-                className="rounded-xl border border-tint-12 bg-tint-06 p-2.5 text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:text-white"
+                className="group overflow-hidden rounded-xl border border-tint-12 bg-tint-06 p-2.5 text-neutral-300 transition-colors duration-300 hover:text-neutral-0"
               >
-                <Iconify icon={s.icon} width={16} height={16} />
+                <RollingLabel>
+                  <Iconify icon={s.icon} width={16} height={16} />
+                </RollingLabel>
               </a>
             ))}
           </div>

@@ -1,7 +1,8 @@
-import { heroFor, imageFor, type CaseStudy } from "./types";
+import { heroFor, imageFor, pairFor, type CaseStudy } from "./types";
 
 const slug = "cargotrace";
 const img = imageFor(slug);
+const pair = pairFor(slug);
 
 export const cargotrace: CaseStudy = {
   slug,
@@ -62,7 +63,7 @@ export const cargotrace: CaseStudy = {
         "“How should we interrupt you?” lets people choose which alerts deserve a push notification.",
       ],
     },
-    img("131:57198", 1376, 840, "Sign-in and cargo type"),
+    pair("131:57198", 840, "Sign-in and cargo type"),
     img("131:57209", 1376, 753, "First shipment and alert preferences"),
     {
       type: "split",
@@ -74,7 +75,7 @@ export const cargotrace: CaseStudy = {
         "The shipments list filters by status: all, in transit, customs, delayed.",
       ],
     },
-    img("131:57218", 1376, 840, "Home and shipments list"),
+    pair("131:57218", 840, "Home and shipments list"),
     img("131:57229", 1376, 753, "Search, filters and track a shipment"),
     {
       type: "split",
@@ -87,7 +88,7 @@ export const cargotrace: CaseStudy = {
       ],
     },
     img("131:57242", 1376, 753, "Live tracking, timeline and delay report"),
-    img("131:57255", 1376, 840, "Milestone sheet and revised ETA"),
+    pair("131:57255", 840, "Milestone sheet and revised ETA"),
     {
       type: "split",
       heading: "Container detail & paperwork",
@@ -98,7 +99,7 @@ export const cargotrace: CaseStudy = {
         "Customs status uses the same timeline language, so nothing needs re-learning.",
       ],
     },
-    img("131:57266", 1376, 840, "Container detail and documents"),
+    pair("131:57266", 840, "Container detail and documents"),
     img("131:57277", 1376, 753, "Document actions and customs status"),
     {
       type: "split",
@@ -112,7 +113,7 @@ export const cargotrace: CaseStudy = {
         "Share tracking sends a clean update to a consignee or customer in one step.",
       ],
     },
-    img("131:57286", 1376, 840, "Costs and charge detail"),
+    pair("131:57286", 840, "Costs and charge detail"),
     img("131:57297", 1376, 753, "Notifications, ETA update and share tracking"),
     {
       type: "split",

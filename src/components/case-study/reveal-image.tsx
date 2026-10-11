@@ -6,7 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { useOpenImage } from "@/components/case-study/lightbox";
 
 /**
- * Case-study image: opens from a slightly inset, rounded clip as it scrolls in,
+ * Case-study image: opens out from slightly inset sides as it scrolls in,
  * with the picture settling from a small zoom. On phones and tablets,
  * tapping it opens the full-screen viewer.
  */
@@ -17,6 +17,8 @@ export function RevealImage({
   alt,
   priority,
   className,
+  square = false,
+  sizes = "(min-width: 1440px) 1376px, 100vw",
 }: {
   src: string;
   w: number;
@@ -24,12 +26,17 @@ export function RevealImage({
   alt: string;
   priority?: boolean;
   className?: string;
+  /** Square corners (desktop-product case studies). */
+  square?: boolean;
+  sizes?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.55"] });
   const inset = useTransform(scrollYProgress, [0, 1], [6, 0]);
-  const clipPath = useTransform(inset, (v) => `inset(${v}% ${v}% ${v}% ${v}% round ${16 + v * 3}px)`);
+  // Opens from the sides only, so the vertical spacing between images stays
+  // even while they scroll in (important on phones, where images stack).
+  const clipPath = useTransform(inset, (v) => `inset(0% ${v}% 0% ${v}% round ${square ? 0 : 16 + v * 3}px)`);
   const scale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
   const openImage = useOpenImage();
 
@@ -42,7 +49,7 @@ export function RevealImage({
           height={h}
           alt={alt}
           priority={priority}
-          sizes="(min-width: 1440px) 1376px, 100vw"
+          sizes={sizes}
           quality={90}
           className="block h-auto w-full"
         />

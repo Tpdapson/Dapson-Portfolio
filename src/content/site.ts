@@ -36,7 +36,7 @@ export type Work = {
  */
 export const works: Work[] = [
   { slug: "hellome-travel", name: "HelloMe Travel", tagline: "Flights, hotels and tours in one app", href: "/work/hellome-travel", cover: "/images/work-hellome-travel.jpg" },
-  { slug: "spendive", name: "Spendive", tagline: "Spend and procurement management for growing teams", href: "/work/spendive", cover: "/images/work-spendive.jpg" },
+  { slug: "spendive", name: "Spendive", tagline: "Spend management for growing teams", href: "/work/spendive", cover: "/images/work-spendive.jpg" },
   { slug: "freshline", name: "FreshLine", tagline: "Agri supply chain, from farm gate to buyer", href: "/work/freshline", cover: "/images/work-freshline.jpg" },
   { slug: "digitalclan", name: "DigitalClan", tagline: "All in one digital agency for startups", href: links.digitalclan, website: true, cover: "/images/work-digitalclan.jpg" },
   { slug: "soulsync", name: "SoulSync", tagline: "AI-assisted mental wellness app", href: "/work/soulsync", cover: "/images/work-soulsync.jpg" },

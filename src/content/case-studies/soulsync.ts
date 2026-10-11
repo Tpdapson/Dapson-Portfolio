@@ -1,7 +1,8 @@
-import { heroFor, imageFor, type CaseStudy } from "./types";
+import { heroFor, imageFor, pairFor, type CaseStudy } from "./types";
 
 const slug = "soulsync";
 const img = imageFor(slug);
+const pair = pairFor(slug);
 
 export const soulsync: CaseStudy = {
   slug,
@@ -60,7 +61,7 @@ export const soulsync: CaseStudy = {
       ],
     },
     img("122:44960", 1376, 710, "Splash and three onboarding screens"),
-    img("122:44988", 1376, 840, "Questionnaire and daily reminder setup screens"),
+    pair("122:44988", 840, "Questionnaire and daily reminder setup screens"),
     {
       type: "split",
       heading: "Home & mood logging",
@@ -94,7 +95,7 @@ export const soulsync: CaseStudy = {
       ],
     },
     img("122:45052", 1376, 753, "SOS screen, connecting call and in-call screens"),
-    img("122:45065", 1376, 840, "Post-call mood check-in and confirmation"),
+    pair("122:45065", 840, "Post-call mood check-in and confirmation"),
     {
       type: "split",
       heading: "Journaling",
@@ -139,7 +140,7 @@ export const soulsync: CaseStudy = {
         "Explore groups tools into Breathe, Meditate, Journal and Sleep, with quick paths like “Is it crisis?”.",
       ],
     },
-    img("122:45174", 1376, 840, "Statistics and Explore screens"),
+    pair("122:45174", 840, "Statistics and Explore screens"),
     {
       type: "split",
       heading: "Subscription",

@@ -1,7 +1,8 @@
-import { heroFor, imageFor, type CaseStudy } from "./types";
+import { heroFor, imageFor, pairFor, type CaseStudy } from "./types";
 
 const slug = "hellome-money";
 const img = imageFor(slug);
+const pair = pairFor(slug);
 
 export const hellomeMoney: CaseStudy = {
   slug,
@@ -50,7 +51,7 @@ export const hellomeMoney: CaseStudy = {
       ],
     },
     img("138:49396", 1376, 709, "Splash and onboarding screens"),
-    img("138:49413", 1376, 840, "Multi-currency card and account type selection"),
+    pair("138:49413", 840, "Multi-currency card and account type selection"),
     img("138:49424", 1376, 753, "Business account options and free NGN account offer"),
     {
       type: "split",
@@ -62,7 +63,7 @@ export const hellomeMoney: CaseStudy = {
         "Documents are uploaded with clear requirements for each file.",
       ],
     },
-    img("138:49479", 1376, 840, "Business verification search"),
+    pair("138:49479", 840, "Business verification search"),
     img("138:49455", 1376, 753, "Business account, shareholders, activities and documents"),
     {
       type: "split",
@@ -75,7 +76,7 @@ export const hellomeMoney: CaseStudy = {
       ],
     },
     img("138:49490", 1376, 753, "Sign-in, phone OTP and biometrics"),
-    img("138:49503", 1376, 840, "New-device check and restricted country notice"),
+    pair("138:49503", 840, "New-device check and restricted country notice"),
     {
       type: "split",
       heading: "Balances you can act on",
@@ -88,7 +89,7 @@ export const hellomeMoney: CaseStudy = {
         "Recent transactions and promotions sit below, never competing with the main actions.",
       ],
     },
-    img("138:49514", 1376, 840, "Dashboard and more actions"),
+    pair("138:49514", 840, "Dashboard and more actions"),
     img("138:49525", 1376, 753, "Add beneficiary, account details and add money"),
     {
       type: "split",
@@ -101,7 +102,7 @@ export const hellomeMoney: CaseStudy = {
       ],
     },
     img("138:49538", 1376, 709, "Send options and choosing a beneficiary"),
-    img("138:49555", 1376, 840, "Bank selection and empty account state"),
+    pair("138:49555", 840, "Bank selection and empty account state"),
     img("138:49566", 1376, 753, "Send amount, fees and receiving currency"),
     {
       type: "split",
@@ -114,7 +115,7 @@ export const hellomeMoney: CaseStudy = {
       ],
     },
     img("138:49597", 1376, 753, "Transfer in progress, successful and failed"),
-    img("138:49610", 1376, 840, "Success and failure confirmations"),
+    pair("138:49610", 840, "Success and failure confirmations"),
     {
       type: "split",
       heading: "International school fees",
@@ -127,7 +128,7 @@ export const hellomeMoney: CaseStudy = {
         "A summary shows the amount, fees and rate before paying, followed by clear bank deposit details.",
       ],
     },
-    img("139:126683", 1376, 840, "Saved institutions and payment information"),
+    pair("139:126683", 840, "Saved institutions and payment information"),
     img("138:49639", 1376, 753, "Adding an institution, summary and institutional details"),
     {
       type: "split",
@@ -149,7 +150,7 @@ export const hellomeMoney: CaseStudy = {
         "Subscription plans clearly compare what each tier unlocks.",
       ],
     },
-    img("138:49680", 1376, 840, "Referrals and subscription plans"),
+    pair("138:49680", 840, "Referrals and subscription plans"),
     {
       type: "split",
       heading: "Other screens",

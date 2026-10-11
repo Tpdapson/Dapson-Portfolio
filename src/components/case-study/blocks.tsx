@@ -25,17 +25,44 @@ export function Blocks({ study }: { study: CaseStudy }) {
   );
 }
 
+function Caption({ text }: { text: string }) {
+  return (
+    <FadeUp>
+      <figcaption className="text-sm font-medium text-body">{text}</figcaption>
+    </FadeUp>
+  );
+}
+
 function BlockView({ block, study }: { block: Block; study: CaseStudy }) {
   switch (block.type) {
+    // Images sit 12px apart on phones (the same as the gap inside a stacked
+    // pair) and 40px apart from tablet up.
     case "image":
       return (
-        <figure className="flex flex-col gap-4 px-4 py-5 sm:px-8">
-          <RevealImage src={block.src} w={block.w} h={block.h} alt={block.alt} />
-          {block.caption && (
-            <FadeUp>
-              <figcaption className="text-sm font-medium text-body">{block.caption}</figcaption>
-            </FadeUp>
-          )}
+        <figure className="flex flex-col gap-4 px-4 py-1.5 sm:px-8 sm:py-5">
+          <RevealImage src={block.src} w={block.w} h={block.h} alt={block.alt} square={study.squareImages} />
+          {block.caption && <Caption text={block.caption} />}
+        </figure>
+      );
+    case "pair":
+      return (
+        // Side by side from tablet up with Figma's 24px gap (as a share of the
+        // 1376px frame); stacked on phones so each panel is shown large.
+        <figure className="flex flex-col gap-4 px-4 py-1.5 sm:px-8 sm:py-5">
+          <div className="grid gap-3 md:grid-cols-2 md:gap-[1.744%]">
+            {block.images.map((img) => (
+              <RevealImage
+                key={img.src}
+                src={img.src}
+                w={img.w}
+                h={img.h}
+                alt={img.alt}
+                square={study.squareImages}
+                sizes="(min-width: 1440px) 676px, (min-width: 768px) 50vw, 100vw"
+              />
+            ))}
+          </div>
+          {block.caption && <Caption text={block.caption} />}
         </figure>
       );
     case "centered":

@@ -1,8 +1,9 @@
 import { links } from "@/content/site";
-import { heroFor, imageFor, type CaseStudy } from "./types";
+import { heroFor, imageFor, pairFor, type CaseStudy } from "./types";
 
 const slug = "spendive";
 const img = imageFor(slug);
+const pair = pairFor(slug);
 
 export const spendive: CaseStudy = {
   slug,
@@ -23,6 +24,7 @@ export const spendive: CaseStudy = {
       ["Market", "Nigeria & Africa"],
     ],
   },
+  squareImages: true,
   blocks: [
     img("118:76393", 1376, 1000, "Spendive admin dashboard"),
     {
@@ -30,7 +32,7 @@ export const spendive: CaseStudy = {
       heading: "The challenge",
       body: "Growing businesses manage procurement and expenses across spreadsheets, chats and slow manual approvals. The result is little visibility, weak policy compliance, delayed reimbursements and poor collaboration with vendors, which leads to budget overruns and operational drag. Spendive needed one platform that felt simple enough for any employee, yet powerful enough for finance teams.",
     },
-    img("118:76397", 1376, 541, "Spendive brand mockups"),
+    pair("118:76397", 541, "Spendive brand mockups"),
     {
       type: "split",
       heading: "The solution",
@@ -61,7 +63,7 @@ export const spendive: CaseStudy = {
         "Bank account sync comes last, once trust is established, so drop-off stays low.",
       ],
     },
-    img("116:43151", 1376, 460, "Onboarding screens"),
+    pair("116:43151", 460, "Onboarding screens"),
     {
       type: "split",
       heading: "Admin & employee dashboards",
@@ -74,7 +76,7 @@ export const spendive: CaseStudy = {
         "An important-notice bar keeps pending approvals one click away.",
       ],
     },
-    img("116:43156", 1376, 460, "Admin and employee dashboards"),
+    pair("116:43156", 460, "Admin and employee dashboards"),
     {
       type: "split",
       heading: "Spend controls",
@@ -87,7 +89,7 @@ export const spendive: CaseStudy = {
         "At least one admin approval is enforced, with an inline explanation instead of a cryptic error.",
       ],
     },
-    img("116:43164", 1376, 460, "Spend control settings"),
+    pair("116:43164", 460, "Spend control settings"),
     {
       type: "split",
       heading: "Purchase, reimbursement & travel requests",
@@ -101,8 +103,8 @@ export const spendive: CaseStudy = {
       ],
     },
     img("116:43169", 1376, 800, "Request list and detail"),
-    img("116:43172", 1376, 460, "Purchase request flow"),
-    img("116:43177", 1376, 460, "Reimbursement request flow"),
+    pair("116:43172", 460, "Purchase request flow"),
+    pair("116:43177", 460, "Reimbursement request flow"),
     {
       type: "split",
       heading: "Travel requests",
@@ -115,8 +117,8 @@ export const spendive: CaseStudy = {
         "Approvers see the full trip and cost breakdown on one screen before deciding.",
       ],
     },
-    img("116:43203", 1376, 460, "Travel request steps"),
-    img("116:43208", 1376, 460, "Travel request review"),
+    pair("116:43203", 460, "Travel request steps"),
+    pair("116:43208", 460, "Travel request review"),
     {
       type: "split",
       heading: "Cards & wallet",
@@ -127,8 +129,8 @@ export const spendive: CaseStudy = {
         "The wallet keeps balances, top-ups and transactions in one place.",
       ],
     },
-    img("116:43216", 1376, 460, "Cards screens"),
-    img("116:43221", 1376, 460, "Wallet screens"),
+    pair("116:43216", 460, "Cards screens"),
+    pair("116:43221", 460, "Wallet screens"),
     {
       type: "split",
       heading: "Budgets",
@@ -136,7 +138,7 @@ export const spendive: CaseStudy = {
         "Company and department budgets show what was allocated, what has been spent and what is left, so overspending is visible before it happens.",
       ],
     },
-    img("116:43232", 1376, 460, "Budget screens"),
+    pair("116:43232", 460, "Budget screens"),
     {
       type: "split",
       heading: "Transactions & bill payments",
@@ -147,8 +149,8 @@ export const spendive: CaseStudy = {
         "Transactions list every movement with status, and pending items open into full detail.",
       ],
     },
-    img("116:43263", 1376, 460, "Transactions and transaction detail"),
-    img("116:43258", 1376, 460, "Bill payments and new bill"),
+    pair("116:43263", 460, "Transactions and transaction detail"),
+    pair("116:43258", 460, "Bill payments and new bill"),
     {
       type: "split",
       heading: "Insights",
@@ -160,8 +162,8 @@ export const spendive: CaseStudy = {
       ],
     },
     img("116:43286", 1376, 800, "Spend analysis"),
-    img("116:43289", 1376, 460, "Approval and vendor insights"),
-    img("116:43294", 1376, 460, "Budget and risk insights"),
+    pair("116:43289", 460, "Approval and vendor insights"),
+    pair("116:43294", 460, "Budget and risk insights"),
     {
       type: "split",
       heading: "Roles, permissions & vendors",
@@ -172,19 +174,19 @@ export const spendive: CaseStudy = {
       ],
     },
     img("116:43299", 1376, 800, "Roles and permissions"),
-    img("116:43302", 1376, 460, "Permission settings"),
+    pair("116:43302", 460, "Permission settings"),
     {
       type: "split",
       heading: "Teams & employees",
       body: ["Teams, departments and employees are managed in one place, with single or bulk onboarding for growing companies."],
     },
-    img("116:43313", 1376, 460, "Teams and employees screens"),
+    pair("116:43313", 460, "Teams and employees screens"),
     {
       type: "split",
       heading: "Request for quotation",
       body: ["Teams select vendors and send one RFQ to many, so comparing quotes is fair, fast and documented."],
     },
-    img("116:43343", 1376, 460, "Request for quotation screens"),
+    pair("116:43343", 460, "Request for quotation screens"),
     {
       type: "split",
       heading: "Vendors & marketplace",
@@ -193,14 +195,14 @@ export const spendive: CaseStudy = {
       ],
     },
     img("116:43329", 1376, 800, "Vendor directory"),
-    img("116:43332", 1376, 460, "Vendor marketplace"),
+    pair("116:43332", 460, "Vendor marketplace"),
     {
       type: "split",
       heading: "Products & inventory",
       body: ["A product catalogue keeps items, prices and stock consistent across every purchase request."],
     },
     img("116:43354", 1376, 800, "Product catalogue"),
-    img("116:43357", 1376, 460, "Inventory screens"),
+    pair("116:43357", 460, "Inventory screens"),
     {
       type: "split",
       heading: "Marketing website",

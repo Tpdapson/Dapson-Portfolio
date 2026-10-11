@@ -1,7 +1,8 @@
-import { heroFor, imageFor, type CaseStudy } from "./types";
+import { heroFor, imageFor, pairFor, type CaseStudy } from "./types";
 
 const slug = "fundora";
 const img = imageFor(slug);
+const pair = pairFor(slug);
 
 export const fundora: CaseStudy = {
   slug,
@@ -21,6 +22,7 @@ export const fundora: CaseStudy = {
       ["Status", "Concept MVP"],
     ],
   },
+  squareImages: true,
   blocks: [
     {
       type: "centered",
@@ -49,9 +51,9 @@ export const fundora: CaseStudy = {
         "“Limit approved” closes the loop with a real number instead of a waiting state.",
       ],
     },
-    img("104:53606", 1376, 460, "Email verification and ownership documents"),
+    pair("104:53606", 460, "Email verification and ownership documents"),
     img("98:41685", 1376, 800, "Bank connection"),
-    img("98:41688", 1376, 460, "Limit approved and welcome dashboard"),
+    pair("98:41688", 460, "Limit approved and welcome dashboard"),
     {
       type: "split",
       heading: "Facilities & credit limit",
@@ -62,7 +64,7 @@ export const fundora: CaseStudy = {
       ],
     },
     img("98:41707", 1376, 800, "Facility detail"),
-    img("98:41710", 1376, 460, "Facilities list and credit limit"),
+    pair("98:41710", 460, "Facilities list and credit limit"),
     {
       type: "split",
       heading: "The $250k request, from start to payout",
@@ -74,9 +76,9 @@ export const fundora: CaseStudy = {
       ],
     },
     img("98:41733", 1376, 800, "Purchase details and live eligibility check"),
-    img("98:41736", 1376, 460, "Eligibility result and document upload"),
+    pair("98:41736", 460, "Eligibility result and document upload"),
     img("104:54430", 1376, 800, "Approval tracker"),
-    img("98:41741", 1376, 460, "Offer e-signature and disbursement confirmation"),
+    pair("98:41741", 460, "Offer e-signature and disbursement confirmation"),
     {
       type: "split",
       heading: "Repayments, risk status & documents",
@@ -91,8 +93,8 @@ export const fundora: CaseStudy = {
       ],
     },
     img("98:41764", 1376, 800, "Repayments"),
-    img("98:41767", 1376, 460, "Repayment panel and risk status"),
-    img("104:54488", 1376, 460, "Document library and transaction receipt"),
+    pair("98:41767", 460, "Repayment panel and risk status"),
+    pair("104:54488", 460, "Document library and transaction receipt"),
     {
       type: "split",
       heading: "Suppliers & shipments",
@@ -107,8 +109,8 @@ export const fundora: CaseStudy = {
       ],
     },
     img("108:43636", 1376, 800, "Supplier directory"),
-    img("108:43639", 1376, 460, "Add supplier panel and supplier detail"),
-    img("108:43644", 1376, 460, "Shipments list and shipment detail"),
+    pair("108:43639", 460, "Add supplier panel and supplier detail"),
+    pair("108:43644", 460, "Shipments list and shipment detail"),
     {
       type: "split",
       heading: "Settings & help",
@@ -121,8 +123,8 @@ export const fundora: CaseStudy = {
       ],
     },
     img("108:43684", 1376, 800, "Team and permissions"),
-    img("108:43687", 1376, 460, "Bank accounts and security"),
-    img("108:43692", 1376, 460, "Help and support"),
+    pair("108:43687", 460, "Bank accounts and security"),
+    pair("108:43692", 460, "Help and support"),
     {
       type: "split",
       heading: "Dark mode, built into the system",
@@ -136,7 +138,7 @@ export const fundora: CaseStudy = {
       ],
     },
     img("109:53619", 1376, 800, "Repayments in dark mode"),
-    img("109:53622", 1376, 460, "Dashboard and facilities in dark mode"),
+    pair("109:53622", 460, "Dashboard and facilities in dark mode"),
     {
       type: "split",
       heading: "The outcome",

@@ -22,7 +22,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   if (!study) notFound();
 
   // Every image on the page, in reading order, for the full-screen viewer.
-  const images = [study.hero, ...study.blocks.flatMap((b) => (b.type === "image" ? [b] : []))];
+  const images = [
+    study.hero,
+    ...study.blocks.flatMap((b) => (b.type === "image" ? [b] : b.type === "pair" ? b.images : [])),
+  ];
 
   return (
     <main className="mx-auto max-w-[1440px]">

@@ -3,6 +3,8 @@ export type Img = { src: string; w: number; h: number; alt: string };
 export type Block =
   /** Full-width image (mockup panels, split panels, feature shots). */
   | ({ type: "image"; caption?: string } & Img)
+  /** Two panels side by side on wider screens, stacked on phones. Each opens on its own in the viewer. */
+  | { type: "pair"; images: [Img, Img]; caption?: string }
   /** Narrow centred text column, used for "The challenge". */
   | { type: "centered"; heading: string; body: string }
   /** Heading on the left, content on the right. Most text sections use this. */
@@ -39,6 +41,8 @@ export type CaseStudy = {
     meta: [string, string][];
   };
   blocks: Block[];
+  /** Desktop products (web apps, dashboards): images get square corners. */
+  squareImages?: boolean;
   /** Slugs of the two projects suggested at the end; their cards come from `works` in content/site.ts. */
   more: [string, string];
 };
@@ -46,7 +50,7 @@ export type CaseStudy = {
 export function imageFor(slug: string) {
   return (id: string, w: number, h: number, alt: string, caption?: string): Block => ({
     type: "image",
-    src: `/case-studies/${slug}/${id.replace(":", "-")}.jpg`,
+    src: `/case-studies/${slug}/${id.replace(":", "-")}.webp`,
     w,
     h,
     alt,
@@ -54,6 +58,24 @@ export function imageFor(slug: string) {
   });
 }
 
+/**
+ * Two-panel image from Figma (a frame holding two 676px-wide panels), exported
+ * as two files: `<id>-1.webp` and `<id>-2.webp`.
+ */
+export function pairFor(slug: string) {
+  return (id: string, h: number, alt: string, caption?: string): Block => {
+    const base = `/case-studies/${slug}/${id.replace(":", "-")}`;
+    return {
+      type: "pair",
+      images: [
+        { src: `${base}-1.webp`, w: 676, h, alt: `${alt} (1 of 2)` },
+        { src: `${base}-2.webp`, w: 676, h, alt: `${alt} (2 of 2)` },
+      ],
+      caption,
+    };
+  };
+}
+
 export function heroFor(slug: string, id: string, alt: string): Img {
-  return { src: `/case-studies/${slug}/${id.replace(":", "-")}.jpg`, w: 1376, h: 850, alt };
+  return { src: `/case-studies/${slug}/${id.replace(":", "-")}.webp`, w: 1376, h: 850, alt };
 }

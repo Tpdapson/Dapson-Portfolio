@@ -1,8 +1,9 @@
 import { links } from "@/content/site";
-import { heroFor, imageFor, type CaseStudy } from "./types";
+import { heroFor, imageFor, pairFor, type CaseStudy } from "./types";
 
 const slug = "hellome-travel";
 const img = imageFor(slug);
+const pair = pairFor(slug);
 
 export const hellomeTravel: CaseStudy = {
   slug,
@@ -49,7 +50,7 @@ export const hellomeTravel: CaseStudy = {
       ],
     },
     img("135:46101", 1376, 709, "Onboarding screens"),
-    img("135:46118", 1376, 840, "Sign-up and email verification"),
+    pair("135:46118", 840, "Sign-up and email verification"),
     {
       type: "split",
       heading: "Search that adapts to the trip",
@@ -61,7 +62,7 @@ export const hellomeTravel: CaseStudy = {
         "Destination cards show rating and price, so inspiration turns into a booking.",
       ],
     },
-    img("135:46129", 1376, 840, "Home and flight search"),
+    pair("135:46129", 840, "Home and flight search"),
     img("135:46140", 1376, 753, "Cabin class and traveller sheets, and the search loading state"),
     {
       type: "split",
@@ -74,7 +75,7 @@ export const hellomeTravel: CaseStudy = {
       ],
     },
     img("135:46153", 1376, 709, "Flight results, sort and filter sheets"),
-    img("135:46170", 1376, 840, "Flight details, contact info and passenger form"),
+    pair("135:46170", 840, "Flight details, contact info and passenger form"),
     {
       type: "split",
       heading: "Hotels and tours, same pattern",
@@ -84,7 +85,7 @@ export const hellomeTravel: CaseStudy = {
         "Room selection and reviews are separated into tabs to keep details scannable.",
       ],
     },
-    img("135:46181", 1376, 840, "Hotel sort and hotel details"),
+    pair("135:46181", 840, "Hotel sort and hotel details"),
     img("135:46192", 1376, 753, "Hotel reviews, tours and booking confirmation"),
     {
       type: "split",
@@ -96,9 +97,9 @@ export const hellomeTravel: CaseStudy = {
         "Flight price alerts let people set a route and get notified when fares drop.",
       ],
     },
-    img("135:46205", 1376, 840, "Payment method and paying with HelloMe Money"),
+    pair("135:46205", 840, "Payment method and paying with HelloMe Money"),
     img("135:46216", 1376, 753, "Checkout, booking confirmation and bank deposit details"),
-    img("135:46229", 1376, 840, "Bookings and wishlists"),
+    pair("135:46229", 840, "Bookings and wishlists"),
     {
       type: "split",
       heading: "Price alerts & profile",
@@ -111,7 +112,7 @@ export const hellomeTravel: CaseStudy = {
         "Help lives in the profile, with FAQs, contact options and account settings in one place.",
       ],
     },
-    img("135:46258", 1376, 840, "Flight price alerts and adding a new alert"),
+    pair("135:46258", 840, "Flight price alerts and adding a new alert"),
     img("135:46269", 1376, 753, "Profile, travel information and FAQs"),
     {
       type: "split",

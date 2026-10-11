@@ -74,7 +74,7 @@ export function SiteNav() {
           <span className="relative size-10 overflow-hidden rounded-[10px] bg-surface">
             <Image src="/images/timi.png" alt="" fill sizes="40px" priority className="object-cover" />
           </span>
-          <span className="text-base text-ink">Dapson</span>
+          <span className="text-base font-medium text-ink">Dapson</span>
         </Link>
 
         {/* Desktop: inline links. */}
@@ -202,7 +202,7 @@ function MobileMenu({
               <span className="relative size-10 overflow-hidden rounded-[10px] bg-surface">
                 <Image src="/images/timi.png" alt="" fill sizes="40px" className="object-cover" />
               </span>
-              <span className="text-base text-ink">Dapson</span>
+              <span className="text-base font-medium text-ink">Dapson</span>
             </Link>
             <button
               type="button"

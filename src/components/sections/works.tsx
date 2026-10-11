@@ -13,6 +13,7 @@ import {
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { easeOut, Sticker } from "@/components/motion/primitives";
 import { SectionTitle } from "@/components/sections/section-title";
+import Image from "next/image";
 import Link from "next/link";
 import { external, works, type Work } from "@/content/site";
 
@@ -38,8 +39,7 @@ export function Works() {
         <SectionTitle note="Explore my work!" lines={["SELECTED", "WORKS"]}>
           <Sticker rotate={-8} delay={0.3} className="absolute left-[min(calc(50%+120px),calc(100%-64px))] top-[24px] sm:left-[65%] sm:top-[30px]">
             <div className="size-[56px] overflow-hidden rounded-full bg-surface sm:size-[73px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/works-sticker.png" alt="" className="pointer-events-none size-full object-cover" draggable={false} />
+              <Image src="/images/works-sticker.png" alt="" width={73} height={73} className="pointer-events-none size-full object-cover" draggable={false} />
             </div>
           </Sticker>
         </SectionTitle>
@@ -137,13 +137,14 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
       >
         <div className="absolute inset-0" style={{ background: work.tone ?? "var(--color-surface)" }} />
         {!missing && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={work.cover}
             alt={`${work.name} — ${work.tagline}`}
-            loading="lazy"
+            fill
+            sizes="(min-width: 1440px) 1360px, (min-width: 640px) calc(100vw - 80px), calc(100vw - 32px)"
+            quality={90}
             onError={() => setMissing(true)}
-            className="absolute inset-0 size-full object-cover"
+            className="object-cover"
           />
         )}
       </motion.div>

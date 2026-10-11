@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { SectionTitle } from "@/components/sections/section-title";
@@ -95,8 +96,7 @@ function Message({ t }: { t: Testimonial }) {
 function Avatar({ t }: { t: Testimonial }) {
   if (t.avatar) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img src={t.avatar} alt="" className="size-9 rounded-full bg-surface object-cover" />
+      <Image src={t.avatar} alt="" width={36} height={36} className="size-9 rounded-full bg-surface object-cover" />
     );
   }
   return (

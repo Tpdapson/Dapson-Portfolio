@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
@@ -67,8 +68,7 @@ export function SiteNav() {
       >
         <Link href="/" className="flex items-center gap-2">
           <span className="relative size-10 overflow-hidden rounded-[10px] bg-surface">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/timi.png" alt="" className="size-full object-cover" />
+            <Image src="/images/timi.png" alt="" fill sizes="40px" priority className="object-cover" />
           </span>
           <span className="text-base text-ink">Dapson</span>
         </Link>

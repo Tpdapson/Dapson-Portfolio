@@ -40,6 +40,7 @@ export function RevealImage({
           alt={alt}
           priority={priority}
           sizes="(min-width: 1440px) 1376px, 100vw"
+          quality={90}
           className="block h-auto w-full"
         />
       </motion.div>

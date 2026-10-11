@@ -26,7 +26,6 @@ export type CaseStudy = {
   name: string;
   tagline: string;
   /** Short line used on "More Works" cards. */
-  cardTagline: string;
   /** Bullet dots, finding numbers and links. */
   accent: string;
   /** Soft tint for lesson and stat cards. */
@@ -40,6 +39,7 @@ export type CaseStudy = {
     meta: [string, string][];
   };
   blocks: Block[];
+  /** Slugs of the two projects suggested at the end; their cards come from `works` in content/site.ts. */
   more: [string, string];
 };
 

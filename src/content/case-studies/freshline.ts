@@ -7,7 +7,6 @@ export const freshline: CaseStudy = {
   slug,
   name: "FreshLine",
   tagline: "Farm produce, moving on time: a supply chain app for Nigerian agri-aggregators",
-  cardTagline: "Agri supply chain, from farm gate to buyer",
   accent: "#1f7a4d",
   tint: "#e8f1ea",
   hero: heroFor(slug, "91:41104", "FreshLine app screens over farmland"),

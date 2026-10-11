@@ -29,6 +29,11 @@ export type Work = {
   tone?: string;
 };
 
+/**
+ * The one list of projects. Name, tagline and cover set here are used
+ * everywhere a project is shown: Selected Works on the home page and the
+ * "More Works" cards at the end of each case study.
+ */
 export const works: Work[] = [
   { slug: "hellome-travel", name: "HelloMe Travel", tagline: "Flights, hotels and tours in one app", href: "/work/hellome-travel", cover: "/images/work-hellome-travel.jpg" },
   { slug: "spendive", name: "Spendive", tagline: "Spend and procurement management for growing teams", href: "/work/spendive", cover: "/images/work-spendive.jpg" },
@@ -39,6 +44,10 @@ export const works: Work[] = [
   { slug: "fundora", name: "Fundora", tagline: "Trade finance for African importers", href: "/work/fundora", cover: "/images/work-fundora.jpg" },
   { slug: "cargotrace", name: "CargoTrace", tagline: "Freight tracking for Nigerian importers", href: "/work/cargotrace", cover: "/images/work-cargotrace.jpg", tone: "#e8edf3" },
 ];
+
+export function getWork(slug: string) {
+  return works.find((w) => w.slug === slug);
+}
 
 export type Testimonial = {
   quote: string;

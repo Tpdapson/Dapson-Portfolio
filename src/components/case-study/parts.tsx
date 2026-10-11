@@ -6,7 +6,8 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { easeOut, FadeUp, MaskLines } from "@/components/motion/primitives";
 import { PillButton } from "@/components/ui/pill-button";
-import { cardCover, getCaseStudy, type CaseStudy } from "@/content/case-studies";
+import type { CaseStudy } from "@/content/case-studies";
+import { external, getWork, type Work } from "@/content/site";
 
 export function CaseHero({ study }: { study: CaseStudy }) {
   const reduce = useReducedMotion();
@@ -80,8 +81,9 @@ export function CaseOverview({ study }: { study: CaseStudy }) {
   );
 }
 
+/** Suggested projects, using the same name, tagline and cover as the home page. */
 export function MoreWorks({ study }: { study: CaseStudy }) {
-  const others = study.more.map((s) => getCaseStudy(s)).filter((s): s is CaseStudy => !!s);
+  const others = study.more.map(getWork).filter((w): w is Work => !!w);
   return (
     <section className="flex flex-col gap-10 px-4 py-20 sm:px-8">
       <h2 className="text-[clamp(40px,4.4vw,64px)] font-medium tracking-[-0.02em] text-[#141414]">
@@ -90,21 +92,26 @@ export function MoreWorks({ study }: { study: CaseStudy }) {
       <div className="grid gap-10 md:grid-cols-2">
         {others.map((o, i) => (
           <FadeUp key={o.slug} delay={i * 0.1}>
-            <Link href={`/work/${o.slug}`} className="group flex flex-col gap-4">
-              <div className="relative aspect-[668/420] overflow-hidden rounded-[32px] border-4 border-white bg-[#f4f4f4]">
+            <Link href={o.href} {...external(o.href)} className="group flex flex-col gap-4">
+              {/* Same 1360×800 shape as the home cover, so nothing is cropped. */}
+              <div
+                className="relative aspect-[1360/800] overflow-hidden rounded-[32px] border-4 border-white"
+                style={{ background: o.tone ?? "#f4f4f4" }}
+              >
                 <Image
-                  src={cardCover(o.slug)}
+                  src={o.cover}
                   fill
-                  alt={`${o.name} cover`}
+                  alt={`${o.name} — ${o.tagline}`}
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
+                  quality={90}
+                  className="object-cover"
                 />
                 <span className="absolute right-5 top-5 flex size-11 scale-75 items-center justify-center rounded-full bg-[#0e0e0e] text-white opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                   <ArrowUpRight size={18} />
                 </span>
               </div>
               <p className="text-[22px] font-medium tracking-[-0.01em] text-[#0e0e0e]">{o.name}</p>
-              <p className="-mt-2 text-[15px] font-medium text-[#737373]">{o.cardTagline}</p>
+              <p className="-mt-2 text-[15px] font-medium text-[#737373]">{o.tagline}</p>
             </Link>
           </FadeUp>
         ))}

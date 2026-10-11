@@ -7,7 +7,6 @@ export const cargotrace: CaseStudy = {
   slug,
   name: "CargoTrace",
   tagline: "Freight, in plain sight: shipment tracking for Nigerian importers",
-  cardTagline: "Freight tracking for Nigerian importers",
   accent: "#2563eb",
   tint: "#e9eef5",
   hero: heroFor(slug, "92:41129", "CargoTrace tracking screens over the sea"),

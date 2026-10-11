@@ -8,7 +8,6 @@ export const hellomeTravel: CaseStudy = {
   slug,
   name: "HelloMe Travels",
   tagline: "From booking to beautiful memories: flights, hotels and tours in one app",
-  cardTagline: "Flights, hotels and tours in one app",
   accent: "#f2600c",
   tint: "#fdf1ea",
   hero: heroFor(slug, "100:41658", "HelloMe Travels app screens over snowy mountains"),

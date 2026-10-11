@@ -7,7 +7,6 @@ export const hellomeMoney: CaseStudy = {
   slug,
   name: "HelloMe Money",
   tagline: "Send, receive and exchange money across borders, in one account",
-  cardTagline: "Send, receive and exchange money across borders",
   accent: "#1a6bf0",
   tint: "#eef3fe",
   hero: heroFor(slug, "99:41633", "HelloMe Money app screens"),

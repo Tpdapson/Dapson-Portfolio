@@ -7,7 +7,6 @@ export const soulsync: CaseStudy = {
   slug,
   name: "SoulSync",
   tagline: "A gentler, more human approach to mental wellness",
-  cardTagline: "A gentler, more human approach to mental wellness",
   accent: "#a65997",
   tint: "#f8e9f5",
   hero: heroFor(slug, "89:41055", "SoulSync home screen beside a meditation photo"),

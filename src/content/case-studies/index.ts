@@ -13,9 +13,4 @@ export function getCaseStudy(slug: string) {
   return caseStudies.find((c) => c.slug === slug);
 }
 
-/** Card image shown under "More Works". */
-export function cardCover(slug: string) {
-  return `/case-studies/covers/${slug}.jpg`;
-}
-
 export type { CaseStudy, Block } from "./types";

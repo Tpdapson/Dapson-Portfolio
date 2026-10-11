@@ -7,7 +7,6 @@ export const fundora: CaseStudy = {
   slug,
   name: "Fundora",
   tagline: "Trade finance for businesses buying across borders",
-  cardTagline: "Trade finance for businesses buying across borders",
   accent: "#036bdd",
   tint: "#eef5fe",
   hero: heroFor(slug, "98:41608", "Fundora repayments dashboard over a container port"),

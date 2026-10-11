@@ -8,7 +8,6 @@ export const spendive: CaseStudy = {
   slug,
   name: "Spendive",
   tagline: "Spend smarter, work faster, save bigger: spend & procurement management for growing teams",
-  cardTagline: "Spend & procurement management for growing teams",
   accent: "#1a6bf0",
   tint: "#eef7fe",
   hero: heroFor(slug, "118:76378", "Spendive dashboard on a laptop"),

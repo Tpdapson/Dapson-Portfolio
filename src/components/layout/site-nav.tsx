@@ -27,6 +27,8 @@ export function SiteNav() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Opened with Enter/Space (a keyboard "click" has detail 0) rather than a tap.
+  const [menuByKeyboard, setMenuByKeyboard] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
 
   // While a link is jumping to a section, keep the nav tucked away so it
@@ -100,7 +102,10 @@ export function SiteNav() {
         <button
           ref={menuButton}
           type="button"
-          onClick={() => setMenuOpen(true)}
+          onClick={(e) => {
+            setMenuByKeyboard(e.detail === 0);
+            setMenuOpen(true);
+          }}
           aria-label="Open menu"
           aria-expanded={menuOpen}
           aria-controls="site-menu"
@@ -109,7 +114,12 @@ export function SiteNav() {
           <DotsNine size={32} />
         </button>
       </motion.header>
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} returnFocus={menuButton} />
+      <MobileMenu
+        open={menuOpen}
+        byKeyboard={menuByKeyboard}
+        onClose={() => setMenuOpen(false)}
+        returnFocus={menuButton}
+      />
     </motion.div>
   );
 }
@@ -136,10 +146,13 @@ function StatusDot({ large = false }: { large?: boolean }) {
  */
 function MobileMenu({
   open,
+  byKeyboard,
   onClose,
   returnFocus,
 }: {
   open: boolean;
+  /** Keyboard users get focus moved onto the first link and back to the menu button on close. */
+  byKeyboard: boolean;
   onClose: () => void;
   returnFocus: React.RefObject<HTMLButtonElement | null>;
 }) {
@@ -164,7 +177,9 @@ function MobileMenu({
   const close = (restoreFocus = true) => {
     unlock();
     onClose();
-    if (restoreFocus) returnFocus.current?.focus();
+    // Only for keyboard use: after a tap, mobile browsers draw a focus ring
+    // around anything focused from code, which looks like a stuck highlight.
+    if (restoreFocus && byKeyboard) returnFocus.current?.focus();
   };
 
   useEffect(() => {
@@ -173,7 +188,10 @@ function MobileMenu({
     else document.documentElement.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
     window.addEventListener("keydown", onKey);
-    panel.current?.querySelector<HTMLElement>("a, button")?.focus();
+    // Keyboard: focus the first link. Touch: focus the panel itself (no ring),
+    // so screen readers still start inside the menu.
+    if (byKeyboard) panel.current?.querySelector<HTMLElement>("a, button")?.focus();
+    else panel.current?.focus();
     return () => {
       window.removeEventListener("keydown", onKey);
       unlock();
@@ -187,11 +205,12 @@ function MobileMenu({
       {open && (
         <motion.div
           ref={panel}
+          tabIndex={-1}
           id="site-menu"
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className="fixed inset-0 z-50 flex h-dvh flex-col bg-page px-4 pb-10 sm:px-10 lg:hidden"
+          className="fixed inset-0 z-50 flex h-dvh flex-col bg-page px-4 pb-10 outline-none sm:px-10 lg:hidden"
           initial={reduce ? { opacity: 0 } : { x: "100%" }}
           animate={reduce ? { opacity: 1 } : { x: "0%" }}
           exit={reduce ? { opacity: 0 } : { x: "100%" }}

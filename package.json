@@ -20,7 +20,8 @@
     "motion": "^14.0.0",
     "next": "16.4.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "yet-another-react-lightbox": "3.32.2"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",

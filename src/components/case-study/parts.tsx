@@ -6,11 +6,14 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { easeOut, FadeUp, MaskLines } from "@/components/motion/primitives";
 import { PillButton } from "@/components/ui/pill-button";
+import { useOpenImage } from "@/components/case-study/lightbox";
+import { ZoomButton } from "@/components/case-study/reveal-image";
 import type { CaseStudy } from "@/content/case-studies";
 import { external, getWork, type Work } from "@/content/site";
 
 export function CaseHero({ study }: { study: CaseStudy }) {
   const reduce = useReducedMotion();
+  const openImage = useOpenImage();
   return (
     <section className="flex flex-col gap-10 px-4 py-10 sm:px-8">
       <div className="flex flex-col gap-4">
@@ -28,6 +31,7 @@ export function CaseHero({ study }: { study: CaseStudy }) {
         transition={{ duration: 1.3, ease: easeOut, delay: 0.45 }}
       >
         <motion.div
+          className="relative"
           initial={reduce ? false : { scale: 1.12 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.6, ease: easeOut, delay: 0.45 }}
@@ -39,8 +43,10 @@ export function CaseHero({ study }: { study: CaseStudy }) {
             alt={study.hero.alt}
             priority
             sizes="(min-width: 1440px) 1376px, 100vw"
-            className="block aspect-[4/3] h-auto w-full object-cover sm:aspect-auto"
+            // Natural shape on every screen, so nothing is cropped.
+            className="block h-auto w-full"
           />
+          {openImage && <ZoomButton label={study.hero.alt} onClick={() => openImage(study.hero.src)} />}
         </motion.div>
       </motion.div>
     </section>

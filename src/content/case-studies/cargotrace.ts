@@ -22,7 +22,7 @@ export const cargotrace: CaseStudy = {
     ],
   },
   blocks: [
-    img("92:41160", 1376, 800, "CargoTrace feature screens"),
+    img("92:41160", 1384, 800, "CargoTrace feature screens"),
     {
       type: "centered",
       heading: "The challenge",

@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // 75 for photos, 90 for UI screenshots so small text stays crisp.
     qualities: [75, 90],
-    minimumCacheTTL: 60 * 60 * 24 * 365,
   },
   turbopack: {
     rules: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
+import { Phone, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { FadeUp, MaskLines } from "@/components/motion/primitives";
 import { PillButton } from "@/components/ui/pill-button";
 import { links } from "@/content/site";
@@ -24,7 +24,7 @@ export function ContactCta() {
             <PillButton
               href={links.bookCall}
               label="Book a call"
-              icon={ArrowUpRight}
+              icon={Phone}
               tone="bg-neutral-0 text-neutral-950"
               pad="pl-5 pr-[22px]"
               gap="gap-1.5"

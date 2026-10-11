@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDown, Phone } from "@phosphor-icons/react/dist/ssr";
 import { BlurWords, FadeUp, MaskLines } from "@/components/motion/primitives";
 import { PillButton } from "@/components/ui/pill-button";
 import { links } from "@/content/site";
@@ -20,7 +20,7 @@ export function Hero() {
         <PillButton
           href={links.bookCall}
           label="Book a call"
-          icon={ArrowUpRight}
+          icon={Phone}
           tone="bg-ink-2 text-on-ink"
           pad="pl-[22px] pr-5"
         />

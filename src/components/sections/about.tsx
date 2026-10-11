@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, PaperPlaneTilt } from "@phosphor-icons/react/dist/ssr";
+import { EnvelopeSimple, PaperPlaneTilt } from "@phosphor-icons/react/dist/ssr";
 import { FadeUp, Sticker } from "@/components/motion/primitives";
 import { RevealText } from "@/components/motion/reveal-text";
 import { PillButton } from "@/components/ui/pill-button";
+import { links } from "@/content/site";
 
 export function About() {
   return (
@@ -38,7 +39,7 @@ export function About() {
       />
 
       <FadeUp>
-        <PillButton href="#contact" label="Get in Touch" icon={ArrowRight} tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />
+        <PillButton href={links.email} label="Get in Touch" icon={EnvelopeSimple} tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />
       </FadeUp>
     </section>
   );

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { useLenis } from "lenis/react";
-import { FileText, Folder, List, Phone, Smiley, X } from "@phosphor-icons/react/dist/ssr";
+import { DotsNine, FileText, Folder, Phone, Smiley, X } from "@phosphor-icons/react/dist/ssr";
 import { easeOut } from "@/components/motion/primitives";
 import { external, links } from "@/content/site";
 
@@ -106,7 +106,7 @@ export function SiteNav() {
           aria-controls="site-menu"
           className="-mr-2 flex size-11 items-center justify-center rounded-full text-ink lg:hidden"
         >
-          <List size={26} />
+          <DotsNine size={32} />
         </button>
       </motion.header>
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} returnFocus={menuButton} />
@@ -114,14 +114,17 @@ export function SiteNav() {
   );
 }
 
+/**
+ * "Open to work" status: a green dot sending out two staggered light-green
+ * rings, so it reads as live at a glance. Static for reduced motion.
+ */
 function StatusDot({ large = false }: { large?: boolean }) {
+  const size = large ? "size-3" : "size-2";
   return (
-    <span
-      className={`relative flex items-center justify-center rounded-full bg-[#9ddaa9] ${large ? "size-6" : "size-4"}`}
-      aria-hidden
-    >
-      <span className={`absolute animate-ping rounded-full bg-[#329746] opacity-50 motion-reduce:animate-none ${large ? "size-3" : "size-2"}`} />
-      <span className={`rounded-full bg-[#329746] ${large ? "size-3" : "size-2"}`} />
+    <span className={`relative flex items-center justify-center ${large ? "size-6" : "size-4"}`} aria-hidden>
+      <span className={`absolute ${size} animate-status-ring rounded-full bg-[#6fdc86] motion-reduce:hidden`} />
+      <span className={`absolute ${size} animate-status-ring rounded-full bg-[#6fdc86] [animation-delay:0.9s] motion-reduce:hidden`} />
+      <span className={`relative ${size} rounded-full bg-[#3db855]`} />
     </span>
   );
 }
@@ -207,7 +210,7 @@ function MobileMenu({
               aria-label="Close menu"
               className="-mr-2 flex size-11 items-center justify-center rounded-full text-ink"
             >
-              <X size={26} />
+              <X size={28} />
             </button>
           </div>
 

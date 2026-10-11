@@ -4,6 +4,7 @@ export const links = {
   bookCall: "https://calendly.com/tp_dapson/30min",
   email: "mailto:petertimmy8@gmail.com",
   resume: "https://drive.google.com/file/d/1fW6aFax2e0h83tb7hsAvqiB1I1Ah-_gd/view?usp=drivesdk",
+  // Not linked anywhere yet; add { label: "Playground", href: links.playground } to the footer nav when the page exists.
   playground: "#",
   digitalclan: "https://digitalclan.co.uk/",
   spendive: "https://spendive.com/",

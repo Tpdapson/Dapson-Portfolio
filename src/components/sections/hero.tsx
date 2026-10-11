@@ -22,7 +22,7 @@ export function Hero() {
           label="Book a call"
           icon={CalendarBlank}
           nudge="tilt"
-          tone="bg-ink-2 text-white"
+          tone="bg-ink-2 text-on-ink"
           pad="pl-5 pr-[22px]"
         />
         <PillButton href="#work" label="See my works" icon={ArrowDown} nudge="down" tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />

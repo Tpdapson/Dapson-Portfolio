@@ -83,6 +83,13 @@ export function SkillPile() {
   // Set once the physics world exists: bounces pill `i`, nudged along (dx, dy).
   const kick = useRef<(i: number, dx?: number, dy?: number) => void>(() => {});
   const lastKick = useRef<number[]>([]);
+  // Touch dragging: grab pill `i` at a page point, follow the finger, let go.
+  const drag = useRef<{
+    grab: (i: number, x: number, y: number) => void;
+    move: (x: number, y: number) => void;
+    release: () => void;
+  } | null>(null);
+  const touch = useRef<{ x: number; y: number; t: number; moved: boolean } | null>(null);
 
   // Rebuild the world when the width changes meaningfully.
   useEffect(() => {
@@ -163,7 +170,37 @@ export function SkillPile() {
         M.Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.3);
       };
 
-      // Grab-and-throw for mouse users only; touch keeps native scrolling.
+      // Touch: a spring from the finger to the grabbed point, like the mouse
+      // constraint below. Letting go keeps the pill's momentum, so it can be thrown.
+      let held: Matter.Constraint | null = null;
+      const toWorld = (x: number, y: number) => {
+        const r = el.getBoundingClientRect();
+        return { x: x - r.left, y: y - r.top };
+      };
+      drag.current = {
+        grab(i, x, y) {
+          const b = bodies[i];
+          if (!b) return;
+          const p = toWorld(x, y);
+          held = M.Constraint.create({
+            pointA: p,
+            bodyB: b,
+            pointB: M.Vector.rotate(M.Vector.sub(p, b.position), -b.angle),
+            stiffness: 0.2,
+            damping: 0.1,
+          });
+          M.Composite.add(engine.world, held);
+        },
+        move(x, y) {
+          if (held) held.pointA = toWorld(x, y);
+        },
+        release() {
+          if (held) M.Composite.remove(engine.world, held);
+          held = null;
+        },
+      };
+
+      // Grab-and-throw for mouse users.
       let removeMouse = () => {};
       if (window.matchMedia("(pointer: fine)").matches) {
         const mouse = M.Mouse.create(el);
@@ -205,6 +242,7 @@ export function SkillPile() {
 
       teardown = () => {
         kick.current = () => {};
+        drag.current = null;
         cancelAnimationFrame(raf);
         io.disconnect();
         removeMouse();
@@ -224,7 +262,7 @@ export function SkillPile() {
       aria-label="Skills"
       role="list"
       // On touch screens the box lets scrolls through; only the pills take taps.
-      className="absolute inset-x-0 bottom-0 h-[150px] cursor-grab select-none active:cursor-grabbing sm:h-[260px] lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
+      className="absolute inset-x-0 bottom-0 h-[180px] cursor-grab select-none active:cursor-grabbing sm:h-[260px] lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
     >
       {items.map((it, i) => (
         <div
@@ -234,31 +272,56 @@ export function SkillPile() {
           }}
           role={it.label ? "listitem" : undefined}
           aria-hidden={it.label ? undefined : true}
-          // Tap to bounce (a click never fires on a scroll, so swiping still scrolls).
-          onClick={() => kick.current(i)}
+          // Mouse click bounces it. Touch is handled below: tap to bounce, drag to move.
+          onClick={() => {
+            if (!touch.current) kick.current(i);
+          }}
+          onPointerDown={(e) => {
+            if (e.pointerType === "mouse") {
+              touch.current = null;
+              return;
+            }
+            e.currentTarget.setPointerCapture(e.pointerId);
+            touch.current = { x: e.clientX, y: e.clientY, t: performance.now(), moved: false };
+            drag.current?.grab(i, e.clientX, e.clientY);
+          }}
+          onPointerUp={(e) => {
+            const t = touch.current;
+            if (!t || e.pointerType === "mouse") return;
+            drag.current?.release();
+            if (!t.moved && performance.now() - t.t < 350) kick.current(i);
+          }}
+          onPointerCancel={() => drag.current?.release()}
           // Mouse: brushing across a pill knocks it the way the cursor moves.
           onPointerMove={(e) => {
+            const t = touch.current;
+            if (t && e.pointerType !== "mouse") {
+              if (Math.hypot(e.clientX - t.x, e.clientY - t.y) > 8) t.moved = true;
+              drag.current?.move(e.clientX, e.clientY);
+              return;
+            }
             if (e.pointerType !== "mouse" || e.buttons) return;
             const now = performance.now();
             if (now - (lastKick.current[i] ?? 0) < 350) return;
             lastKick.current[i] = now;
             kick.current(i, e.movementX * 0.6, e.movementY * 0.3);
           }}
-          className={`pointer-events-auto absolute left-0 top-0 flex items-center justify-center opacity-0 shadow-[var(--shadow-pill)] will-change-transform [-webkit-tap-highlight-color:transparent] ${
+          // touch-none: a finger on a pill drags it instead of scrolling the page.
+          className={`pointer-events-auto absolute left-0 top-0 flex touch-none items-center justify-center opacity-0 shadow-[var(--shadow-pill)] will-change-transform [-webkit-tap-highlight-color:transparent] ${
             it.kind === "ball"
               ? "size-[var(--s)] rounded-full sm:size-[var(--S)]"
-              : "gap-1 whitespace-nowrap rounded-full px-2.5 py-1.5 text-[10px] uppercase tracking-[0.02em] text-[#1b1b1b] sm:gap-2.5 sm:px-[22px] sm:py-3.5 sm:text-[17px]"
+              : "gap-[5px] whitespace-nowrap rounded-full px-[12.5px] py-[7.5px] text-[12.5px] uppercase tracking-[0.02em] text-[#1b1b1b] sm:gap-2.5 sm:px-[22px] sm:py-3.5 sm:text-[17px]"
           }`}
           style={
             {
               background: it.color,
-              // Balls: half size on phones.
-              ...(it.kind === "ball" ? { "--s": `${it.size! / 2}px`, "--S": `${it.size}px` } : null),
+              // Balls: smaller on phones (5/8 of desktop, in step with the pills).
+              ...(it.kind === "ball" ? { "--s": `${(it.size! * 5) / 8}px`, "--S": `${it.size}px` } : null),
             } as CSSProperties
           }
         >
           {it.label}
-          <it.Icon size={16} color="#1b1b1b" className={it.kind === "ball" ? "size-2.5 sm:size-[18px]" : "size-2.5 sm:size-4"} />
+          <it.Icon size={16} color="#1b1b1b" className={it.kind === "ball" ? "size-[12.5px] sm:size-[18px]" : "size-[12.5px] sm:size-4"} />
         </div>
       ))}
     </div>

@@ -1,7 +1,16 @@
 @import "tailwindcss";
 @import "@fontsource/reenie-beanie/400.css";
 
-/* Tokens from the Figma file (Landing / Final). */
+/* `dark:` utilities follow the theme attribute on <html>, not the OS setting. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Tokens from the Figma file (Landing / Final). The light values live here;
+ * the dark values are below under [data-theme="dark"]. Components only use
+ * these names, so switching <html data-theme="dark"> re-themes the site.
+ * The contact section and footer are dark in both themes and use the
+ * neutral-* and tint-* tokens, which don't change.
+ */
 @theme {
   --font-sans: var(--font-neue), ui-sans-serif, system-ui, sans-serif;
   --font-hand: "Reenie Beanie", cursive;
@@ -17,6 +26,15 @@
   --color-chip: #f1f1f1;
   --color-lime: #e4f27a;
 
+  /* Page background, and text sitting on ink-coloured buttons. */
+  --color-page: #ffffff;
+  --color-on-ink: #ffffff;
+  /* Case-study body copy, small labels, image placeholders, hairlines. */
+  --color-body: #737373;
+  --color-subtle: #9a9a9a;
+  --color-surface-2: #f4f4f4;
+  --color-hairline: rgb(0 0 0 / 0.06);
+
   --color-neutral-0: #ffffff;
   --color-neutral-300: #c2c2be;
   --color-neutral-400: #9a9a95;
@@ -31,15 +49,45 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/*
+ * Dark theme. Not switched on anywhere yet: the nav toggle will set
+ * data-theme="dark" on <html> (and remember the choice). React resets
+ * attributes on <html> while the page loads, so the toggle needs
+ * suppressHydrationWarning on <html> plus a small inline script that applies
+ * the saved theme before first paint.
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-page: #0b0b0b;
+  --color-on-ink: #0b0b0b;
+
+  --color-ink: #f4f4f2;
+  --color-ink-2: #ededeb;
+  --color-ink-3: #d4d4d1;
+  --color-muted: #6f6f6c;
+  --color-faint: #3d3d3b;
+  --color-caption: #8c8c88;
+  --color-rule: #2a2a29;
+  --color-surface: #1a1a19;
+  --color-surface-2: #141413;
+  --color-chip: #1e1e1d;
+
+  --color-body: #a3a3a0;
+  --color-subtle: #7e7e7a;
+  --color-hairline: rgb(255 255 255 / 0.08);
+}
+
 html {
-  background: #ffffff;
+  color-scheme: light;
+  background: var(--color-page);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   font-family: var(--font-sans);
-  background: #ffffff;
+  background: var(--color-page);
   overflow-x: clip;
 }
 

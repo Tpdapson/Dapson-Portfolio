@@ -85,8 +85,8 @@ function Message({ t }: { t: Testimonial }) {
       >
         <Avatar t={t} />
         <div className={`flex flex-col gap-0.5 ${right ? "items-end" : "items-start"}`}>
-          <span className="text-[13px] font-medium text-[#333]">{t.name}</span>
-          <span className="text-xs text-[#9a9a9a]">{t.role}</span>
+          <span className="text-[13px] font-medium text-ink-3">{t.name}</span>
+          <span className="text-xs text-subtle">{t.role}</span>
         </div>
       </motion.div>
     </div>

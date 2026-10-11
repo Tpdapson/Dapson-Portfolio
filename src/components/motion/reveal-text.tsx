@@ -35,8 +35,9 @@ export function RevealText({
   paragraphs,
   className,
   paragraphClassName,
-  from = "#c4c4c4",
-  to = "#0a0a0a",
+  // Theme colours, so the fill also works in dark mode.
+  from = "var(--color-faint)",
+  to = "var(--color-ink)",
 }: {
   paragraphs: string[];
   className?: string;
@@ -110,7 +111,9 @@ function Word({
   to: string;
   onReach: (i: number) => void;
 }) {
-  const color = useTransform(progress, [i, i + 1], [from, to]);
+  // Blend in CSS (not JS) so `from`/`to` can be CSS variables.
+  const amount = useTransform(progress, [i, i + 1], [0, 100], { clamp: true });
+  const color = useTransform(amount, (a) => `color-mix(in srgb, ${to} ${a}%, ${from})`);
   return (
     <motion.span style={{ color }} onPointerEnter={() => onReach(i)}>
       {children}

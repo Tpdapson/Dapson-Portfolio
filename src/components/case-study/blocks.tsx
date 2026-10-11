@@ -33,7 +33,7 @@ function BlockView({ block, study }: { block: Block; study: CaseStudy }) {
           <RevealImage src={block.src} w={block.w} h={block.h} alt={block.alt} />
           {block.caption && (
             <FadeUp>
-              <figcaption className="text-sm font-medium text-[#737373]">{block.caption}</figcaption>
+              <figcaption className="text-sm font-medium text-body">{block.caption}</figcaption>
             </FadeUp>
           )}
         </figure>
@@ -42,10 +42,10 @@ function BlockView({ block, study }: { block: Block; study: CaseStudy }) {
       return (
         <section className="flex justify-center px-4 py-12 sm:px-8">
           <FadeUp className="flex w-full max-w-[640px] flex-col gap-4">
-            <h2 className="text-[clamp(26px,2.2vw,32px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#0e0e0e]">
+            <h2 className="text-[clamp(26px,2.2vw,32px)] font-medium leading-[1.2] tracking-[-0.02em] text-ink">
               {block.heading}
             </h2>
-            <p className="text-base font-medium leading-[1.45] text-[#737373]">{block.body}</p>
+            <p className="text-base font-medium leading-[1.45] text-body">{block.body}</p>
           </FadeUp>
         </section>
       );
@@ -61,9 +61,9 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
   return (
     <section className="flex flex-col gap-6 px-4 pb-10 pt-16 sm:px-8 md:flex-row md:gap-16 md:pt-[100px]">
       <FadeUp className="flex shrink-0 flex-col gap-2.5 md:w-[440px]">
-        {block.eyebrow && <p className="text-[13px] text-[#9a9a9a]">{block.eyebrow}</p>}
-        <h2 className="text-[clamp(24px,2vw,28px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#0e0e0e]">{block.heading}</h2>
-        {block.subheading && <p className="text-base font-medium leading-[1.5] text-[#737373]">{block.subheading}</p>}
+        {block.eyebrow && <p className="text-[13px] text-subtle">{block.eyebrow}</p>}
+        <h2 className="text-[clamp(24px,2vw,28px)] font-medium leading-[1.2] tracking-[-0.02em] text-ink">{block.heading}</h2>
+        {block.subheading && <p className="text-base font-medium leading-[1.5] text-body">{block.subheading}</p>}
       </FadeUp>
 
       <motion.div
@@ -74,7 +74,7 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
         viewport={{ once: true, amount: 0.2 }}
       >
         {block.body?.map((p, i) => (
-          <motion.p key={i} variants={item} className="text-base font-medium leading-[1.5] text-[#737373]">
+          <motion.p key={i} variants={item} className="text-base font-medium leading-[1.5] text-body">
             {p}
           </motion.p>
         ))}
@@ -83,19 +83,19 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
 
         {block.groups?.map((g) => (
           <motion.div key={g.title} variants={item} className="flex flex-col gap-3.5 pt-2">
-            <h3 className="text-[17px] font-medium text-[#0e0e0e]">{g.title}</h3>
+            <h3 className="text-[17px] font-medium text-ink">{g.title}</h3>
             <Points points={g.points} accent={study.accent} />
           </motion.div>
         ))}
 
         {block.findings?.map((f, i) => (
-          <motion.div key={f.title} variants={item} className="flex gap-6 border-t border-[#ededed] py-4">
+          <motion.div key={f.title} variants={item} className="flex gap-6 border-t border-surface py-4">
             <span className="text-sm font-medium" style={{ color: study.accent }}>
               {String(i + 1).padStart(2, "0")}
             </span>
             <div className="flex flex-1 flex-col gap-1">
-              <p className="text-[17px] font-medium text-[#0e0e0e]">{f.title}</p>
-              <p className="text-[15px] font-medium leading-[1.45] text-[#737373]">{f.body}</p>
+              <p className="text-[17px] font-medium text-ink">{f.title}</p>
+              <p className="text-[15px] font-medium leading-[1.45] text-body">{f.body}</p>
             </div>
           </motion.div>
         ))}
@@ -109,8 +109,8 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
                 className="flex flex-col gap-2 rounded-3xl p-6"
                 style={{ background: study.tint }}
               >
-                <p className="text-[17px] font-medium text-[#0e0e0e]">{l.title}</p>
-                <p className="text-sm font-medium leading-[1.5] text-[#737373]">{l.body}</p>
+                <p className="text-[17px] font-medium text-ink">{l.title}</p>
+                <p className="text-sm font-medium leading-[1.5] text-body">{l.body}</p>
               </motion.div>
             ))}
           </div>
@@ -128,7 +128,7 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
                 <p className="text-[30px] font-medium tracking-[-0.02em]" style={{ color: study.accent }}>
                   {s.value}
                 </p>
-                <p className="text-sm font-medium leading-[1.45] text-[#737373]">{s.label}</p>
+                <p className="text-sm font-medium leading-[1.45] text-body">{s.label}</p>
               </motion.div>
             ))}
           </div>
@@ -156,7 +156,7 @@ function Points({ points, accent }: { points: string[]; accent: string }) {
       {points.map((p) => (
         <motion.div key={p} variants={item} className="flex items-start gap-3">
           <span aria-hidden className="mt-[9px] size-1.5 shrink-0 rounded-full" style={{ background: accent }} />
-          <p className="flex-1 text-[15px] font-medium leading-[1.5] text-[#0e0e0e]">{p}</p>
+          <p className="flex-1 text-[15px] font-medium leading-[1.5] text-ink">{p}</p>
         </motion.div>
       ))}
     </>
@@ -168,7 +168,7 @@ function Palette({ swatches }: { swatches: { name: string; hex: string; text: st
   return (
     <section className="px-4 pb-10 sm:px-8">
       <motion.div
-        className="grid grid-cols-2 border-4 border-white sm:grid-cols-4 lg:grid-cols-8"
+        className="grid grid-cols-2 border-4 border-page sm:grid-cols-4 lg:grid-cols-8"
         variants={{ hide: {}, show: { transition: { staggerChildren: 0.06 } } }}
         initial={reduce ? "show" : "hide"}
         whileInView="show"

@@ -14,15 +14,15 @@ export function CaseHero({ study }: { study: CaseStudy }) {
   return (
     <section className="flex flex-col gap-10 px-4 py-10 sm:px-8">
       <div className="flex flex-col gap-4">
-        <h1 className="text-[clamp(48px,5.6vw,80px)] font-medium leading-none tracking-[-0.03em] text-[#0e0e0e]">
+        <h1 className="text-[clamp(48px,5.6vw,80px)] font-medium leading-none tracking-[-0.03em] text-ink">
           <MaskLines lines={[study.name]} onMount delay={0.1} />
         </h1>
         <FadeUp onMount delay={0.35} y={12}>
-          <p className="text-base font-medium text-[#737373]">{study.tagline}</p>
+          <p className="text-base font-medium text-body">{study.tagline}</p>
         </FadeUp>
       </div>
       <motion.div
-        className="overflow-hidden bg-[#f4f4f4]"
+        className="overflow-hidden bg-surface-2"
         initial={reduce ? false : { clipPath: "inset(12% 6% 0% 6% round 32px)", opacity: 0 }}
         animate={{ clipPath: "inset(0% 0% 0% 0% round 0px)", opacity: 1 }}
         transition={{ duration: 1.3, ease: easeOut, delay: 0.45 }}
@@ -52,8 +52,8 @@ export function CaseOverview({ study }: { study: CaseStudy }) {
   return (
     <section className="flex flex-col gap-12 px-4 pb-20 pt-12 sm:px-10 lg:flex-row lg:gap-16 xl:gap-[120px] md:pb-[120px] md:pt-20">
       <FadeUp className="flex flex-col gap-5 lg:w-[55%] lg:max-w-[640px] lg:shrink-0">
-        <h2 className="text-[28px] font-medium leading-[1.2] tracking-[-0.02em] text-[#0e0e0e]">{overview.heading ?? "Overview"}</h2>
-        <p className="text-base font-medium leading-[1.45] text-[#737373]">{overview.body}</p>
+        <h2 className="text-[28px] font-medium leading-[1.2] tracking-[-0.02em] text-ink">{overview.heading ?? "Overview"}</h2>
+        <p className="text-base font-medium leading-[1.45] text-body">{overview.body}</p>
         {overview.cta && (
           <div>
             <PillButton
@@ -61,7 +61,7 @@ export function CaseOverview({ study }: { study: CaseStudy }) {
               label={overview.cta.label}
               icon={ArrowUpRight}
               nudge="up-right"
-              tone="bg-[#0e0e0e] text-white"
+              tone="bg-ink text-on-ink"
               pad="px-4"
               gap="gap-1.5"
               size="sm"
@@ -72,8 +72,8 @@ export function CaseOverview({ study }: { study: CaseStudy }) {
       <FadeUp delay={0.12} className="grid flex-1 grid-cols-2 gap-x-6 gap-y-7">
         {overview.meta.map(([label, value]) => (
           <div key={label} className="flex flex-col gap-1.5">
-            <p className="text-[13px] text-[#9a9a9a]">{label}</p>
-            <p className="text-[15px] font-medium text-[#0e0e0e]">{value}</p>
+            <p className="text-[13px] text-subtle">{label}</p>
+            <p className="text-[15px] font-medium text-ink">{value}</p>
           </div>
         ))}
       </FadeUp>
@@ -86,7 +86,7 @@ export function MoreWorks({ study }: { study: CaseStudy }) {
   const others = study.more.map(getWork).filter((w): w is Work => !!w);
   return (
     <section className="flex flex-col gap-10 px-4 py-20 sm:px-8">
-      <h2 className="text-[clamp(40px,4.4vw,64px)] font-medium tracking-[-0.02em] text-[#141414]">
+      <h2 className="text-[clamp(40px,4.4vw,64px)] font-medium tracking-[-0.02em] text-ink">
         <MaskLines lines={["More Works"]} />
       </h2>
       <div className="grid gap-10 md:grid-cols-2">
@@ -95,8 +95,8 @@ export function MoreWorks({ study }: { study: CaseStudy }) {
             <Link href={o.href} {...external(o.href)} className="group flex flex-col gap-4">
               {/* Same 1360×800 shape as the home cover, so nothing is cropped. */}
               <div
-                className="relative aspect-[1360/800] overflow-hidden rounded-[32px] border-4 border-white"
-                style={{ background: o.tone ?? "#f4f4f4" }}
+                className="relative aspect-[1360/800] overflow-hidden rounded-[32px] border-4 border-page"
+                style={{ background: o.tone ?? "var(--color-surface-2)" }}
               >
                 <Image
                   src={o.cover}
@@ -106,12 +106,12 @@ export function MoreWorks({ study }: { study: CaseStudy }) {
                   quality={90}
                   className="object-cover"
                 />
-                <span className="absolute right-5 top-5 flex size-11 scale-75 items-center justify-center rounded-full bg-[#0e0e0e] text-white opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                <span className="absolute right-5 top-5 flex size-11 scale-75 items-center justify-center rounded-full bg-ink text-on-ink opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                   <ArrowUpRight size={18} />
                 </span>
               </div>
-              <p className="text-[22px] font-medium tracking-[-0.01em] text-[#0e0e0e]">{o.name}</p>
-              <p className="-mt-2 text-[15px] font-medium text-[#737373]">{o.tagline}</p>
+              <p className="text-[22px] font-medium tracking-[-0.01em] text-ink">{o.name}</p>
+              <p className="-mt-2 text-[15px] font-medium text-body">{o.tagline}</p>
             </Link>
           </FadeUp>
         ))}

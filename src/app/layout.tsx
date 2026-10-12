@@ -15,7 +15,7 @@ const neueMontreal = localFont({
   display: "swap",
 });
 
-const title = "Dapson — Product Designer";
+const title = "Timilehin Oladapo — Product Designer & Engineer";
 const description =
   "Timilehin Oladapo designs and builds digital products that look good and work even better.";
 

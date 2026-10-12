@@ -63,7 +63,7 @@ export const hellomeMoney: CaseStudy = {
         "Documents are uploaded with clear requirements for each file.",
       ],
     },
-    pair("138:49479", 840, "Business verification search"),
+    pair("138:49479", 840, "Business verification search and confirming company details"),
     img("138:49455", 1376, 753, "Business account, shareholders, activities and documents"),
     {
       type: "split",

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import { PushPin } from "@phosphor-icons/react";
 import { DrawLine, MaskLines } from "@/components/motion/primitives";
 import { RollingLabel } from "@/components/ui/pill-button";
@@ -68,7 +68,7 @@ export function PinANote() {
                 className={`lg:absolute lg:left-[calc(var(--x)*1%)] lg:top-[calc(var(--y)*1%)] lg:w-[calc(210px*var(--ns))] lg:-translate-x-1/2 ${i >= gridTilt.length ? "max-lg:hidden" : ""}`}
                 style={{ "--x": slots[i].x, "--y": slots[i].y } as CSSProperties}
               >
-                <StickyNote note={note} tilt={slots[i].r} gridTilt={gridTilt[i] ?? 0} flip={slots[i].flip} fresh={note.id === fresh} />
+                <StickyNote note={note} tilt={slots[i].r} gridTilt={gridTilt[i] ?? 0} flip={slots[i].flip} fresh={note.id === fresh} order={i} />
               </li>
             ))}
           </ul>
@@ -111,6 +111,7 @@ function StickyNote({
   gridTilt,
   flip,
   fresh,
+  order,
 }: {
   note: Note;
   tilt: number;
@@ -118,8 +119,19 @@ function StickyNote({
   /** Desktop only: name at the top, note at the bottom. */
   flip?: boolean;
   fresh: boolean;
+  /** Position on the board, to stagger the swings when several arrive together. */
+  order: number;
 }) {
   const [swing, setSwing] = useState(false);
+  // Swing once each time the note scrolls into view, a beat apart from its
+  // neighbours, then settle. Hover and tap still swing it as well.
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.6 });
+  useEffect(() => {
+    if (!inView) return;
+    const id = setTimeout(() => setSwing(true), 120 + (order % 7) * 90);
+    return () => clearTimeout(id);
+  }, [inView, order]);
   // A note that was just pinned drops in once, then swings like the others.
   const [entering, setEntering] = useState(fresh);
   const c = noteColors[note.color] ?? noteColors.pink;
@@ -129,6 +141,7 @@ function StickyNote({
   return (
     <div
       // Tilt: a gentle grid tilt on phones/tablets, the Figma tilt on desktop.
+      ref={ref}
       className="@container relative aspect-[210/190] w-full cursor-default [--r:var(--rg)] lg:[--r:var(--rd)]"
       style={{ "--rg": `${gridTilt}deg`, "--rd": `${tilt}deg` } as CSSProperties}
       // A little swing on hover (mouse) or tap (touch), hanging from the pin.

@@ -80,11 +80,6 @@ export function SiteNav() {
           <span className="text-base text-ink">Dapson</span>
         </Link>
 
-        {/* Light/dark switch, dead centre on every screen size. */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <ThemeToggle />
-        </div>
-
         {/* Desktop: inline links. */}
         <nav className="hidden items-center gap-4 lg:flex">
           {items.map(({ label, href, Icon }) => (
@@ -105,21 +100,28 @@ export function SiteNav() {
           </span>
         </nav>
 
-        {/* Phones and tablets: menu button. */}
-        <button
-          ref={menuButton}
-          type="button"
-          onClick={(e) => {
-            setMenuByKeyboard(e.detail === 0);
-            setMenuOpen(true);
-          }}
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          aria-controls="site-menu"
-          className="-mr-2 flex size-11 items-center justify-center rounded-full text-ink lg:hidden"
-        >
-          <DotsNine size={32} />
-        </button>
+        {/* Light/dark switch: dead centre of the nav on desktop; beside the
+            menu button on phones and tablets. */}
+        <div className="flex items-center gap-3 lg:contents">
+          <div className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+            <ThemeToggle />
+          </div>
+          {/* Phones and tablets: menu button. */}
+          <button
+            ref={menuButton}
+            type="button"
+            onClick={(e) => {
+              setMenuByKeyboard(e.detail === 0);
+              setMenuOpen(true);
+            }}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+            className="-mr-2 flex size-11 items-center justify-center rounded-full text-ink lg:hidden"
+          >
+            <DotsNine size={32} />
+          </button>
+        </div>
       </motion.header>
       <MobileMenu
         open={menuOpen}

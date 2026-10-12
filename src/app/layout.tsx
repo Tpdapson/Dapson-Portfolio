@@ -21,7 +21,7 @@ const description =
 
 // Text shown on link previews (WhatsApp, LinkedIn, X, …).
 const share = {
-  title: "Oladapo Timilehin — Product Designer",
+  title: "Timilehin Oladapo — Product Designer & Engineer",
   description: "Product (UI/UX) Designer, designing digital products that look good and work even better.",
 };
 
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   ...(process.env.NEXT_PUBLIC_SITE_URL && { metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL) }),
   title,
   description,
-  openGraph: { ...share, type: "website", siteName: "Dapson", locale: "en_GB" },
+  openGraph: { ...share, type: "website", siteName: "Timilehin Oladapo", locale: "en_GB" },
   twitter: { card: "summary_large_image", ...share, creator: "@tp_dapson" },
 };
 

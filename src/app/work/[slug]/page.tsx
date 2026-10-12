@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   const { slug } = await params;
   const study = getCaseStudy(slug);
   if (!study) return {};
-  return { title: `${study.name} — Dapson`, description: study.tagline };
+  return { title: `${study.name} — Timilehin Oladapo`, description: study.tagline };
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {

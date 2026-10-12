@@ -29,6 +29,34 @@ const slots = [
 // Gentler alternating tilts for the phone and tablet grid.
 const gridTilt = [-3, 4, 3, -4, -2, 3];
 
+/**
+ * Preview mode: add `?demo-notes` to the page URL to fill the board with 20
+ * made-up notes (only in that browser tab; nothing is saved), to try "See
+ * more notes" before real notes come in.
+ */
+function demoNotes(): Note[] {
+  if (!new URLSearchParams(window.location.search).has("demo-notes")) return [];
+  const lines = [
+    "Love the attention to detail here",
+    "The case studies read so well",
+    "hello from Accra 👋",
+    "Clean, calm and clear. Great work",
+    "That dark mode toggle is fun",
+    "Saving this for inspiration",
+    "the sticky notes are a vibe",
+    "Proud of you, keep going!",
+    "Great storytelling in the HelloMe study",
+    "hi from Lagos!",
+  ];
+  return Array.from({ length: 20 }, (_, i) => ({
+    id: `demo-${i + 1}`,
+    text: `${lines[i % lines.length]} (demo ${i + 1})`,
+    name: `Demo visitor ${i + 1}`,
+    color: colorNames[i % colorNames.length],
+    createdAt: 0,
+  }));
+}
+
 /** "Say hi before you go!" — visitors write a sticky note and pin it to the board. */
 export function PinANote() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -38,7 +66,7 @@ export function PinANote() {
     let live = true;
     fetch("/api/notes")
       .then((r) => (r.ok ? r.json() : { notes: [] }))
-      .then((d: { notes?: Note[] }) => live && setNotes(d.notes ?? []))
+      .then((d: { notes?: Note[] }) => live && setNotes([...(d.notes ?? []), ...demoNotes()]))
       .catch(() => {});
     return () => {
       live = false;

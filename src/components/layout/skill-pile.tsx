@@ -265,7 +265,7 @@ export function SkillPile() {
       aria-label="Skills"
       role="list"
       // On touch screens the box lets scrolls through; only the pills take taps.
-      className="absolute inset-x-0 bottom-0 h-[180px] cursor-grab select-none active:cursor-grabbing sm:h-[260px] lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
+      className="absolute inset-x-0 bottom-0 h-[180px] cursor-grab select-none active:cursor-grabbing sm:h-[220px] lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
     >
       {items.map((it, i) => (
         <div
@@ -312,19 +312,21 @@ export function SkillPile() {
           // touch-none: a finger on a pill drags it instead of scrolling the page.
           className={`pointer-events-auto absolute left-0 top-0 flex touch-none items-center justify-center opacity-0 shadow-[var(--shadow-pill)] will-change-transform [-webkit-tap-highlight-color:transparent] ${
             it.kind === "ball"
-              ? "size-[var(--s)] rounded-full sm:size-[var(--S)]"
-              : "gap-[5px] whitespace-nowrap rounded-full px-[12.5px] py-[7.5px] text-[12.5px] uppercase tracking-[0.02em] text-[#1b1b1b] sm:gap-2.5 sm:px-[22px] sm:py-3.5 sm:text-[17px]"
+              ? "size-[var(--s)] rounded-full sm:size-[var(--t)] lg:size-[var(--S)]"
+              : "gap-[5px] whitespace-nowrap rounded-full px-[12.5px] py-[7.5px] text-[12.5px] uppercase tracking-[0.02em] text-[#1b1b1b] sm:gap-[6.25px] sm:px-[15.6px] sm:py-[9.4px] sm:text-[15.6px] lg:gap-2.5 lg:px-[22px] lg:py-3.5 lg:text-[17px]"
           }`}
           style={
             {
               background: it.color,
-              // Balls: smaller on phones (5/8 of desktop, in step with the pills).
-              ...(it.kind === "ball" ? { "--s": `${(it.size! * 5) / 8}px`, "--S": `${it.size}px` } : null),
+              // Balls scale with the pills: phones 5/8 of desktop, tablets 1.25x phones.
+              ...(it.kind === "ball"
+                ? { "--s": `${(it.size! * 5) / 8}px`, "--t": `${(it.size! * 25) / 32}px`, "--S": `${it.size}px` }
+                : null),
             } as CSSProperties
           }
         >
           {it.label}
-          <it.Icon size={16} color="#1b1b1b" className={it.kind === "ball" ? "size-[12.5px] sm:size-[18px]" : "size-[12.5px] sm:size-4"} />
+          <it.Icon size={16} color="#1b1b1b" className={it.kind === "ball" ? "size-[12.5px] sm:size-[15.6px] lg:size-[18px]" : "size-[12.5px] sm:size-[15.6px] lg:size-4"} />
         </div>
       ))}
     </div>

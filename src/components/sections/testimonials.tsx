@@ -11,7 +11,7 @@ export function Testimonials() {
   return (
     <section>
       <SectionTitle note="What my past clients say!" lines={["TESTIMONIALS"]} />
-      <div className="mx-auto flex w-full max-w-[640px] flex-col gap-10 px-4 pb-[140px]">
+      <div className="mx-auto flex w-full max-w-[640px] flex-col gap-10 px-4 pb-[70px] lg:pb-[140px]">
         {testimonials.map((t) => (
           <Message key={t.name} t={t} />
         ))}

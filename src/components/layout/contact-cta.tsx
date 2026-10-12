@@ -8,8 +8,9 @@ import { links } from "@/content/site";
 /** "Have an idea worth building?" block that sits above the footer. */
 export function ContactCta() {
   return (
-    <section id="contact" className="border-t border-tint-12 bg-black px-4 pb-20 pt-24 sm:px-20">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-14">
+    <section id="contact" className="border-t border-tint-12 bg-black px-4 pb-10 pt-12 sm:px-20 lg:pb-20 lg:pt-24">
+      {/* Phones/tablets: tighter padding and 16px from title to text; desktop as designed. */}
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-4 lg:gap-14">
         <h2 className="text-[clamp(44px,6.67vw,96px)] font-medium leading-none tracking-[-0.03em] text-neutral-0">
           <MaskLines lines={["Have an idea worth building?"]} lineClassName="text-balance" />
         </h2>

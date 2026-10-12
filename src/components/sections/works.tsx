@@ -83,17 +83,19 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
   const coverRef = useRef<HTMLDivElement>(null);
   const [missing, setMissing] = useState(false);
 
-  // Cover opens up from an inset card as it scrolls in. The image itself is
+  // Cover opens out from inset sides as it scrolls in. The image itself is
   // never zoomed or shifted, so the whole design always shows.
   const { scrollYProgress } = useScroll({ target: coverRef, offset: ["start end", "end start"] });
   const inset = useTransform(scrollYProgress, [0, 0.35], [8, 0]);
-  const clipPath = useTransform(inset, (v) => `inset(${v}% ${v}% ${v}% ${v}% round ${v * 2}px)`);
+  // Sides only, so the cover doesn't add empty space above/below while it opens.
+  const clipPath = useTransform(inset, (v) => `inset(0% ${v}% 0% ${v}% round ${v * 2}px)`);
 
   const number = String(index + 1).padStart(2, "0");
   const isExternal = !!work.website;
 
   return (
-    <article className="flex flex-col gap-5 px-4 pb-[72px] sm:px-10">
+    // Space below each project: 36px on phones, 56px on tablets, 72px on desktop.
+    <article className="flex flex-col gap-5 px-4 pb-9 sm:px-10 sm:pb-14 lg:pb-[72px]">
       <motion.div
         className="flex items-center gap-4 sm:gap-6"
         initial={reduce ? false : "hide"}

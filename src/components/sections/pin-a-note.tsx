@@ -260,11 +260,11 @@ function Composer({ onPinned }: { onPinned: (note: Note) => void }) {
         <button
           type="submit"
           disabled={status.kind === "sending"}
-          className="group relative inline-flex shrink-0 cursor-pointer overflow-hidden rounded-full bg-ink-2 py-3 pl-[22px] pr-5 text-sm font-medium leading-[normal] whitespace-nowrap text-on-ink disabled:cursor-wait disabled:opacity-70"
+          className="group relative inline-flex shrink-0 cursor-pointer overflow-hidden rounded-full bg-ink-2 px-5 py-3 text-sm font-medium leading-[normal] whitespace-nowrap text-on-ink disabled:cursor-wait disabled:opacity-70"
         >
           <RollingLabel className="gap-1.5">
             {status.kind === "sending" ? "Pinning…" : "Pin note"}
-            <PushPin size={14} aria-hidden className="shrink-0" />
+            <PushPin size={16} aria-hidden className="shrink-0" />
           </RollingLabel>
         </button>
       </div>

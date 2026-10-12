@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type FormEvent } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { Eyes, PushPin } from "@phosphor-icons/react";
+import { useLenis } from "lenis/react";
 import { DrawLine, MaskLines } from "@/components/motion/primitives";
 import { RollingLabel } from "@/components/ui/pill-button";
 import { sampleNotes, showSampleNotes } from "@/content/notes";
@@ -44,30 +45,55 @@ export function PinANote() {
     };
   }, []);
 
-  // Desktop shows a board of seven; phones and tablets a grid of six. "See
-  // more notes" swaps in the next, older set, and wraps back to the newest.
-  const perPage = useIsDesktop() ? slots.length : gridTilt.length;
+  const desktop = useMedia(desktopQuery, true);
+  const tablet = useMedia(tabletQuery, false);
+  const first = desktop ? slots.length : gridTilt.length;
   // The Figma examples only top up the first set while there are few real notes.
   const pool =
-    notes.length >= perPage || !showSampleNotes ? notes : [...notes, ...sampleNotes].slice(0, perPage);
-  const pageCount = Math.max(1, Math.ceil(pool.length / perPage));
+    notes.length >= first || !showSampleNotes ? notes : [...notes, ...sampleNotes].slice(0, first);
+
+  // Desktop: "See more notes" swaps in the next, older seven in the same
+  // places, and wraps back to the newest after the oldest.
+  const pageCount = Math.max(1, Math.ceil(pool.length / slots.length));
   const [page, setPage] = useState(0);
   const current = page % pageCount;
-  const shown = pool.slice(current * perPage, current * perPage + perPage);
-  // Notes swapped in by "See more notes" drop onto the board one after another.
+
+  // Phones and tablets: it adds rows below (four notes on phones, six on
+  // tablets, so rows stay full); once everything is showing, "See less notes"
+  // goes back to the first six.
+  const [extra, setExtra] = useState(0);
+  const step = tablet ? 6 : 4;
+  const count = Math.min(gridTilt.length + extra, pool.length);
+  const allShown = count >= pool.length;
+
+  const shown = desktop ? pool.slice(current * slots.length, (current + 1) * slots.length) : pool.slice(0, count);
+  const hasMore = desktop ? pageCount > 1 : pool.length > gridTilt.length;
+
+  // Notes brought in by the button drop onto the board one after another.
   const [dealt, setDealt] = useState(false);
+  const board = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
 
   const seeMore = () => {
     setFresh(null);
     setDealt(true);
-    setPage(current + 1 >= pageCount ? 0 : current + 1);
+    if (desktop) return setPage(current + 1 >= pageCount ? 0 : current + 1);
+    if (!allShown) return setExtra(extra + step);
+    setExtra(0);
+    // Back up to the board, so the page doesn't end up far below it.
+    if (board.current) {
+      if (lenis) lenis.scrollTo(board.current, { offset: -96 });
+      else board.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
+  const less = !desktop && allShown;
 
   const pinned = (note: Note) => {
     setNotes((n) => [note, ...n.filter((m) => m.id !== note.id)]);
     setFresh(note.id);
     setDealt(false);
     setPage(0);
+    setExtra(0);
   };
 
   return (
@@ -76,24 +102,31 @@ export function PinANote() {
         <Header />
 
         {/* Desktop sizes: notes scale with the board (--ns) so they keep their places. */}
-        <div className="relative mt-8 rounded-[24px] bg-board p-4 [--ns:1] [background-image:radial-gradient(circle,var(--color-board-dot)_1.5px,transparent_1.6px)] [background-position:5.5px_5.5px] [background-size:32px_32px] sm:p-8 lg:mt-12 lg:h-[560px] lg:overflow-hidden lg:rounded-[32px] lg:p-0 lg:[--ns:0.78] xl:h-[600px] xl:[--ns:0.9] min-[1440px]:h-[640px] min-[1440px]:[--ns:1]">
+        <div ref={board} className="relative mt-8 rounded-[24px] bg-board p-4 [--ns:1] [background-image:radial-gradient(circle,var(--color-board-dot)_1.5px,transparent_1.6px)] [background-position:5.5px_5.5px] [background-size:32px_32px] sm:p-8 lg:mt-12 lg:h-[560px] lg:overflow-hidden lg:rounded-[32px] lg:p-0 lg:[--ns:0.78] xl:h-[600px] xl:[--ns:0.9] min-[1440px]:h-[640px] min-[1440px]:[--ns:1]">
           <Composer onPinned={pinned} />
 
           <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:mt-14 sm:gap-x-8 sm:gap-y-12 md:grid-cols-3 lg:static lg:mt-0 lg:block">
             {shown.map((note, i) => (
               <li
                 key={note.id}
-                // Six on phones and tablets (two even rows); all seven on desktop.
-                className={`lg:absolute lg:left-[calc(var(--x)*1%)] lg:top-[calc(var(--y)*1%)] lg:w-[calc(210px*var(--ns))] lg:-translate-x-1/2 ${i >= gridTilt.length ? "max-lg:hidden" : ""}`}
-                style={{ "--x": slots[i].x, "--y": slots[i].y } as CSSProperties}
+                // Before hydration the desktop set renders; its seventh note is hidden below desktop.
+                className={`lg:absolute lg:left-[calc(var(--x)*1%)] lg:top-[calc(var(--y)*1%)] lg:w-[calc(210px*var(--ns))] lg:-translate-x-1/2 ${desktop && i >= gridTilt.length ? "max-lg:hidden" : ""}`}
+                style={{ "--x": slots[i % slots.length].x, "--y": slots[i % slots.length].y } as CSSProperties}
               >
-                <StickyNote note={note} tilt={slots[i].r} gridTilt={gridTilt[i] ?? 0} flip={slots[i].flip} drop={note.id === fresh || dealt} order={i} />
+                <StickyNote
+                  note={note}
+                  tilt={slots[i % slots.length].r}
+                  gridTilt={gridTilt[i % gridTilt.length]}
+                  flip={slots[i % slots.length].flip}
+                  drop={note.id === fresh || dealt}
+                  order={desktop ? i : i % gridTilt.length}
+                />
               </li>
             ))}
           </ul>
         </div>
 
-        {pageCount > 1 && (
+        {hasMore && (
           <div className="mt-2 flex justify-center">
             <button
               type="button"
@@ -101,7 +134,7 @@ export function PinANote() {
               className="group relative inline-flex cursor-pointer overflow-hidden rounded-full bg-page py-3.5 pl-[22px] pr-5 text-sm font-medium leading-[normal] whitespace-nowrap text-ink-2"
             >
               <RollingLabel className="gap-2">
-                See more notes
+                {less ? "See less notes" : "See more notes"}
                 <Eyes size={16} aria-hidden className="shrink-0" />
               </RollingLabel>
             </button>
@@ -113,15 +146,16 @@ export function PinANote() {
 }
 
 const desktopQuery = "(min-width: 1024px)";
-function useIsDesktop() {
+const tabletQuery = "(min-width: 768px)";
+function useMedia(query: string, serverValue: boolean) {
   return useSyncExternalStore(
     (cb) => {
-      const m = window.matchMedia(desktopQuery);
+      const m = window.matchMedia(query);
       m.addEventListener("change", cb);
       return () => m.removeEventListener("change", cb);
     },
-    () => window.matchMedia(desktopQuery).matches,
-    () => true,
+    () => window.matchMedia(query).matches,
+    () => serverValue,
   );
 }
 

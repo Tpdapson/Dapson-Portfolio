@@ -8,7 +8,7 @@ import { links } from "@/content/site";
 export function Hero() {
   return (
     <section className="flex flex-col items-center px-4 py-6 text-center">
-      <h1 className="text-[clamp(64px,9.72vw,140px)] font-medium leading-none tracking-[-0.01em] text-ink-2 dark:text-white">
+      <h1 className="text-[clamp(64px,9.72vw,140px)] font-medium leading-none tracking-[-0.01em] text-title">
         <MaskLines lines={["PRODUCT", "DESIGNER"]} onMount delay={0.15} stagger={0.09} />
       </h1>
 

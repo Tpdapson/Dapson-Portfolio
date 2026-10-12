@@ -17,7 +17,7 @@ export function CaseHero({ study }: { study: CaseStudy }) {
   return (
     <section className="flex flex-col gap-10 px-4 py-10 sm:px-8">
       <div className="flex flex-col gap-4">
-        <h1 className="text-[clamp(48px,5.6vw,80px)] font-medium leading-none tracking-[-0.03em] text-ink dark:text-white">
+        <h1 className="text-[clamp(48px,5.6vw,80px)] font-medium leading-none tracking-[-0.03em] text-title">
           <MaskLines lines={[study.name]} onMount delay={0.1} />
         </h1>
         <FadeUp onMount delay={0.35} y={12}>
@@ -91,7 +91,7 @@ export function MoreWorks({ study }: { study: CaseStudy }) {
   const others = study.more.map(getWork).filter((w): w is Work => !!w);
   return (
     <section className="flex flex-col gap-10 px-4 py-20 sm:px-8">
-      <h2 className="text-[clamp(40px,4.4vw,64px)] font-medium tracking-[-0.02em] text-ink dark:text-white">
+      <h2 className="text-[clamp(40px,4.4vw,64px)] font-medium tracking-[-0.02em] text-title">
         <MaskLines lines={["More Works"]} />
       </h2>
       <div className="grid gap-10 md:grid-cols-2">

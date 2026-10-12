@@ -42,8 +42,9 @@ export function About() {
           delay={0.25}
           className="absolute right-[4%] top-[30px] sm:right-[7%] sm:top-[14px] lg:top-[50px]"
         >
-          <div className="flex items-center gap-1.5 rounded-[4px] border border-[#2b2b2b] bg-lime px-2 py-1 sm:gap-2 sm:px-3.5 sm:py-2">
-            <PaperPlaneTilt size={14} className="size-2.5 sm:size-3.5" />
+          <div className="flex items-center gap-1.5 rounded-[4px] border border-[#2b2b2b] bg-lime dark:border-white/85 px-2 py-1 sm:gap-2 sm:px-3.5 sm:py-2">
+            {/* Fixed dark ink on the lime tag in both themes. */}
+            <PaperPlaneTilt size={14} color="#1a1a1a" className="size-2.5 sm:size-3.5" />
             <p className="font-hand text-[13px] leading-none text-[#1a1a1a] sm:text-xl sm:leading-normal">OPEN TO WORK</p>
           </div>
         </Sticker>

@@ -17,7 +17,7 @@ export function About() {
 
         <Sticker rotate={5} delay={0.1}>
           <div className="relative size-[120px] overflow-hidden rounded-[34px] bg-surface sm:size-[150px]">
-            <Image src="/images/timi.png" alt="Timi" fill sizes="150px" className="pointer-events-none object-cover" draggable={false} />
+            <Image src="/images/timi-about.jpg" alt="Timi" fill sizes="150px" quality={90} className="pointer-events-none object-cover" draggable={false} />
           </div>
         </Sticker>
 

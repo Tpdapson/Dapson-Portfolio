@@ -75,7 +75,7 @@ export function SiteNav() {
       >
         <Link href="/" className="flex items-center gap-2">
           <span className="relative size-10 overflow-hidden rounded-[10px] bg-surface">
-            <Image src="/images/timi.png" alt="" fill sizes="40px" priority className="object-cover" />
+            <Image src="/images/timi-nav.jpg" alt="" fill sizes="40px" quality={90} priority className="object-cover" />
           </span>
           <span className="text-base text-ink">Dapson</span>
         </Link>
@@ -228,7 +228,7 @@ function MobileMenu({
           <div className="flex items-center justify-between py-5">
             <Link href="/" onClick={() => close(false)} className="flex items-center gap-2">
               <span className="relative size-10 overflow-hidden rounded-[10px] bg-surface">
-                <Image src="/images/timi.png" alt="" fill sizes="40px" className="object-cover" />
+                <Image src="/images/timi-nav.jpg" alt="" fill sizes="40px" quality={90} className="object-cover" />
               </span>
               <span className="text-base text-ink">Dapson</span>
             </Link>

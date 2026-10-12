@@ -46,7 +46,6 @@ export function PinANote() {
   }, []);
 
   const desktop = useMedia(desktopQuery, true);
-  const tablet = useMedia(tabletQuery, false);
   const first = desktop ? slots.length : gridTilt.length;
   // The Figma examples only top up the first set while there are few real notes.
   const pool =
@@ -58,11 +57,9 @@ export function PinANote() {
   const [page, setPage] = useState(0);
   const current = page % pageCount;
 
-  // Phones and tablets: it adds rows below (four notes on phones, six on
-  // tablets, so rows stay full); once everything is showing, "See less notes"
-  // goes back to the first six.
+  // Phones and tablets: each tap adds six more below (or whatever is left);
+  // once everything is showing, "See less notes" goes back to the first six.
   const [extra, setExtra] = useState(0);
-  const step = tablet ? 6 : 4;
   const count = Math.min(gridTilt.length + extra, pool.length);
   const allShown = count >= pool.length;
 
@@ -78,7 +75,7 @@ export function PinANote() {
     setFresh(null);
     setDealt(true);
     if (desktop) return setPage(current + 1 >= pageCount ? 0 : current + 1);
-    if (!allShown) return setExtra(extra + step);
+    if (!allShown) return setExtra(extra + gridTilt.length);
     setExtra(0);
     // Back up to the board, so the page doesn't end up far below it.
     if (board.current) {
@@ -146,7 +143,6 @@ export function PinANote() {
 }
 
 const desktopQuery = "(min-width: 1024px)";
-const tabletQuery = "(min-width: 768px)";
 function useMedia(query: string, serverValue: boolean) {
   return useSyncExternalStore(
     (cb) => {

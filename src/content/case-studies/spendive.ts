@@ -21,7 +21,6 @@ export const spendive: CaseStudy = {
       ["Industry", "Fintech · Procurement"],
       ["Deliverables", "Web app, website, mobile approvals"],
       ["Users", "Admins, employees, vendors"],
-      ["Market", "Nigeria & Africa"],
     ],
   },
   squareImages: true,

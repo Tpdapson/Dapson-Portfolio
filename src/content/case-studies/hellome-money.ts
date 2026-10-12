@@ -18,8 +18,7 @@ export const hellomeMoney: CaseStudy = {
       ["Company", "HelloMe"],
       ["Type", "Mobile app · Fintech"],
       ["Industry", "Cross-border payments"],
-      ["Users", "Personal, business & agents"],
-      ["Currencies", "USD, GBP, NGN and more"],
+      ["Year", "2025"],
     ],
   },
   blocks: [

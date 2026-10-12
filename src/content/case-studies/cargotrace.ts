@@ -18,7 +18,6 @@ export const cargotrace: CaseStudy = {
       ["Type", "Mobile app · B2B"],
       ["Industry", "Logistics · Freight"],
       ["Year", "2026"],
-      ["Scope", "UX, UI, design system, onboarding"],
       ["Status", "Concept MVP"],
     ],
   },

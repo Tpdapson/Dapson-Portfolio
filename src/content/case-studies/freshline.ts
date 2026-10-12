@@ -18,7 +18,6 @@ export const freshline: CaseStudy = {
       ["Type", "Mobile app · B2B"],
       ["Industry", "Agritech · Supply chain"],
       ["Year", "2026"],
-      ["Scope", "UX, UI, design system, landing page"],
       ["Status", "Concept MVP"],
     ],
   },

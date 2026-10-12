@@ -20,6 +20,7 @@ export const hellomeTravel: CaseStudy = {
       ["Company", "HelloMe"],
       ["Type", "Mobile app · Travel"],
       ["Products", "Flights, hotels, tours"],
+      ["Year", "2026"],
     ],
   },
   blocks: [

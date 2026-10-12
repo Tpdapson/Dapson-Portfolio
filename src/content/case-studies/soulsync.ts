@@ -19,7 +19,6 @@ export const soulsync: CaseStudy = {
       ["Industry", "Mental health & wellness"],
       ["Year", "2025"],
       ["Scope", "Research, UX, UI, Prototyping, Microcopy"],
-      ["Platform", "iOS & Android"],
     ],
   },
   blocks: [

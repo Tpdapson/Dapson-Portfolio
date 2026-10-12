@@ -28,6 +28,8 @@
 
   /* Major titles (hero, section titles, case-study titles): near-black / pure white. */
   --color-title: #050505;
+  /* Main call-to-action pill (hero "Book a call"): near-black / near-white. */
+  --color-cta: #111111;
 
   /* Page background, and text sitting on ink-coloured buttons. */
   --color-page: #ffffff;
@@ -81,6 +83,7 @@
   --color-page: #0b0b0b;
   --color-on-ink: #0b0b0b;
   --color-title: #ffffff;
+  --color-cta: #f7f7f5;
 
   --color-ink: #f4f4f2;
   --color-ink-2: #ededeb;

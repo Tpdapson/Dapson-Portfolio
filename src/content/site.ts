@@ -39,7 +39,7 @@ export const works: Work[] = [
   { slug: "hellome-travel", name: "HelloMe Travel", tagline: "Flights, hotels and tours in one app", href: "/work/hellome-travel", cover: "/images/work-hellome-travel.jpg" },
   { slug: "spendive", name: "Spendive", tagline: "Spend management for growing teams", href: "/work/spendive", cover: "/images/work-spendive.jpg" },
   { slug: "freshline", name: "FreshLine", tagline: "Agri supply chain, from farm gate to buyer", href: "/work/freshline", cover: "/images/work-freshline.jpg" },
-  { slug: "digitalclan", name: "DigitalClan", tagline: "All in one digital agency for startups", href: links.digitalclan, website: true, cover: "/images/work-digitalclan.jpg" },
+  { slug: "digitalclan", name: "DigitalClan", tagline: "All in one digital agency for startups", href: "/work/digitalclan", cover: "/images/work-digitalclan.jpg" },
   { slug: "soulsync", name: "SoulSync", tagline: "AI-assisted mental wellness app", href: "/work/soulsync", cover: "/images/work-soulsync.jpg" },
   { slug: "hellome-money", name: "HelloMe Money", tagline: "Modern fintech app for swift money transfers", href: "/work/hellome-money", cover: "/images/work-hellome-money.jpg" },
   { slug: "fundora", name: "Fundora", tagline: "Trade finance for African importers", href: "/work/fundora", cover: "/images/work-fundora.jpg" },

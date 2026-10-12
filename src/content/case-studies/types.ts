@@ -27,6 +27,8 @@ export type CaseStudy = {
   slug: string;
   name: string;
   tagline: string;
+  /** Optional button under the title, e.g. a link to the live website. */
+  heroCta?: { label: string; href: string };
   /** Short line used on "More Works" cards. */
   /** Bullet dots, finding numbers and links. */
   accent: string;

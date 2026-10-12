@@ -26,7 +26,7 @@ export function ContactCta() {
               href={links.bookCall}
               label="Book a call"
               icon={Phone}
-              tone="bg-neutral-0 text-neutral-950"
+              tone="bg-neutral-0 text-neutral-950 dark:bg-cta"
               pad="pl-5 pr-[22px]"
               gap="gap-1.5"
             />

@@ -23,6 +23,19 @@ export function CaseHero({ study }: { study: CaseStudy }) {
         <FadeUp onMount delay={0.35} y={12}>
           <p className="text-base font-medium text-body">{study.tagline}</p>
         </FadeUp>
+        {study.heroCta && (
+          <FadeUp onMount delay={0.45} y={12}>
+            <PillButton
+              href={study.heroCta.href}
+              label={study.heroCta.label}
+              icon={ArrowUpRight}
+              tone="bg-ink-2 text-on-ink"
+              pad="px-5"
+              gap="gap-1.5"
+              size="compact"
+            />
+          </FadeUp>
+        )}
       </div>
       <motion.div
         className="overflow-hidden bg-surface-2"

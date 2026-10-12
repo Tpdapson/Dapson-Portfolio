@@ -21,7 +21,7 @@ export function Hero() {
           href={links.bookCall}
           label="Book a call"
           icon={Phone}
-          tone="bg-ink-2 text-on-ink"
+          tone="bg-cta text-on-ink"
           pad="pl-[22px] pr-5"
         />
         <PillButton href="#work" label="See my works" icon={ArrowDown} tone="bg-chip text-ink-2" pad="pl-[22px] pr-5" />

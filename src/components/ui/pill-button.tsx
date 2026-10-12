@@ -5,6 +5,8 @@ import { external } from "@/content/site";
 const sizes = {
   // 16px text, 18px icon, 47px tall (landing page CTAs).
   md: { text: "text-base", py: "py-3.5", icon: 18 },
+  // 14px text, 14px icon, 41px tall (case-study hero link).
+  compact: { text: "text-sm", py: "py-3", icon: 14 },
   // 13px text, 14px icon, 36px tall (case-study overview).
   sm: { text: "text-[13px]", py: "py-2.5", icon: 14 },
 };

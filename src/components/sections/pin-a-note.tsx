@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { PushPin } from "@phosphor-icons/react";
 import { DrawLine, MaskLines } from "@/components/motion/primitives";
 import { RollingLabel } from "@/components/ui/pill-button";
 import { sampleNotes, showSampleNotes } from "@/content/notes";
@@ -20,7 +21,9 @@ const slots = [
   { x: 91.35, y: 29.5, r: -7 },
   { x: 13.62, y: 59.66, r: -3 },
   { x: 87.59, y: 65.7, r: -5 },
-  { x: 52.34, y: 71.1, r: 3 },
+  // Mostly under the composer on desktop, so the name goes on top and the
+  // note itself at the bottom, where it can be read.
+  { x: 52.34, y: 71.1, r: 3, flip: true },
 ];
 // Gentler alternating tilts for the phone and tablet grid.
 const gridTilt = [-3, 4, 3, -4, -2, 3];
@@ -65,7 +68,7 @@ export function PinANote() {
                 className={`lg:absolute lg:left-[calc(var(--x)*1%)] lg:top-[calc(var(--y)*1%)] lg:w-[calc(210px*var(--ns))] lg:-translate-x-1/2 ${i >= gridTilt.length ? "max-lg:hidden" : ""}`}
                 style={{ "--x": slots[i].x, "--y": slots[i].y } as CSSProperties}
               >
-                <StickyNote note={note} tilt={slots[i].r} gridTilt={gridTilt[i] ?? 0} fresh={note.id === fresh} />
+                <StickyNote note={note} tilt={slots[i].r} gridTilt={gridTilt[i] ?? 0} flip={slots[i].flip} fresh={note.id === fresh} />
               </li>
             ))}
           </ul>
@@ -102,7 +105,20 @@ function Header() {
   );
 }
 
-function StickyNote({ note, tilt, gridTilt, fresh }: { note: Note; tilt: number; gridTilt: number; fresh: boolean }) {
+function StickyNote({
+  note,
+  tilt,
+  gridTilt,
+  flip,
+  fresh,
+}: {
+  note: Note;
+  tilt: number;
+  gridTilt: number;
+  /** Desktop only: name at the top, note at the bottom. */
+  flip?: boolean;
+  fresh: boolean;
+}) {
   const [swing, setSwing] = useState(false);
   // A note that was just pinned drops in once, then swings like the others.
   const [entering, setEntering] = useState(fresh);
@@ -121,14 +137,14 @@ function StickyNote({ note, tilt, gridTilt, fresh }: { note: Note; tilt: number;
     >
       <figure
         className={`absolute inset-0 m-0 flex flex-col justify-between overflow-hidden rounded-[6px] p-[10.5cqw] drop-shadow-[0_10px_10px_rgb(0_0_0/0.1)] ${entering ? "note-drop" : swing ? "note-dangle" : ""}`}
-        style={{ background: c.paper, color: c.ink, transform: "rotate(var(--r))", transformOrigin: "50% -3.7%" }}
+        style={{ background: c.paper, color: c.ink, transform: "rotate(var(--r))", transformOrigin: "50% 3%" }}
         onAnimationEnd={() => {
           setEntering(false);
           setSwing(false);
         }}
       >
-        <blockquote className={`m-0 line-clamp-5 font-hand leading-[1.05] [overflow-wrap:anywhere] ${size}`}>{note.text}</blockquote>
-        {note.name && <figcaption className="truncate text-[6.2cqw] font-medium">— {note.name}</figcaption>}
+        <blockquote className={`m-0 line-clamp-5 font-hand leading-[1.05] [overflow-wrap:anywhere] ${size} ${flip ? "lg:mt-auto" : ""}`}>{note.text}</blockquote>
+        {note.name && <figcaption className={`truncate text-[6.2cqw] font-medium ${flip ? "lg:order-first" : ""}`}>— {note.name}</figcaption>}
       </figure>
       <Image
         src="/images/pin.svg"
@@ -136,7 +152,7 @@ function StickyNote({ note, tilt, gridTilt, fresh }: { note: Note; tilt: number;
         width={29}
         height={32}
         unoptimized
-        className={`pointer-events-none absolute left-1/2 top-[-11cqw] h-auto w-[13.7cqw] -translate-x-1/2 drop-shadow-[4px_7px_5px_rgb(13_8_5/0.14)] ${entering ? "pin-drop" : ""}`}
+        className={`pointer-events-none absolute left-1/2 top-[-5cqw] h-auto w-[13.7cqw] -translate-x-1/2 drop-shadow-[4px_7px_5px_rgb(13_8_5/0.14)] ${entering ? "pin-drop" : ""}`}
       />
     </div>
   );
@@ -244,11 +260,11 @@ function Composer({ onPinned }: { onPinned: (note: Note) => void }) {
         <button
           type="submit"
           disabled={status.kind === "sending"}
-          className="group relative inline-flex shrink-0 cursor-pointer overflow-hidden rounded-full bg-ink-2 px-5 py-3 text-sm font-medium leading-[normal] whitespace-nowrap text-on-ink disabled:cursor-wait disabled:opacity-70"
+          className="group relative inline-flex shrink-0 cursor-pointer overflow-hidden rounded-full bg-ink-2 py-3 pl-[22px] pr-5 text-sm font-medium leading-[normal] whitespace-nowrap text-on-ink disabled:cursor-wait disabled:opacity-70"
         >
           <RollingLabel className="gap-1.5">
-            {status.kind === "sending" ? "Sticking…" : "Stick it"}
-            <span aria-hidden>↗</span>
+            {status.kind === "sending" ? "Pinning…" : "Pin note"}
+            <PushPin size={14} aria-hidden className="shrink-0" />
           </RollingLabel>
         </button>
       </div>

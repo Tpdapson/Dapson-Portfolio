@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScro
 import { useLenis } from "lenis/react";
 import { DotsNine, FileText, Folder, Phone, Smiley, X } from "@phosphor-icons/react/dist/ssr";
 import { easeOut } from "@/components/motion/primitives";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { external, links } from "@/content/site";
 
 const items = [
@@ -67,7 +68,7 @@ export function SiteNav() {
       onFocusCapture={() => setHidden(false)}
     >
       <motion.header
-        className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-5 sm:px-10"
+        className="relative mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-5 sm:px-10"
         initial={reduce ? false : { opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: easeOut }}
@@ -78,6 +79,11 @@ export function SiteNav() {
           </span>
           <span className="text-base text-ink">Dapson</span>
         </Link>
+
+        {/* Light/dark switch, dead centre on every screen size. */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <ThemeToggle />
+        </div>
 
         {/* Desktop: inline links. */}
         <nav className="hidden items-center gap-4 lg:flex">
@@ -92,9 +98,10 @@ export function SiteNav() {
               {label}
             </a>
           ))}
-          <span className="flex items-center gap-1.5 p-1 text-sm text-ink-3">
+          {/* The label hides on small laptops so the links clear the centred switch. */}
+          <span className="flex items-center gap-1.5 p-1 text-sm text-ink-3" title="Open to work">
             <StatusDot />
-            Open to work
+            <span className="hidden xl:inline">Open to work</span>
           </span>
         </nav>
 

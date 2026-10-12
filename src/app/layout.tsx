@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { SiteNav } from "@/components/layout/site-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { themeInitScript } from "@/components/theme/theme-script";
 import "./globals.css";
 
 const neueMontreal = localFont({
@@ -37,7 +38,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={neueMontreal.variable}>
+    // suppressHydrationWarning: the inline script may set data-theme before React loads.
+    <html lang="en" className={neueMontreal.variable} suppressHydrationWarning>
+      <head>
+        {/* Apply a saved dark theme before first paint (no light flash). */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <SmoothScroll>
           <SiteNav />

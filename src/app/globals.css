@@ -63,11 +63,9 @@
 }
 
 /*
- * Dark theme. Not switched on anywhere yet: the nav toggle will set
- * data-theme="dark" on <html> (and remember the choice). React resets
- * attributes on <html> while the page loads, so the toggle needs
- * suppressHydrationWarning on <html> plus a small inline script that applies
- * the saved theme before first paint.
+ * Dark theme, switched by the nav toggle (components/theme). It sets
+ * data-theme="dark" on <html>, saves the choice, and an inline script in the
+ * root layout re-applies it before first paint.
  */
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -107,6 +105,13 @@ body {
 ::selection {
   background: var(--color-lime);
   color: var(--color-ink);
+}
+
+/* Theme switch: a soft crossfade of the whole page. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Lenis */

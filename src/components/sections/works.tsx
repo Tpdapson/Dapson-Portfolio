@@ -94,8 +94,8 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
   const isExternal = !!work.website;
 
   return (
-    // Space below each project: 36px on phones, 56px on tablets, 72px on desktop.
-    <article className="flex flex-col gap-5 px-4 pb-9 sm:px-10 sm:pb-14 lg:pb-[72px]">
+    // Space below each project: 48px on phones, 56px on tablets, 72px on desktop.
+    <article className="flex flex-col gap-5 px-4 pb-12 sm:px-10 sm:pb-14 lg:pb-[72px]">
       <motion.div
         className="flex items-center gap-4 sm:gap-6"
         initial={reduce ? false : "hide"}

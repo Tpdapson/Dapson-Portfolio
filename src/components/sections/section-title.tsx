@@ -27,7 +27,7 @@ export function SectionTitle({
         <p className="font-hand text-[28px] text-ink-2">{note}</p>
         <DrawLine className="h-[2px] w-[70px] rounded-[1px] bg-ink-3" delay={0.35} />
       </motion.div>
-      <h2 className="text-[clamp(48px,6.67vw,96px)] font-medium leading-[0.95] tracking-[-0.04em] text-ink">
+      <h2 className="text-[clamp(48px,6.67vw,96px)] font-medium leading-[0.95] tracking-[-0.04em] text-ink dark:text-white">
         <MaskLines lines={lines} delay={0.1} />
       </h2>
       {children}

@@ -137,7 +137,7 @@ function StickyNote({
     >
       <figure
         className={`absolute inset-0 m-0 flex flex-col justify-between overflow-hidden rounded-[6px] p-[10.5cqw] drop-shadow-[0_10px_10px_rgb(0_0_0/0.1)] ${entering ? "note-drop" : swing ? "note-dangle" : ""}`}
-        style={{ background: c.paper, color: c.ink, transform: "rotate(var(--r))", transformOrigin: "50% 0%" }}
+        style={{ background: c.paper, color: c.ink, transform: "rotate(var(--r))", transformOrigin: "50% -1%" }}
         onAnimationEnd={() => {
           setEntering(false);
           setSwing(false);
@@ -152,7 +152,7 @@ function StickyNote({
         width={29}
         height={32}
         unoptimized
-        className={`pointer-events-none absolute left-1/2 top-[-8cqw] h-auto w-[13.7cqw] -translate-x-1/2 drop-shadow-[4px_7px_5px_rgb(13_8_5/0.14)] ${entering ? "pin-drop" : ""}`}
+        className={`pointer-events-none absolute left-1/2 top-[-9.5cqw] h-auto w-[13.7cqw] -translate-x-1/2 drop-shadow-[4px_7px_5px_rgb(13_8_5/0.14)] ${entering ? "pin-drop" : ""}`}
       />
     </div>
   );

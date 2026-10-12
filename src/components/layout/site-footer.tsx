@@ -30,7 +30,9 @@ export function SiteFooter() {
     <div className="relative overflow-clip">
       <ContactCta />
       <footer className="relative flex flex-col gap-8 border-t border-tint-12 bg-black px-4 pb-[135px] pt-12 sm:px-20 sm:pb-[170px] lg:pb-10">
-        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+        {/* Links, socials and copyright stay within the contact section's 1280px
+            container on wide screens; the big wordmark below can run full width. */}
+        <div className="mx-auto flex w-full max-w-[1280px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium leading-[1.3] text-neutral-300">
             {nav.map((l) => (
               <a key={l.label} href={l.href} {...external(l.href)} className="transition-colors hover:text-white">
@@ -56,7 +58,7 @@ export function SiteFooter() {
         </div>
 
         {/* Left on phones, in line with the links and socials above; centred from tablet up. */}
-        <p className="text-left text-sm font-medium leading-[1.3] text-neutral-300 sm:text-center">
+        <p className="mx-auto w-full max-w-[1280px] text-left text-sm font-medium leading-[1.3] text-neutral-300 sm:text-center">
           © 2026 - Designed &amp; Developed by Timilehin Oladapo
         </p>
 

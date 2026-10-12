@@ -6,7 +6,7 @@ import { colorNames, type NoteColor } from "@/lib/notes/types";
 /** Latest notes for the board. */
 export async function GET() {
   await connection();
-  const notes = await listNotes(12);
+  const notes = await listNotes(60);
   return Response.json({ notes }, { headers: { "Cache-Control": "no-store" } });
 }
 

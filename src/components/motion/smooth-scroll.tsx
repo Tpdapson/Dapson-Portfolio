@@ -8,7 +8,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
   if (reduce) return <>{children}</>;
   return (
-    <ReactLenis root options={{ lerp: 0.12, wheelMultiplier: 1, anchors: { offset: -16 } }}>
+    <ReactLenis root options={{ lerp: 0.12, wheelMultiplier: 1, anchors: { offset: -16 }, allowNestedScroll: true }}>
       {children}
     </ReactLenis>
   );

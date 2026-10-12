@@ -44,11 +44,16 @@ export function PinANote() {
     };
   }, []);
 
-  const shown = [...notes, ...(showSampleNotes ? sampleNotes : [])].slice(0, slots.length);
+  // Real notes first; the Figma examples only fill the first board if it's short.
+  const shown = [...notes, ...(showSampleNotes ? sampleNotes : [])].slice(0, Math.max(notes.length, slots.length));
+  const pages = Math.ceil(shown.length / slots.length);
+  const scroller = useRef<HTMLDivElement>(null);
 
   const pinned = (note: Note) => {
     setNotes((n) => [note, ...n.filter((m) => m.id !== note.id)]);
     setFresh(note.id);
+    // The new note lands at the top of the board, so bring that into view.
+    scroller.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -56,25 +61,146 @@ export function PinANote() {
       <div className="mx-auto max-w-[1280px]">
         <Header />
 
-        {/* Desktop sizes: notes scale with the board (--ns) so they keep their places. */}
-        <div className="relative mt-8 rounded-[24px] bg-board p-4 [--ns:1] [background-image:radial-gradient(circle,var(--color-board-dot)_1.5px,transparent_1.6px)] [background-position:5.5px_5.5px] [background-size:32px_32px] sm:p-8 lg:mt-12 lg:h-[560px] lg:overflow-hidden lg:rounded-[32px] lg:p-0 lg:[--ns:0.78] xl:h-[600px] xl:[--ns:0.9] min-[1440px]:h-[640px] min-[1440px]:[--ns:1]">
+        {/* Desktop sizes: notes scale with the board (--ns) so they keep their places; --bh is the board height. */}
+        <div className="relative mt-8 rounded-[24px] bg-board p-4 [--ns:1] [background-image:radial-gradient(circle,var(--color-board-dot)_1.5px,transparent_1.6px)] [background-position:5.5px_5.5px] [background-size:32px_32px] sm:p-8 lg:mt-12 lg:h-[var(--bh)] lg:overflow-hidden lg:rounded-[32px] lg:p-0 lg:[--bh:560px] lg:[--ns:0.78] xl:[--bh:600px] xl:[--ns:0.9] min-[1440px]:[--bh:640px] min-[1440px]:[--ns:1]">
           <Composer onPinned={pinned} />
 
-          <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:mt-14 sm:gap-x-8 sm:gap-y-12 md:grid-cols-3 lg:static lg:mt-0 lg:block">
-            {shown.map((note, i) => (
-              <li
-                key={note.id}
-                // Six on phones and tablets (two even rows); all seven on desktop.
-                className={`lg:absolute lg:left-[calc(var(--x)*1%)] lg:top-[calc(var(--y)*1%)] lg:w-[calc(210px*var(--ns))] lg:-translate-x-1/2 ${i >= gridTilt.length ? "max-lg:hidden" : ""}`}
-                style={{ "--x": slots[i].x, "--y": slots[i].y } as CSSProperties}
-              >
-                <StickyNote note={note} tilt={slots[i].r} gridTilt={gridTilt[i] ?? 0} flip={slots[i].flip} fresh={note.id === fresh} order={i} />
-              </li>
-            ))}
-          </ul>
+          {/*
+            Notes scroll inside the board, with their own scrollbar. On desktop
+            the board keeps its layout page after page behind the composer; on
+            phones and tablets it's a grid under the composer. Once the end is
+            reached, scrolling carries on down the page.
+          */}
+          <ScrollArea
+            scrollRef={scroller}
+            className="mt-8 sm:mt-10 lg:absolute lg:inset-0 lg:mt-0"
+            // Phones/tablets: room at the sides so tilted notes aren't clipped, and a
+            // soft fade where notes slide out of the box.
+            scrollClassName="-mx-3 max-h-[480px] px-3 [mask-image:linear-gradient(to_bottom,transparent,#000_20px,#000_calc(100%-28px),transparent)] sm:-mx-6 sm:max-h-[600px] sm:px-6 lg:mx-0 lg:h-full lg:max-h-none lg:px-0 lg:[mask-image:none]"
+          >
+            <ul
+              className="grid grid-cols-2 gap-x-4 gap-y-10 pb-8 pt-8 sm:gap-x-8 sm:gap-y-12 md:grid-cols-3 lg:relative lg:block lg:h-[calc(var(--pages)*var(--bh))] lg:p-0"
+              style={{ "--pages": pages } as CSSProperties}
+            >
+              {shown.map((note, i) => {
+                const slot = slots[i % slots.length];
+                return (
+                  <li
+                    key={note.id}
+                    className="lg:absolute lg:left-[calc(var(--x)*1%)] lg:top-[calc(var(--y)*var(--bh)/100)] lg:w-[calc(210px*var(--ns))] lg:-translate-x-1/2"
+                    // Each further board-full of notes repeats the layout below the last.
+                    style={{ "--x": slot.x, "--y": Math.floor(i / slots.length) * 100 + slot.y } as CSSProperties}
+                  >
+                    <StickyNote
+                      note={note}
+                      tilt={slot.r}
+                      gridTilt={gridTilt[i % gridTilt.length]}
+                      flip={slot.flip}
+                      fresh={note.id === fresh}
+                      order={i}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </ScrollArea>
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * A scrolling box with a slim, always-visible scrollbar of its own (the system
+ * one hides itself on phones and Macs). The thumb can be dragged, and tapping
+ * the track jumps there.
+ */
+function ScrollArea({
+  children,
+  className = "",
+  scrollClassName = "",
+  scrollRef,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  scrollClassName?: string;
+  scrollRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const track = useRef<HTMLDivElement>(null);
+  const [thumb, setThumb] = useState<{ top: number; size: number } | null>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const update = () => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+      if (scrollHeight <= clientHeight + 1) return setThumb(null);
+      const size = Math.max(clientHeight / scrollHeight, 0.12);
+      setThumb({ size, top: (scrollTop / (scrollHeight - clientHeight)) * (1 - size) });
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    if (el.firstElementChild) ro.observe(el.firstElementChild);
+    return () => {
+      el.removeEventListener("scroll", update);
+      ro.disconnect();
+    };
+  }, [scrollRef]);
+
+  // Scroll so the thumb's top sits at `share` of the track.
+  const scrollToShare = (share: number, size: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const t = Math.min(Math.max(share / (1 - size), 0), 1);
+    el.scrollTop = t * (el.scrollHeight - el.clientHeight);
+  };
+
+  const drag = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!thumb || !track.current) return;
+    e.preventDefault();
+    const rect = track.current.getBoundingClientRect();
+    const onThumb = e.target !== e.currentTarget;
+    // Grab the thumb where it was pressed, or centre it under a press on the track.
+    const grab = onThumb ? (e.clientY - rect.top) / rect.height - thumb.top : thumb.size / 2;
+    const move = (y: number) => scrollToShare((y - rect.top) / rect.height - grab, thumb.size);
+    if (!onThumb) move(e.clientY);
+    const target = e.currentTarget;
+    target.setPointerCapture(e.pointerId);
+    const onMove = (ev: PointerEvent) => move(ev.clientY);
+    const stop = () => {
+      target.removeEventListener("pointermove", onMove);
+      target.removeEventListener("pointerup", stop);
+      target.removeEventListener("pointercancel", stop);
+    };
+    target.addEventListener("pointermove", onMove);
+    target.addEventListener("pointerup", stop);
+    target.addEventListener("pointercancel", stop);
+  };
+
+  return (
+    <div className={`relative ${className}`}>
+      <div
+        ref={scrollRef}
+        className={`overflow-y-auto overscroll-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${scrollClassName}`}
+      >
+        {children}
+      </div>
+      {thumb && (
+        <div
+          ref={track}
+          aria-hidden
+          onPointerDown={drag}
+          className="absolute -right-2.5 bottom-3 top-3 z-20 w-1.5 cursor-pointer touch-none rounded-full bg-black/[0.06] sm:-right-5 lg:right-3 lg:bottom-4 lg:top-4 dark:bg-white/[0.08]"
+        >
+          <div
+            className="absolute inset-x-0 rounded-full bg-black/25 transition-colors hover:bg-black/40 dark:bg-white/30 dark:hover:bg-white/45"
+            style={{ top: `${thumb.top * 100}%`, height: `${thumb.size * 100}%` }}
+          />
+        </div>
+      )}
+    </div>
   );
 }
 

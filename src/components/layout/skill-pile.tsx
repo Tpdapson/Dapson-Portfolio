@@ -73,26 +73,30 @@ function place(node: HTMLElement, x: number, y: number, angle: number) {
 }
 
 /**
- * When the footer scrolls in, the pills drop in and pile up. Tapping a pill,
- * or brushing the mouse across one, bounces it; with a mouse you can also grab
- * and throw them. Reduced motion gets the static Figma arrangement.
+ * The skill pills fill the whole contact + footer area. When the contact
+ * section is about halfway up the screen they drop in from its top and pile
+ * up at the bottom of the footer. Tap/click a pill to bounce it, brush the
+ * mouse across one to knock it, or grab one (mouse or finger) and throw it,
+ * as high as the top of the contact section. Reduced motion gets the static
+ * Figma arrangement.
  */
 export function SkillPile() {
   const box = useRef<HTMLDivElement>(null);
   const nodes = useRef<(HTMLDivElement | null)[]>([]);
   const reduce = useReducedMotion();
-  const started = useInView(box, { amount: 0.2, once: true });
+  // Start once the top of the contact section is about halfway up the screen.
+  const started = useInView(box, { margin: "0px 0px -45% 0px", once: true });
   const [build, setBuild] = useState(0);
   // Set once the physics world exists: bounces pill `i`, nudged along (dx, dy).
   const kick = useRef<(i: number, dx?: number, dy?: number) => void>(() => {});
   const lastKick = useRef<number[]>([]);
-  // Touch dragging: grab pill `i` at a page point, follow the finger, let go.
+  // Dragging (mouse or touch): grab pill `i` at a page point, follow the pointer, let go.
   const drag = useRef<{
     grab: (i: number, x: number, y: number) => void;
     move: (x: number, y: number) => void;
     release: () => void;
   } | null>(null);
-  const touch = useRef<{ x: number; y: number; t: number; moved: boolean } | null>(null);
+  const press = useRef<{ x: number; y: number; t: number; moved: boolean } | null>(null);
 
   // Rebuild the world when the width changes meaningfully.
   useEffect(() => {
@@ -151,7 +155,8 @@ export function SkillPile() {
         const h = n.offsetHeight;
         const c = designCenter(it, w, h);
         const x = Math.min(W - w / 2, Math.max(w / 2, (c.x / DESIGN_W) * W));
-        const y = -h - Math.random() * H * 2 - i * 14;
+        // Just above the top of the contact section, staggered so they rain in.
+        const y = -h - Math.random() * 260 - i * 18;
         const opts = { restitution: 0.3, friction: 0.5, frictionAir: 0.015, density: 0.002, angle: (it.rot * Math.PI) / 180 };
         const body =
           it.kind === "ball"
@@ -173,9 +178,18 @@ export function SkillPile() {
         M.Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.3);
       };
 
-      // Touch: a spring from the finger to the grabbed point, like the mouse
-      // constraint below. Letting go keeps the pill's momentum, so it can be thrown.
+      // Once everything has dropped in, add a ceiling at the top of the contact
+      // section so a throw can reach it but never fly out of view.
+      const ceilingTimer = window.setTimeout(() => {
+        M.Composite.add(engine.world, M.Bodies.rectangle(W / 2, -T / 2, W + T * 2, T, wall));
+      }, 3500);
+
+      // A spring from the pointer to the grabbed point. Letting go keeps the
+      // pill's momentum, so it can be thrown.
       let held: Matter.Constraint | null = null;
+      let heldBody: Matter.Body | null = null;
+      // Recent pointer positions, to throw with the pointer's own speed.
+      let trail: { x: number; y: number; t: number }[] = [];
       const toWorld = (x: number, y: number) => {
         const r = el.getBoundingClientRect();
         return { x: x - r.left, y: y - r.top };
@@ -192,35 +206,37 @@ export function SkillPile() {
             stiffness: 0.2,
             damping: 0.1,
           });
+          heldBody = b;
+          trail = [{ ...p, t: performance.now() }];
           M.Composite.add(engine.world, held);
         },
         move(x, y) {
-          if (held) held.pointA = toWorld(x, y);
+          if (!held) return;
+          const p = toWorld(x, y);
+          held.pointA = p;
+          const now = performance.now();
+          trail.push({ ...p, t: now });
+          trail = trail.filter((s) => now - s.t < 90);
         },
         release() {
           if (held) M.Composite.remove(engine.world, held);
+          // Fling: carry on at the pointer's speed (per 16.7ms physics step).
+          const first = trail[0];
+          const lastS = trail[trail.length - 1];
+          if (heldBody && first && lastS && lastS.t - first.t > 10) {
+            const k = 16.7 / (lastS.t - first.t);
+            const clamp = (v: number) => Math.max(-45, Math.min(45, v));
+            const vx = clamp((lastS.x - first.x) * k);
+            const vy = clamp((lastS.y - first.y) * k);
+            if (Math.hypot(vx, vy) > Math.hypot(heldBody.velocity.x, heldBody.velocity.y)) {
+              M.Body.setVelocity(heldBody, { x: vx, y: vy });
+            }
+          }
           held = null;
+          heldBody = null;
+          trail = [];
         },
       };
-
-      // Grab-and-throw for mouse users.
-      let removeMouse = () => {};
-      if (window.matchMedia("(pointer: fine)").matches) {
-        const mouse = M.Mouse.create(el);
-        // matter-js keeps its DOM handlers on the instance but doesn't type them.
-        const h = mouse as unknown as Record<"mousewheel" | "mousemove" | "mousedown" | "mouseup", EventListener>;
-        el.removeEventListener("wheel", h.mousewheel);
-        el.removeEventListener("touchmove", h.mousemove);
-        el.removeEventListener("touchstart", h.mousedown);
-        el.removeEventListener("touchend", h.mouseup);
-        const mc = M.MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.2, render: { visible: false } } });
-        M.Composite.add(engine.world, mc);
-        removeMouse = () => {
-          el.removeEventListener("mousemove", h.mousemove);
-          el.removeEventListener("mousedown", h.mousedown);
-          el.removeEventListener("mouseup", h.mouseup);
-        };
-      }
 
       // Run only while visible.
       let visible = true;
@@ -248,7 +264,7 @@ export function SkillPile() {
         drag.current = null;
         cancelAnimationFrame(raf);
         io.disconnect();
-        removeMouse();
+        window.clearTimeout(ceilingTimer);
         M.Engine.clear(engine);
       };
     });
@@ -264,8 +280,9 @@ export function SkillPile() {
       ref={box}
       aria-label="Skills"
       role="list"
-      // On touch screens the box lets scrolls through; only the pills take taps.
-      className="absolute inset-x-0 bottom-0 h-[180px] cursor-grab select-none active:cursor-grabbing sm:h-[220px] lg:h-[190px] [@media(pointer:coarse)]:pointer-events-none"
+      // Covers the contact section and footer. Clicks and scrolls pass through
+      // to the content underneath; only the pills themselves take the pointer.
+      className="pointer-events-none absolute inset-0 select-none"
     >
       {items.map((it, i) => (
         <div
@@ -275,42 +292,40 @@ export function SkillPile() {
           }}
           role={it.label ? "listitem" : undefined}
           aria-hidden={it.label ? undefined : true}
-          // Mouse click bounces it. Touch is handled below: tap to bounce, drag to move.
-          onClick={() => {
-            if (!touch.current) kick.current(i);
-          }}
+          // Press to grab and throw; a quick press without moving bounces it.
           onPointerDown={(e) => {
-            if (e.pointerType === "mouse") {
-              touch.current = null;
-              return;
-            }
+            if (e.button !== 0) return;
             e.currentTarget.setPointerCapture(e.pointerId);
-            touch.current = { x: e.clientX, y: e.clientY, t: performance.now(), moved: false };
+            press.current = { x: e.clientX, y: e.clientY, t: performance.now(), moved: false };
             drag.current?.grab(i, e.clientX, e.clientY);
           }}
-          onPointerUp={(e) => {
-            const t = touch.current;
-            if (!t || e.pointerType === "mouse") return;
+          onPointerUp={() => {
+            const p = press.current;
+            press.current = null;
+            if (!p) return;
             drag.current?.release();
-            if (!t.moved && performance.now() - t.t < 350) kick.current(i);
+            if (!p.moved && performance.now() - p.t < 350) kick.current(i);
           }}
-          onPointerCancel={() => drag.current?.release()}
-          // Mouse: brushing across a pill knocks it the way the cursor moves.
+          onPointerCancel={() => {
+            press.current = null;
+            drag.current?.release();
+          }}
           onPointerMove={(e) => {
-            const t = touch.current;
-            if (t && e.pointerType !== "mouse") {
-              if (Math.hypot(e.clientX - t.x, e.clientY - t.y) > 8) t.moved = true;
+            const p = press.current;
+            if (p) {
+              if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 8) p.moved = true;
               drag.current?.move(e.clientX, e.clientY);
               return;
             }
-            if (e.pointerType !== "mouse" || e.buttons) return;
+            // Mouse hover: brushing across a pill knocks it the way the cursor moves.
+            if (e.pointerType !== "mouse") return;
             const now = performance.now();
             if (now - (lastKick.current[i] ?? 0) < 350) return;
             lastKick.current[i] = now;
             kick.current(i, e.movementX * 0.6, e.movementY * 0.3);
           }}
           // touch-none: a finger on a pill drags it instead of scrolling the page.
-          className={`pointer-events-auto absolute left-0 top-0 flex touch-none items-center justify-center opacity-0 shadow-[var(--shadow-pill)] will-change-transform [-webkit-tap-highlight-color:transparent] ${
+          className={`pointer-events-auto absolute left-0 top-0 flex cursor-grab touch-none active:cursor-grabbing items-center justify-center opacity-0 shadow-[var(--shadow-pill)] will-change-transform [-webkit-tap-highlight-color:transparent] ${
             it.kind === "ball"
               ? "size-[var(--s)] rounded-full sm:size-[var(--t)] lg:size-[var(--S)]"
               : "gap-[5px] whitespace-nowrap rounded-full px-[12.5px] py-[7.5px] text-[12.5px] uppercase tracking-[0.02em] text-[#1b1b1b] sm:gap-[6.25px] sm:px-[15.6px] sm:py-[9.4px] sm:text-[15.6px] lg:gap-2.5 lg:px-[22px] lg:py-3.5 lg:text-[17px]"

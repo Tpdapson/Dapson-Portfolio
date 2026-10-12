@@ -25,9 +25,11 @@ const socials = [
 /** Site-wide footer: the contact call to action, links, socials and the skill pile. Rendered once in the root layout. */
 export function SiteFooter() {
   return (
-    <>
+    // One clipped area for the contact section and footer, so the skill pills
+    // can fall and be thrown across both.
+    <div className="relative overflow-clip">
       <ContactCta />
-      <footer className="relative flex flex-col gap-8 overflow-clip border-t border-tint-12 bg-black px-4 pb-[135px] pt-12 sm:px-20 sm:pb-[170px] lg:pb-10">
+      <footer className="relative flex flex-col gap-8 border-t border-tint-12 bg-black px-4 pb-[135px] pt-12 sm:px-20 sm:pb-[170px] lg:pb-10">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium leading-[1.3] text-neutral-300">
             {nav.map((l) => (
@@ -65,8 +67,8 @@ export function SiteFooter() {
           Dapson
         </p>
 
-        <SkillPile />
       </footer>
-    </>
+      <SkillPile />
+    </div>
   );
 }

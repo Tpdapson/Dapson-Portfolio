@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -22,6 +22,9 @@ const CursorContext = createContext<CursorApi>({ show: () => {}, hide: () => {} 
 
 export function Works() {
   const [label, setLabel] = useState<string | null>(null);
+  // The home page is kept alive in the background while a case study is open.
+  // Clear the label whenever it's set aside, so it never comes back stuck on.
+  useEffect(() => () => setLabel(null), []);
   const x = useMotionValue(-200);
   const y = useMotionValue(-200);
   const sx = useSpring(x, { stiffness: 500, damping: 40, mass: 0.5 });
@@ -127,6 +130,8 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
         href={work.href}
         {...external(work.href)}
         aria-label={isExternal ? `View the ${work.name} website` : `Read the ${work.name} case study`}
+        // Leaving for the case study means the pointer never "leaves" the cover.
+        onClick={cursor.hide}
         className="block"
       >
       <motion.div

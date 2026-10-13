@@ -111,12 +111,12 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
           </motion.p>
         ))}
 
-        {block.points && <Points points={block.points} accent={study.accent} />}
+        {block.points && <Points points={block.points} />}
 
         {block.groups?.map((g) => (
           <motion.div key={g.title} variants={item} className="flex flex-col gap-3.5 pt-2">
             <h3 className="text-[17px] font-medium text-ink">{g.title}</h3>
-            <Points points={g.points} accent={study.accent} />
+            <Points points={g.points} />
           </motion.div>
         ))}
 
@@ -171,8 +171,7 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
             variants={item}
             href={block.link.href}
             {...external(block.link.href)}
-            className="w-fit text-[15px] font-medium underline-offset-4 hover:underline"
-            style={{ color: study.accent }}
+            className="w-fit text-[15px] font-medium text-body underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             {block.link.label}
           </motion.a>
@@ -182,12 +181,12 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
   );
 }
 
-function Points({ points, accent }: { points: string[]; accent: string }) {
+function Points({ points }: { points: string[] }) {
   return (
     <>
       {points.map((p) => (
         <motion.div key={p} variants={item} className="flex items-start gap-3">
-          <span aria-hidden className="mt-[9px] size-1.5 shrink-0 rounded-full" style={{ background: accent }} />
+          <span aria-hidden className="mt-[9px] size-1.5 shrink-0 rounded-full bg-ink" />
           <p className="flex-1 text-[15px] font-medium leading-[1.5] text-ink">{p}</p>
         </motion.div>
       ))}

@@ -111,13 +111,13 @@ function Hero() {
       {/* Three tilted desk photos, as in Figma; drag them around. */}
       <div className="relative mt-6 aspect-[540/262] w-full max-w-[340px] sm:mt-8 sm:max-w-[540px]">
         <Sticker onMount delay={0.5} className="absolute left-0 top-[16%] w-[21.2%]">
-          <Photo src="/playground/photo-left.webp" w={343} h={424} />
+          <Photo src="/playground/desk-left.webp" w={343} h={424} />
         </Sticker>
         <Sticker onMount delay={0.6} className="absolute right-0 top-[9%] w-[21.6%]">
-          <Photo src="/playground/photo-right.webp" w={349} h={428} />
+          <Photo src="/playground/desk-right.webp" w={349} h={428} />
         </Sticker>
         <Sticker onMount delay={0.4} className="absolute left-1/2 top-0 z-10 w-[45%] -translate-x-1/2">
-          <Photo src="/playground/photo-center.webp" w={728} h={768} />
+          <Photo src="/playground/desk-center.webp" w={728} h={768} />
         </Sticker>
       </div>
     </section>

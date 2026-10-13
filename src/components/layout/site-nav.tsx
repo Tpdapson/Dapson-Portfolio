@@ -6,16 +6,19 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { useLenis } from "lenis/react";
-import { DotsNine, FileText, Folder, Phone, Smiley, X } from "@phosphor-icons/react/dist/ssr";
+import { DotsNine, FileText, Folder, Palette, Phone, Smiley, X } from "@phosphor-icons/react/dist/ssr";
 import { easeOut } from "@/components/motion/primitives";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { external, links } from "@/content/site";
 
+// The phone/tablet menu shows every link; the desktop bar leaves out Résumé so
+// it doesn't crowd the centred switch (it's still in the footer).
 const items = [
-  { label: "Work", href: "/#work", Icon: Folder },
-  { label: "About", href: "/#about", Icon: Smiley },
-  { label: "Resume", href: links.resume, Icon: FileText },
-  { label: "Contact", href: "#contact", Icon: Phone },
+  { label: "Work", href: "/#work", Icon: Folder, desktop: true },
+  { label: "About", href: "/#about", Icon: Smiley, desktop: true },
+  { label: "Playground", href: links.playground, Icon: Palette, desktop: true },
+  { label: "Resume", href: links.resume, Icon: FileText, desktop: false },
+  { label: "Contact", href: "#contact", Icon: Phone, desktop: true },
 ];
 
 /**
@@ -81,8 +84,8 @@ export function SiteNav() {
         </Link>
 
         {/* Desktop: inline links. */}
-        <nav className="hidden items-center gap-4 lg:flex">
-          {items.map(({ label, href, Icon }) => (
+        <nav className="hidden items-center gap-3 lg:flex">
+          {items.filter((item) => item.desktop).map(({ label, href, Icon }) => (
             <a
               key={label}
               href={href}

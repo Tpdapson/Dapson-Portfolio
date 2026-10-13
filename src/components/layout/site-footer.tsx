@@ -12,6 +12,7 @@ const nav = [
   { label: "Work", href: "/#work" },
   { label: "About", href: "/#about" },
   { label: "Résumé", href: links.resume },
+  { label: "Playground", href: links.playground },
   { label: "Contact", href: "#contact" },
 ];
 

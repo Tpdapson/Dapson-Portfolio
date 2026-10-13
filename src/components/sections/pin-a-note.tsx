@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type FormEvent } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { Eyes, PushPin } from "@phosphor-icons/react";
 import { useLenis } from "lenis/react";
@@ -210,6 +210,40 @@ function Header() {
   );
 }
 
+/** Note text sizes, as a share of the note's width: biggest first. */
+const TEXT_SIZES = [14.3, 13.4, 12.6, 11.8, 11, 10.3, 9.6, 9, 8.4, 7.8, 7.2];
+
+/**
+ * Picks the biggest writing that fits the space above the name, so short and
+ * medium notes stay big and only really long ones get small. Checked again
+ * when the note resizes and once the handwriting font has loaded.
+ */
+function useFitText(content: string) {
+  const box = useRef<HTMLQuoteElement>(null);
+  const text = useRef<HTMLSpanElement>(null);
+  const [size, setSize] = useState(TEXT_SIZES[0]);
+
+  useLayoutEffect(() => {
+    const el = box.current;
+    const inner = text.current;
+    if (!el || !inner) return;
+    const fit = () => {
+      for (const s of TEXT_SIZES) {
+        el.style.fontSize = `${s}cqw`;
+        if (inner.offsetHeight <= el.clientHeight + 1) return setSize(s);
+      }
+      setSize(TEXT_SIZES[TEXT_SIZES.length - 1]);
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el.parentElement ?? el);
+    document.fonts?.ready.then(fit);
+    return () => ro.disconnect();
+  }, [content]);
+
+  return { box, text, size };
+}
+
 function StickyNote({
   note,
   tilt,
@@ -242,8 +276,7 @@ function StickyNote({
   const [entering, setEntering] = useState(drop);
   const delay = `${(order % 7) * 70}ms`;
   const c = noteColors[note.color] ?? noteColors.pink;
-  // Long notes get smaller writing so they still fit on the paper.
-  const size = note.text.length <= 32 ? "text-[14.3cqw]" : note.text.length <= 64 ? "text-[11.5cqw]" : "text-[9.6cqw]";
+  const { box, text, size } = useFitText(note.text);
 
   return (
     <div
@@ -256,14 +289,20 @@ function StickyNote({
       onPointerDown={(e) => e.pointerType !== "mouse" && setSwing(true)}
     >
       <figure
-        className={`absolute inset-0 m-0 flex flex-col justify-between overflow-hidden rounded-[6px] p-[10.5cqw] drop-shadow-[0_10px_10px_rgb(0_0_0/0.1)] ${entering ? "note-drop" : swing ? "note-dangle" : ""}`}
+        className={`absolute inset-0 m-0 flex flex-col gap-[3cqw] overflow-hidden rounded-[6px] p-[10.5cqw] drop-shadow-[0_10px_10px_rgb(0_0_0/0.1)] ${entering ? "note-drop" : swing ? "note-dangle" : ""}`}
         style={{ animationDelay: entering ? delay : undefined, background: c.paper, color: c.ink, transform: "rotate(var(--r))", transformOrigin: "50% -1%" }}
         onAnimationEnd={() => {
           setEntering(false);
           setSwing(false);
         }}
       >
-        <blockquote className={`m-0 line-clamp-5 font-hand leading-[1.05] [overflow-wrap:anywhere] ${size} ${flip ? "lg:mt-auto" : ""}`}>{note.text}</blockquote>
+        <blockquote
+          ref={box}
+          className={`m-0 flex min-h-0 flex-1 flex-col overflow-hidden font-hand leading-[1.05] [overflow-wrap:anywhere] ${flip ? "lg:justify-end" : ""}`}
+          style={{ fontSize: `${size}cqw` }}
+        >
+          <span ref={text}>{note.text}</span>
+        </blockquote>
         {note.name && <figcaption className={`truncate text-[6.2cqw] font-medium ${flip ? "lg:order-first" : ""}`}>— {note.name}</figcaption>}
       </figure>
       <Image

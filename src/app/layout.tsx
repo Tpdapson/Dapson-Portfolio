@@ -23,7 +23,7 @@ const description = seoDescription;
 // Text shown on link previews (WhatsApp, LinkedIn, X, …).
 const share = {
   title: "Timilehin Oladapo — Product Designer & Design Engineer",
-  description: "Product (UI/UX) Designer, designing digital products that look good and work even better.",
+  description: "Designing and building digital products that look good and work even better, creating experiences that drive real business growth.",
 };
 
 // Share images come from app/opengraph-image.jpg and app/twitter-image.jpg.

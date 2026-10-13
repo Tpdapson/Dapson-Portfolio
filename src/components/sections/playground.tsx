@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { FadeUp, MaskLines, Sticker } from "@/components/motion/primitives";
 import { SectionTitle } from "@/components/sections/section-title";
@@ -25,7 +27,33 @@ export function Playground() {
         </ul>
       </section>
 
-      <section id="shipped" className="pb-[70px] lg:pb-[120px]">
+      <Shipped />
+    </main>
+  );
+}
+
+/**
+ * Built & Shipped. Over a project image, a "Visit site" label follows the
+ * mouse, the same as the Selected Works covers on the home page.
+ */
+function Shipped() {
+  const [label, setLabel] = useState<string | null>(null);
+  // Clear it if the page is set aside mid-hover, so it never comes back stuck on.
+  useEffect(() => () => setLabel(null), []);
+  const x = useMotionValue(-200);
+  const y = useMotionValue(-200);
+  const sx = useSpring(x, { stiffness: 500, damping: 40, mass: 0.5 });
+  const sy = useSpring(y, { stiffness: 500, damping: 40, mass: 0.5 });
+
+  return (
+      <section
+        id="shipped"
+        className="pb-[70px] lg:pb-[120px]"
+        onPointerMove={(e) => {
+          x.set(e.clientX);
+          y.set(e.clientY);
+        }}
+      >
         <SectionTitle note="Built for Fun" lines={["BUILT & SHIPPED"]} />
         <FadeUp className="mx-auto -mt-4 max-w-[486px] px-4 text-center">
           <p className="text-lg leading-[1.4] text-body sm:text-xl">
@@ -36,13 +64,35 @@ export function Playground() {
           {shipped.map((p, i) => (
             <li key={p.href}>
               <FadeUp delay={i * 0.08} y={32}>
-                <ShippedCard project={p} />
+                <ShippedCard project={p} onShow={() => setLabel("Visit site")} onHide={() => setLabel(null)} />
               </FadeUp>
             </li>
           ))}
         </ul>
+
+        {/* Follower label (mouse only). */}
+        <motion.div
+          aria-hidden
+          className="pointer-events-none fixed left-0 top-0 z-50 hidden [@media(pointer:fine)]:block"
+          style={{ x: sx, y: sy }}
+        >
+          <AnimatePresence>
+            {label && (
+              <motion.div
+                key="cursor"
+                className="flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-ink-2 px-4 py-2.5 text-sm font-medium text-on-ink"
+                initial={{ scale: 0.3, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.3, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 26 }}
+              >
+                {label}
+                <ArrowUpRight size={14} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </section>
-    </main>
   );
 }
 
@@ -108,15 +158,20 @@ function ShotCard({ shot, priority }: { shot: Shot; priority?: boolean }) {
 }
 
 /** A live product: the whole card opens the site in a new tab. */
-function ShippedCard({ project }: { project: ShippedProject }) {
+function ShippedCard({ project, onShow, onHide }: { project: ShippedProject; onShow: () => void; onHide: () => void }) {
   return (
     <a
       href={project.href}
       {...external(project.href)}
       aria-label={`${project.name}: ${project.description} Opens the live site.`}
       className="group flex flex-col gap-5 sm:gap-6"
+      onClick={onHide}
     >
-      <div className="relative overflow-hidden bg-surface">
+      <div
+        className="relative overflow-hidden bg-surface"
+        onPointerEnter={(e) => e.pointerType === "mouse" && onShow()}
+        onPointerLeave={onHide}
+      >
         <Image
           src={project.image}
           width={1344}
@@ -126,10 +181,6 @@ function ShippedCard({ project }: { project: ShippedProject }) {
           sizes="(min-width: 1440px) 672px, (min-width: 640px) 50vw, 100vw"
           className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05] motion-reduce:transition-none"
         />
-        <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-ink-2 px-4 py-2.5 text-sm font-medium text-on-ink opacity-0 transition-[opacity,translate] duration-300 translate-y-2 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 max-lg:translate-y-0 max-lg:opacity-100">
-          Visit site
-          <ArrowUpRight size={14} aria-hidden />
-        </span>
       </div>
       <div className="flex flex-col gap-3 sm:max-w-[491px]">
         <h3 className="text-[22px] font-medium leading-none text-ink">{project.name}</h3>

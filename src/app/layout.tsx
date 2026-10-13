@@ -15,13 +15,13 @@ const neueMontreal = localFont({
   display: "swap",
 });
 
-const title = "Timilehin Oladapo — Product Designer & Engineer";
+const title = "Timilehin Oladapo — Product Designer & Design Engineer";
 const description =
   "Timilehin Oladapo designs and builds digital products that look good and work even better.";
 
 // Text shown on link previews (WhatsApp, LinkedIn, X, …).
 const share = {
-  title: "Timilehin Oladapo — Product Designer & Engineer",
+  title: "Timilehin Oladapo — Product Designer & Design Engineer",
   description: "Product (UI/UX) Designer, designing digital products that look good and work even better.",
 };
 

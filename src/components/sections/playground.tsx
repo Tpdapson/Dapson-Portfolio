@@ -181,6 +181,11 @@ function ShippedCard({ project, onShow, onHide }: { project: ShippedProject; onS
           sizes="(min-width: 1440px) 672px, (min-width: 640px) 50vw, 100vw"
           className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05] motion-reduce:transition-none"
         />
+        {/* Touch screens have no pointer to follow, so the label sits on the image. */}
+        <span className="absolute bottom-3 right-3 hidden items-center gap-1.5 whitespace-nowrap rounded-full bg-ink-2 px-4 py-2.5 text-sm font-medium text-on-ink sm:bottom-4 sm:right-4 [@media(hover:none)]:inline-flex">
+          Visit site
+          <ArrowUpRight size={14} aria-hidden />
+        </span>
       </div>
       <div className="flex flex-col gap-3 sm:max-w-[491px]">
         <h3 className="text-[22px] font-medium leading-none text-ink">{project.name}</h3>

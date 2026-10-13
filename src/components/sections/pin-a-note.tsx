@@ -318,10 +318,26 @@ function StickyNote({
   );
 }
 
+/** A random note colour, other than `not` when given. */
+function randomColor(not?: NoteColor): NoteColor {
+  const options = colorNames.filter((c) => c !== not);
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+// Chosen once per page load in the browser; the server renders pink, then the
+// browser swaps in this colour as the page hydrates.
+let startPick: NoteColor | null = null;
+const randomStartColor = () => (startPick ??= randomColor());
+const noSubscribe = () => () => {};
+
 function Composer({ onPinned }: { onPinned: (note: Note) => void }) {
   const [text, setText] = useState("");
   const [name, setName] = useState("");
-  const [color, setColor] = useState<NoteColor>("pink");
+  // Start each visit on a random colour so the board doesn't fill up with
+  // whichever one happened to be the default. Picking a swatch overrides it.
+  const startColor = useSyncExternalStore(noSubscribe, randomStartColor, () => "pink" as NoteColor);
+  const [picked, setColor] = useState<NoteColor | null>(null);
+  const color = picked ?? startColor;
   const [status, setStatus] = useState<{ kind: "idle" | "sending" | "done" | "error"; message?: string }>({ kind: "idle" });
   const c = noteColors[color];
 
@@ -347,6 +363,8 @@ function Composer({ onPinned }: { onPinned: (note: Note) => void }) {
       }
       if (data.note) onPinned(data.note);
       setText("");
+      // A fresh colour for the next note.
+      setColor(randomColor(color));
       setStatus({ kind: "done", message: "Pinned! Thanks for the note." });
     } catch {
       setStatus({ kind: "error", message: "Couldn't reach the board. Check your connection and try again." });

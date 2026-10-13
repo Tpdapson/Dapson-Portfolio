@@ -9,11 +9,37 @@ import type { Note } from "./types";
  * memory and vanish when the server restarts.
  */
 
-const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
-const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
-const redis = url && token ? new Redis({ url, token }) : null;
+/**
+ * Finds the database's REST URL and token. Vercel names them KV_REST_API_URL /
+ * KV_REST_API_TOKEN (or UPSTASH_REDIS_REST_URL / _TOKEN), but adds a prefix if
+ * one was chosen when connecting the database (e.g. PINNEDNOTES_KV_REST_API_URL),
+ * so any prefix is accepted as long as the URL and token share it.
+ */
+function findConnection() {
+  const env = process.env;
+  const pairs: [string, string][] = [
+    ["KV_REST_API_URL", "KV_REST_API_TOKEN"],
+    ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"],
+  ];
+  for (const [urlKey, tokenKey] of pairs) {
+    if (env[urlKey] && env[tokenKey]) return { url: env[urlKey]!, token: env[tokenKey]!, source: urlKey };
+  }
+  for (const key of Object.keys(env)) {
+    for (const [urlKey, tokenKey] of pairs) {
+      if (!key.endsWith(urlKey) || !env[key]) continue;
+      const tokenName = key.slice(0, -urlKey.length) + tokenKey;
+      if (env[tokenName]) return { url: env[key]!, token: env[tokenName]!, source: key };
+    }
+  }
+  return null;
+}
+
+const found = findConnection();
+const redis = found ? new Redis({ url: found.url, token: found.token }) : null;
 
 export const persistent = redis !== null;
+/** Name of the env var the database URL came from (never the secret itself), for /notes/admin. */
+export const storageSource = found?.source ?? null;
 
 const LIST = "notes:list";
 /** Older notes drop off the end beyond this many. */

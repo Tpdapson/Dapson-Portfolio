@@ -9,7 +9,6 @@ export const digitalclan: CaseStudy = {
   slug,
   name: "DigitalClan",
   tagline: "Website design for an AI-first creative agency",
-  heroCta: { label: "Visit live website", href: links.digitalclan },
   accent: "#d6aa00",
   tint: "#fdf7dc",
   hero: heroFor(slug, "261:59669", "DigitalClan website: home page hero, works, testimonials and the giant wordmark"),

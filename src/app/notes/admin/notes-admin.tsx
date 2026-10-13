@@ -9,6 +9,7 @@ export function NotesAdmin() {
   const [key, setKey] = useState("");
   const [notes, setNotes] = useState<Note[] | null>(null);
   const [persistent, setPersistent] = useState(true);
+  const [source, setSource] = useState<string | null>(null);
   const [error, setError] = useState("");
 
   const load = async (k: string) => {
@@ -24,6 +25,7 @@ export function NotesAdmin() {
     } catch {}
     setNotes(data.notes);
     setPersistent(data.persistent);
+    setSource(data.storageSource ?? null);
   };
 
   const signIn = (e: FormEvent) => {
@@ -68,7 +70,9 @@ export function NotesAdmin() {
         <>
           <p className="mt-3 text-sm text-body">
             {notes.length} note{notes.length === 1 ? "" : "s"}, newest first.
-            {!persistent && " Storage isn't connected, so these live in memory and reset when the server restarts."}
+            {persistent
+              ? ` Saved in the database${source ? ` (${source})` : ""}.`
+              : " Storage isn't connected, so these live in memory and reset when the server restarts. Check that the Upstash database is connected to this project for the Production environment, then redeploy."}
           </p>
           <ul className="mt-8 flex flex-col gap-3">
             {notes.map((n) => (

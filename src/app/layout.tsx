@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { SiteNav } from "@/components/layout/site-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -72,6 +74,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
           <SiteFooter />
         </SmoothScroll>
+        {/* Visitor counts and page speed, shown in the Vercel dashboard (no cookies). */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { SiteNav } from "@/components/layout/site-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { themeInitScript } from "@/components/theme/theme-script";
+import { person, seoDescription, siteUrl } from "@/content/seo";
 import "./globals.css";
 
 const neueMontreal = localFont({
@@ -16,8 +17,7 @@ const neueMontreal = localFont({
 });
 
 const title = "Timilehin Oladapo — Product Designer & Design Engineer";
-const description =
-  "Timilehin Oladapo designs and builds digital products that look good and work even better.";
+const description = seoDescription;
 
 // Text shown on link previews (WhatsApp, LinkedIn, X, …).
 const share = {
@@ -26,13 +26,29 @@ const share = {
 };
 
 // Share images come from app/opengraph-image.jpg and app/twitter-image.jpg.
-// Set NEXT_PUBLIC_SITE_URL to the live domain so their URLs are absolute
-// (on Vercel the production URL is used automatically).
+// URLs resolve against the live domain (siteUrl in content/seo.tsx).
 export const metadata: Metadata = {
-  ...(process.env.NEXT_PUBLIC_SITE_URL && { metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL) }),
+  metadataBase: new URL(siteUrl),
   title,
   description,
-  openGraph: { ...share, type: "website", siteName: "Timilehin Oladapo", locale: "en_GB" },
+  applicationName: person.name,
+  authors: [{ name: person.name, url: siteUrl }],
+  creator: person.name,
+  keywords: [
+    person.name,
+    ...person.alternateNames,
+    "product designer",
+    "UI/UX designer",
+    "web designer",
+    "design engineer",
+    "product engineer",
+    "mobile app designer",
+    "design systems",
+    "portfolio",
+  ],
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
+  openGraph: { ...share, type: "website", siteName: "Timilehin Oladapo", locale: "en_GB", url: "/" },
   twitter: { card: "summary_large_image", ...share, creator: "@tp_dapson" },
 };
 

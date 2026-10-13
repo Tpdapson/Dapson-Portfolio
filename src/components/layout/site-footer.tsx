@@ -34,14 +34,14 @@ export function SiteFooter() {
         {/* Links, socials and copyright stay within the contact section's 1280px
             container on wide screens; the big wordmark below can run full width. */}
         <div className="mx-auto flex w-full max-w-[1280px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-          <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium leading-[1.3] text-neutral-300">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium leading-[1.3] text-neutral-300">
             {nav.map((l) => (
               <a key={l.label} href={l.href} {...external(l.href)} className="transition-colors hover:text-white">
                 {l.label}
               </a>
             ))}
           </nav>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             {socials.map((s) => (
               <a
                 key={s.label}

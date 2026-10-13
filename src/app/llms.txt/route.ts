@@ -14,6 +14,7 @@ export function GET() {
     "",
     `> ${person.summary}`,
     "",
+    `Location: ${person.location.city}, ${person.location.country} (works remotely with teams worldwide)`,
     `Website: ${siteUrl}`,
     `Email: ${person.email}`,
     `Book a call: ${links.bookCall}`,

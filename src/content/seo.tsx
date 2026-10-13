@@ -12,9 +12,10 @@ export const person = {
   name: "Timilehin Oladapo",
   alternateNames: ["Dapson", "Oladapo Timilehin", "Timi Oladapo"],
   jobTitle: "Product Designer & Design Engineer",
+  location: { city: "Lagos", country: "Nigeria", countryCode: "NG" },
   // One plain sentence: what you do, for whom, and how.
   summary:
-    "Timilehin Oladapo (Dapson) is a product designer and design engineer who designs and builds web and mobile products: UI/UX design, web design, design systems and AI-assisted front-end builds for startups and growing businesses in fintech, travel, logistics and wellness.",
+    "Timilehin Oladapo (Dapson) is a product designer and design engineer based in Lagos, Nigeria, who designs and builds web and mobile products: UI/UX design, web design, design systems and AI-assisted front-end builds for startups and growing businesses in fintech, travel, logistics and wellness. Available for remote work worldwide.",
   skills: [
     "Product design",
     "UI/UX design",
@@ -33,7 +34,7 @@ export const person = {
 };
 
 export const seoDescription =
-  "Timilehin Oladapo (Dapson) is a product designer and design engineer. UI/UX, web and mobile product design, design systems and AI-assisted builds for startups in fintech, travel, logistics and more.";
+  "Timilehin Oladapo (Dapson) is a product designer and design engineer based in Lagos, Nigeria. UI/UX, web and mobile product design, design systems and AI-assisted builds for startups in fintech, travel, logistics and more.";
 
 export const absolute = (path: string) => (path.startsWith("http") ? path : `${siteUrl}${path.startsWith("/") ? "" : "/"}${path}`);
 
@@ -49,6 +50,8 @@ export function personSchema() {
     url: siteUrl,
     image: absolute(person.image),
     email: person.email,
+    address: { "@type": "PostalAddress", addressLocality: person.location.city, addressCountry: person.location.countryCode },
+    homeLocation: { "@type": "Place", name: `${person.location.city}, ${person.location.country}` },
     knowsAbout: person.skills,
     sameAs: person.profiles,
   };

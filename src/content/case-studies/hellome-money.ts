@@ -165,7 +165,16 @@ export const hellomeMoney: CaseStudy = {
       type: "split",
       heading: "The outcome",
       body: [
-        "HelloMe Money came together as a consistent mobile experience across onboarding, verification, multi-currency balances, transfers and rewards, designed to reduce friction at every step and build trust through clarity.",
+        "I led the end-to-end redesign of HelloMe Money, turning a set of complex, form-heavy processes into one consistent mobile experience across onboarding, verification, multi-currency balances, transfers and rewards. The biggest wins came from simplifying the workflows people found hardest: KYC, sending money and registering a business.",
+      ],
+      points: [
+        "KYC broken into short, guided steps with clear progress, so verification no longer feels like a wall.",
+        "Transfers show fees, rates and delivery time upfront, then track every stage after sending.",
+        "Business registration split into focused steps for details, activities, shareholders and documents.",
+      ],
+      stats: [
+        { value: "30–40%", label: "fewer steps across key user journeys" },
+        { value: "3", label: "complex workflows simplified: KYC, transactions and business registration" },
       ],
     },
   ],

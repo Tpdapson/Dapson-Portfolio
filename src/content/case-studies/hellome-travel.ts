@@ -129,7 +129,16 @@ export const hellomeTravel: CaseStudy = {
       type: "split",
       heading: "The outcome",
       body: [
-        "HelloMe Travels came together as a complete booking experience across flights (return, one-way and multi-city), hotels, tours, bookings, wishlists, price alerts and profile, all built on one reusable booking pattern.",
+        "I led the design of conversion-optimised booking flows across the HelloMe Travels app and website. Flights (return, one-way and multi-city), hotels and tours now share one reusable booking pattern, so every search-to-checkout journey feels familiar, with fewer screens, clearer prices and less room to drop off.",
+      ],
+      points: [
+        "Search, results, details and checkout follow the same steps for flights, hotels and tours.",
+        "Prices, fees and booking timers are visible early, so there are no surprises at checkout.",
+        "Bookings, wishlists and price alerts bring travellers back to finish a trip they started.",
+      ],
+      stats: [
+        { value: "~25%", label: "estimated reduction in potential drop-offs from search to checkout" },
+        { value: "2", label: "platforms, one experience: mobile app and website" },
       ],
     },
   ],

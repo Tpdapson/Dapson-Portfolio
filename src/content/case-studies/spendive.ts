@@ -234,14 +234,15 @@ export const spendive: CaseStudy = {
       type: "split",
       heading: "Impact",
       body: [
-        "We ran usability tests with admins, employees, vendors and customers. Feedback led to simpler forms, status indicators across every approval stage and a mobile experience so approvers can act on the go. Based on the streamlined flows and controls over the course of 6 months, Spendive delivered:",
+        "I designed multi-role workflows for admins, employees, vendors and customers, covering requests, approvals, reimbursements and dashboards, so each person sees exactly what they need to act on. I then ran usability tests with target users across all four roles. Feedback led to simpler forms and status indicators across every approval stage. Based on the streamlined flows and controls over the course of 6 months, Spendive delivered:",
       ],
       stats: [
         { value: "40–50%", label: "faster request-to-approval" },
+        { value: "30%", label: "faster task completion across critical workflows" },
+        { value: "25%", label: "fewer process bottlenecks" },
         { value: "Up to 35%", label: "less overspending in 6 months" },
         { value: "5–10 hrs", label: "saved per week on manual work" },
         { value: "25%", label: "better vendor response & accuracy" },
-        { value: "30%", label: "higher employee satisfaction" },
       ],
     },
     {

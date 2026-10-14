@@ -19,7 +19,7 @@ export const spendive: CaseStudy = {
       ["Role", "Sole Product Designer"],
       ["Type", "Web app · B2B SaaS"],
       ["Industry", "Fintech · Procurement"],
-      ["Deliverables", "Web app, website, mobile approvals"],
+      ["Deliverables", "Web app, website"],
       ["Users", "Admins, employees, vendors"],
     ],
   },

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Design explorations, UI concepts and side projects by product designer Timilehin Oladapo, plus products built and shipped with AI-powered tools.",
   alternates: { canonical: "/playground" },
-  openGraph: { title: "Playground — Timilehin Oladapo", url: "/playground", siteName: "Timilehin Oladapo", images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: "Dapson, Product Designer: I design digital products that look good and work even better." }] },
+  openGraph: { title: "Playground — Timilehin Oladapo", url: "/playground", siteName: "Timilehin Oladapo", images: [{ url: "/opengraph-image.jpg?v=2", width: 1200, height: 630, alt: "Dapson, Product Designer: I design and build digital products that look good and work even better." }] },
 };
 
 // Nav and footer come from the root layout.

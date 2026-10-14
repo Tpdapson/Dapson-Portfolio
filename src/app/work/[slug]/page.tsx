@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
     title: `${study.name} — Timilehin Oladapo`,
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, type: "article", siteName: "Timilehin Oladapo", images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: "Dapson, Product Designer: I design digital products that look good and work even better." }] },
-    twitter: { card: "summary_large_image", title, description, creator: "@tp_dapson", images: ["/twitter-image.jpg"] },
+    openGraph: { title, description, url, type: "article", siteName: "Timilehin Oladapo", images: [{ url: "/opengraph-image.jpg?v=2", width: 1200, height: 630, alt: "Dapson, Product Designer: I design and build digital products that look good and work even better." }] },
+    twitter: { card: "summary_large_image", title, description, creator: "@tp_dapson", images: ["/twitter-image.jpg?v=2"] },
   };
 }
 

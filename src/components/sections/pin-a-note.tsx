@@ -412,7 +412,7 @@ function Composer({ onPinned }: { onPinned: (note: Note) => void }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         maxLength={NAME_MAX}
-        placeholder="Your name (optional)"
+        placeholder="Your name"
         aria-label="Your name (optional)"
         autoComplete="given-name"
         className="w-full rounded-[12px] bg-field px-4 py-3.5 text-sm text-ink outline-none placeholder:text-subtle focus-visible:ring-2 focus-visible:ring-ink-3"

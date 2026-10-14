@@ -107,7 +107,7 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
       >
         <span className="overflow-hidden">
           <motion.span
-            className="block text-[clamp(32px,3.33vw,48px)] tracking-[-0.04em] text-ink"
+            className="block text-[clamp(32px,3.33vw,48px)] lg:text-[56px] tracking-[-0.04em] text-ink"
             variants={{ hide: { y: "100%" }, show: { y: 0, transition: { duration: 0.8, ease: easeOut } } }}
           >
             {number}
@@ -121,8 +121,8 @@ function WorkItem({ work, index }: { work: Work; index: number }) {
           className="flex flex-col items-end gap-1 text-right"
           variants={{ hide: { opacity: 0, x: 16 }, show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: easeOut, delay: 0.25 } } }}
         >
-          <span className="text-[clamp(17px,1.53vw,22px)] font-medium tracking-[-0.02em] text-ink">{work.name}</span>
-          <span className="text-xs text-caption">{work.tagline}</span>
+          <span className="text-[clamp(17px,1.53vw,22px)] font-medium lg:text-[28px] tracking-[-0.02em] text-ink">{work.name}</span>
+          <span className="text-xs text-caption lg:text-sm">{work.tagline}</span>
         </motion.span>
       </motion.div>
 

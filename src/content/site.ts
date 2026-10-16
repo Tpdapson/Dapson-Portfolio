@@ -94,7 +94,7 @@ export const testimonials: Testimonial[] = [
   {
     quote:
       "I really enjoyed working with Dapson. He was intentional with his work, communicated clearly, and made the whole process smooth from start to finish. He took feedback well and understood both the brief and the bigger picture. I'd happily work with him again.",
-    name: "Kenechuckwu Anyaeche",
+    name: "Kenechukwu Anyaeche",
     role: "Product Designer, Wiseki Technologies",
     side: "right",
     bubble: "#b1e59e",

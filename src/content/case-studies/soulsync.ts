@@ -229,21 +229,7 @@ export const soulsync: CaseStudy = {
       type: "split",
       heading: "Impact",
       body: [
-        "As a concept, SoulSync has no live usage data yet. Its impact so far is what testing changed: five problems found in remote sessions, and five specific design changes, from a persistent SOS in chat to optional voice journaling and plain-language progress summaries.",
-        "The bigger lesson was that a wellness product is judged on how it feels, and on how safely it behaves when someone is struggling. That shaped every decision, from the tone of SoSo’s replies to keeping SOS free.",
-        "What I heard from participants (paraphrased), and what changed as a result:",
-      ],
-      points: [
-        "Some didn’t notice SoSo in the centre of the navigation, so its icon got a stronger gradient and a gentle first-time prompt.",
-        "Participants said the SOS option was easy to miss when they were feeling distressed, so it now stays visible on every chat screen.",
-        "Some found typing-only journaling restrictive and didn’t want to pick a mood every time, so voice notes, images and an optional mood were added.",
-        "Therapist calls felt unfinished when they ended, so a “How are you feeling now?” check-in now closes each call.",
-        "The mood graphs were hard to read at a glance, so charts got softer colours, simpler labels and a weekly summary in plain words.",
-      ],
-      lessons: [
-        { title: "Tone is a feature", body: "Small choices in colour, copy and pacing deeply shape how a wellness product feels." },
-        { title: "AI needs tuning", body: "Helpful AI takes constant tuning of tone, timing and interaction patterns." },
-        { title: "Choice is inclusive", body: "Letting users type, speak or skip makes the product work for more people." },
+        "As a concept, SoulSync has no live usage data yet. What it proved is that a wellness product is judged on how it feels, and on how safely it behaves when someone is struggling, which is why tone and safety shaped every decision.",
       ],
     },
     img("89:41539", 1384, 995, "Thanks for viewing: SoulSync splash screen beside a meditating man"),

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { SiteNav } from "@/components/layout/site-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -54,6 +55,10 @@ export const metadata: Metadata = {
     "portfolio",
   ],
   alternates: { canonical: "/" },
+  // Meta Business domain verification (Business settings → Brand safety → Domains).
+  ...(process.env.NEXT_PUBLIC_META_DOMAIN_VERIFICATION && {
+    other: { "facebook-domain-verification": process.env.NEXT_PUBLIC_META_DOMAIN_VERIFICATION },
+  }),
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   openGraph: { ...share, type: "website", siteName: "Timilehin Oladapo", locale: "en_GB", url: "/" },
   twitter: { card: "summary_large_image", ...share, creator: "@tp_dapson" },
@@ -75,6 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </SmoothScroll>
         {/* Visitor counts, shown in the Vercel dashboard (no cookies). */}
         <Analytics />
+        <MetaPixel />
       </body>
     </html>
   );

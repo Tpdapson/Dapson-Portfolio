@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
 
 export const easeOut = [0.16, 1, 0.3, 1] as const;
 
@@ -19,7 +18,7 @@ export function MaskLines({
   stagger = 0.08,
   onMount,
 }: {
-  lines: ReactNode[];
+  lines: string[];
   className?: string;
   lineClassName?: string;
   stagger?: number;

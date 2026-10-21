@@ -128,17 +128,6 @@ body {
  * Pinned notes. A note hangs from its pin (the transform origin), so these
  * swing it around that point, starting and ending at its resting tilt --r.
  */
-/* Typing cursor in the hero: on, then off. */
-@keyframes caret {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
 @keyframes note-dangle {
   0% { transform: rotate(var(--r)); }
   18% { transform: rotate(calc(var(--r) + 4deg)); }

@@ -234,11 +234,11 @@ export const spendive: CaseStudy = {
       type: "split",
       heading: "Impact",
       body: [
-        "I designed multi-role workflows for admins, employees and vendors, covering requests, approvals, reimbursements and dashboards, so each person sees exactly what they need to act on. I then ran usability tests with target users from all three groups. Feedback led to simpler forms and status indicators across every approval stage, and task completion on critical workflows got about 30% faster between test rounds.",
+        "I designed multi-role workflows for admins, employees and vendors, covering requests, approvals, reimbursements and dashboards, so each person sees exactly what they need to act on. I then ran usability tests with target users from all three groups. Feedback led to simpler forms and status indicators across every approval stage, and in testing, users completed critical workflows about 30% faster on the new flows than on the old ones.",
         "After launch, the Spendive team reported the results below over the first 6 months. They reflect the whole product (design, engineering and the team's rollout), not design alone.",
       ],
       stats: [
-        { value: "~30%", label: "faster task completion in usability testing" },
+        { value: "~30%", label: "faster task completion, new flows vs old, in usability testing" },
         { value: "40–50%", label: "faster request-to-approval, reported by the team" },
         { value: "~25%", label: "fewer process bottlenecks, reported by the team" },
         { value: "Up to 35%", label: "less overspending over 6 months, reported by the team" },

@@ -53,7 +53,7 @@ export function About() {
       <RevealText
         className="flex w-full max-w-[860px] flex-col gap-7 pt-2 text-[clamp(20px,1.95vw,28px)] font-medium leading-[1.4] tracking-[-0.01em]"
         paragraphs={[
-          "I'm Timi, a Product Designer focused on creating digital products that feel intuitive, purposeful, and made with people in mind.",
+          "I'm Timi, a Product Designer with 5+ years of experience focused on creating digital products that feel intuitive, purposeful, and made with people in mind.",
           "Mobile apps, web apps, dashboards, design systems and websites. I've worked across it all, for teams in Africa and the UK.",
           "I also build what I design using AI-powered tools, bridging the gap between design and development to bring ideas to life.",
         ]}

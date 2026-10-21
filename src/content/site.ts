@@ -73,7 +73,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "I wholeheartedly recommend Timilehin for any role or project that needs a thoughtful, reliable team member. He is patient, diligent, and always listens and understands before taking action. It's rare to find someone who pairs technical skill with such a humble, open-minded attitude.",
+      "I wholeheartedly recommend Timi for any role or project that needs a thoughtful, reliable team member. He is patient, diligent, and always listens and understands before taking action. It's rare to find someone who pairs technical skill with such a humble, open-minded attitude.",
     name: "Oke Micheal",
     role: "CTO, Spendive",
     side: "right",
@@ -83,7 +83,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Timmy is good. He brings a really good attitude to the work, and the quality of what he delivers is consistently good too. Really great to work with.",
+      "Timmy is really good. He brings a really good attitude to the work, and the quality of what he delivers is consistently good too. Really great to work with.",
     name: "David Hanby",
     role: "Director, Minutes Master",
     side: "left",
@@ -93,7 +93,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "I really enjoyed working with Dapson. He was intentional with his work, communicated clearly, and made the whole process smooth from start to finish. He took feedback well and understood both the brief and the bigger picture. I'd happily work with him again.",
+      "I really enjoyed working with Timmy. He was intentional with his work, communicated clearly, and made the whole process smooth from start to finish. He took feedback well and understood both the brief and the bigger picture. I'd happily work with him again.",
     name: "Kenechukwu Anyaeche",
     role: "Product Designer, Wiseki Technologies",
     side: "right",
@@ -103,7 +103,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "I really enjoyed working with Timilehin. He was easy to work with, a great team player, and had a good eye for turning business requirements into designs that were both visually appealing and easy to navigate. I'd happily recommend him.",
+      "Timi was such a pleasure to work with and a great team player. He had a real knack for turning business requirements into designs that were visually appealing and easy to navigate. I'd happily recommend him.",
     name: "Korede Adelaja",
     role: "Product Manager, IMBIL Telecoms Solutions",
     side: "left",

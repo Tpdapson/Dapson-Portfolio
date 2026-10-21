@@ -6,14 +6,15 @@ import { useEffect, useRef } from "react";
 import { links } from "@/content/site";
 
 /**
- * Meta (Facebook) Pixel, for measuring Meta ads. It only loads when
- * NEXT_PUBLIC_META_PIXEL_ID is set in Vercel, so the site stays pixel-free
- * until then. Tracks:
+ * Meta (Facebook) Pixel ("TpDapson Website" dataset), for measuring Meta ads.
+ * The ID is public by design; NEXT_PUBLIC_META_PIXEL_ID can override it, and
+ * setting that to "off" turns the pixel off. Tracks:
  * - PageView on every page, including moves between pages without a reload.
  * - Lead when someone clicks "Book a call" (Calendly).
  * - Contact when someone clicks an email link.
  */
-const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+const configured = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "1045317758527300";
+const pixelId = configured === "off" ? undefined : configured;
 
 type Fbq = (...args: unknown[]) => void;
 const fbq: Fbq = (...args) => (window as unknown as { fbq?: Fbq }).fbq?.(...args);

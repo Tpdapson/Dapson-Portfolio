@@ -65,7 +65,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "Timi designed both the UX and UI for our website at Digitalclan, and I was thoroughly impressed. He turned our needs into intuitive, user-friendly designs with real attention to details. Communication was smooth, deadlines were met, and quality never dropped. Highly recommended!",
     name: "Jide Ladipo",
-    role: "Founder, Digital Clan",
+    role: "Senior Business Analyst, BOMADU",
     side: "left",
     bubble: "#edbbf7",
     text: "#503357",

@@ -12,13 +12,14 @@ export const soulsync: CaseStudy = {
   tint: "#f8e9f5",
   hero: heroFor(slug, "89:41055", "SoulSync home screen beside a meditation photo"),
   overview: {
-    body: "SoulSync brings a more human, emotionally aware approach to mental wellness. It blends gentle AI with empathetic design: daily mood check-ins, guided journaling and meditations, SoSo, an AI companion, and a one-tap SOS line to a real therapist when things get heavy. I was the sole product designer, owning strategy, flows, UI, prototyping and microcopy.",
+    body: "SoulSync brings a more human, emotionally aware approach to mental wellness. It blends gentle AI with empathetic design: daily mood check-ins, guided journaling and meditations, SoSo, an AI companion, and a one-tap SOS line to a real therapist when things get heavy. SoulSync is a self-initiated concept, not a shipped product. I was the sole product designer, owning strategy, flows, UI, prototyping and microcopy, and I tested it with users to shape the final design.",
     meta: [
       ["Role", "Sole Product Designer"],
       ["Type", "Mobile app · B2C"],
       ["Industry", "Mental health & wellness"],
       ["Year", "2025"],
-      ["Scope", "Research, UX, UI, Prototyping, Microcopy"],
+      ["Scope", "UX, UI, Prototyping, Microcopy, Usability testing"],
+      ["Status", "Concept project"],
     ],
   },
   blocks: [
@@ -27,6 +28,18 @@ export const soulsync: CaseStudy = {
       type: "centered",
       heading: "The challenge",
       body: "Most wellness apps feel either clinical or chaotic. People who are struggling need something that feels safe the moment it opens, and help that is a single tap away when things get hard. The challenge was to make daily check-ins feel effortless, while keeping a real therapist within reach.",
+    },
+    {
+      type: "split",
+      heading: "Key decisions & findings",
+      body: ["The choices that shaped SoulSync most, and what testing changed. Each is covered in detail further down."],
+      points: [
+        "SoSo is a supportive companion, not a therapist. It never diagnoses, and it hands people to a human the moment a conversation turns serious.",
+        "SOS is never behind a paywall. The free plan includes SOS calls with therapists, so help never depends on payment.",
+        "SOS stays visible in every chat. Testing showed people in distress missed it, so it became persistent with a soft red highlight.",
+        "Journaling had to be optional and flexible. Typing alone felt restrictive, so voice notes, images and an optional mood were added.",
+        "Progress is told in words, not just charts. Graphs were hard to read, so each week ends with a plain summary statement.",
+      ],
     },
     {
       type: "split",
@@ -74,8 +87,8 @@ export const soulsync: CaseStudy = {
     img("89:41349", 1376, 753, "Home, mood logging pop-up and mood history screens"),
     {
       type: "split",
-      heading: "SoSo, your AI therapist",
-      body: ["SoSo lives in the centre of the navigation, so support is always one tap away, day or night."],
+      heading: "SoSo, your AI companion",
+      body: ["SoSo lives in the centre of the navigation, so support is always one tap away, day or night. It is designed as a supportive companion for everyday feelings, not a replacement for a therapist."],
       points: [
         "Suggested prompts like “Feeling overwhelmed” lower the barrier to starting a conversation.",
         "Responses validate the feeling first, then ask gentle follow-up questions.",
@@ -83,6 +96,39 @@ export const soulsync: CaseStudy = {
       ],
     },
     img("122:45017", 1376, 753, "Three SoSo chat screens"),
+    {
+      type: "split",
+      heading: "Designing for safety: when SoSo steps back",
+      body: [
+        "An AI in a mental health app is only as good as how it behaves on someone’s worst day. People usually reach for help during a serious emergency or moment of deep distress, so I designed clear rules for how SoSo responds, when it hands over to a human, and what it will never do.",
+      ],
+      groups: [
+        {
+          title: "Handling risky conversations",
+          points: [
+            "Messages that mention self-harm, suicide, abuse or not feeling safe switch SoSo from chatting to supporting: short, calm replies and no open-ended questions.",
+            "SoSo acknowledges the feeling first (“That sounds really heavy, and I’m glad you told me”) before offering any next step.",
+            "The SOS badge in the chat header turns into a full-width “Talk to someone now” card, so help is the most obvious thing on screen.",
+          ],
+        },
+        {
+          title: "When it escalates to a human",
+          points: [
+            "Any sign of immediate danger brings up SOS straight away, with a real therapist first, the 24/7 crisis hotline next and emergency services always visible.",
+            "If someone keeps returning to the same distress over several days, SoSo gently suggests booking time with a therapist.",
+            "People can skip SoSo entirely: SOS is one tap from the chat header, the account screen and Explore (“Is it crisis?”), and it’s included on the free plan.",
+          ],
+        },
+        {
+          title: "What SoSo won’t do",
+          points: [
+            "It won’t diagnose, label conditions or suggest medication.",
+            "It won’t try to talk someone through a crisis on its own, or keep them chatting when they need a person.",
+            "It won’t pretend to be human. It’s always clearly an AI, with a short note on its limits at the start of every chat.",
+          ],
+        },
+      ],
+    },
     {
       type: "split",
       heading: "SOS emergency support",
@@ -183,7 +229,8 @@ export const soulsync: CaseStudy = {
       type: "split",
       heading: "Impact",
       body: [
-        "Designing SoulSync reinforced that thoughtful design goes beyond usability, it shapes how people feel. Early testing showed users felt seen, less alone, and more willing to engage with their emotions regularly. The product does not just help people track moods or access support; it offers comfort, clarity and connection.",
+        "As a concept, SoulSync has no live usage data yet. Its impact so far is what testing changed: five problems found in remote sessions, and five specific design changes, from a persistent SOS in chat to optional voice journaling and plain-language progress summaries.",
+        "The bigger lesson was that a wellness product is judged on how it feels, and on how safely it behaves when someone is struggling. That shaped every decision, from the tone of SoSo’s replies to keeping SOS free.",
       ],
       lessons: [
         { title: "Tone is a feature", body: "Small choices in colour, copy and pacing deeply shape how a wellness product feels." },

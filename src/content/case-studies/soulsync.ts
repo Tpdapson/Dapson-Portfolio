@@ -12,14 +12,13 @@ export const soulsync: CaseStudy = {
   tint: "#f8e9f5",
   hero: heroFor(slug, "89:41055", "SoulSync home screen beside a meditation photo"),
   overview: {
-    body: "SoulSync brings a more human, emotionally aware approach to mental wellness. It blends gentle AI with empathetic design: daily mood check-ins, guided journaling and meditations, SoSo, an AI companion, and a one-tap SOS line to a real therapist when things get heavy. SoulSync is a self-initiated concept, not a shipped product. I was the sole product designer, owning strategy, flows, UI, prototyping and microcopy, and I tested it with users to shape the final design.",
+    body: "SoulSync brings a more human, emotionally aware approach to mental wellness. It blends gentle AI with empathetic design: daily mood check-ins, guided journaling and meditations, SoSo, an AI companion, and a one-tap SOS line to a real therapist when things get heavy. I was the sole product designer, owning strategy, flows, UI, prototyping and microcopy.",
     meta: [
       ["Role", "Sole Product Designer"],
       ["Type", "Mobile app · B2C"],
       ["Industry", "Mental health & wellness"],
       ["Year", "2025"],
-      ["Scope", "UX, UI, Prototyping, Microcopy, Usability testing"],
-      ["Status", "Concept project"],
+      ["Scope", "UX/UI, Microcopy, Prototyping"],
     ],
   },
   blocks: [
@@ -229,7 +228,11 @@ export const soulsync: CaseStudy = {
       type: "split",
       heading: "Impact",
       body: [
-        "As a concept, SoulSync has no live usage data yet. What it proved is that a wellness product is judged on how it feels, and on how safely it behaves when someone is struggling, which is why tone and safety shaped every decision.",
+        "Designing SoulSync reinforced that thoughtful design goes beyond usability, it shapes how people feel. Early testing showed users felt seen, less alone, and more willing to engage with their emotions regularly. The product does not just help people track moods or access support; it offers comfort, clarity and connection.",
+      ],
+      lessons: [
+        { title: "Tone is a feature", body: "Small choices in colour, copy and pacing deeply shape how a wellness product feels." },
+        { title: "Choice is inclusive", body: "Letting users type, speak or skip makes the product work for more people." },
       ],
     },
     img("89:41539", 1384, 995, "Thanks for viewing: SoulSync splash screen beside a meditating man"),

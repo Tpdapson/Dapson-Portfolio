@@ -133,7 +133,7 @@ function Split({ block, study }: { block: Extract<Block, { type: "split" }>; stu
         ))}
 
         {block.lessons && (
-          <div className="grid gap-4 pt-4 sm:grid-cols-3">
+          <div className={`grid gap-4 pt-4 ${block.lessons.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"}`}>
             {block.lessons.map((l) => (
               <motion.div
                 key={l.title}

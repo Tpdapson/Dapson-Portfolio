@@ -55,10 +55,11 @@ export const metadata: Metadata = {
     "portfolio",
   ],
   alternates: { canonical: "/" },
-  // Meta Business domain verification (Business settings → Brand safety → Domains).
-  ...(process.env.NEXT_PUBLIC_META_DOMAIN_VERIFICATION && {
-    other: { "facebook-domain-verification": process.env.NEXT_PUBLIC_META_DOMAIN_VERIFICATION },
-  }),
+  // Meta Business domain verification for tpdapson.com (Business settings →
+  // Brand safety → Domains). Public by design, like the Pixel ID.
+  other: {
+    "facebook-domain-verification": process.env.NEXT_PUBLIC_META_DOMAIN_VERIFICATION ?? "rxewkv9dqwwkey5warhvbxh8tihwf9",
+  },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   openGraph: { ...share, type: "website", siteName: "Timilehin Oladapo", locale: "en_GB", url: "/" },
   twitter: { card: "summary_large_image", ...share, creator: "@tp_dapson" },

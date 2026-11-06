@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
 
     // Restrict image quality variations
     qualities: [75],
+     // Cache optimized images for 30 days
+  minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 
   turbopack: {
